@@ -19,6 +19,8 @@ You should see something similar to
 
 ## Running
 
+Read the rest of this document before you start pasting code.
+
 ```sh
 git clone git@github.com:elBjarnacho/IVIS18-InnoEnergy.git # if you haven't got the project on disk
 cd IVIS18-InnoEnergy # navigate to the folder that was just created
