@@ -148,7 +148,7 @@ ul li:hover a {
 /* Parallax Section */
 .banner {
 	background-color: #2D9AB7;
-	background-image: url(file:///Macintosh%20HD/Users/amandabergstrom/Library/Application%20Support/Adobe/Dreamweaver%20CC%202018/en_US/Configuration/Temp/Assets/eam70a83daf.TMP/images/parallax.png);
+	background-image: url(../images/parallax.png);
 	height: 400px;
 	background-attachment: fixed;
 	background-size: cover;
@@ -251,7 +251,7 @@ footer .footer_column p {
 	padding-top: 60px;
 	padding-bottom: 60PX;
 	margin-bottom: 0px;
-	background-image: url(file:///Macintosh%20HD/Users/amandabergstrom/Library/Application%20Support/Adobe/Dreamweaver%20CC%202018/en_US/Configuration/Temp/Assets/eam70a83daf.TMP/images/pattern.png);
+	background-image: url(../images/pattern.png);
 	background-repeat: repeat;
 }
 footer {
