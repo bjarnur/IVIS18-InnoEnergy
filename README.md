@@ -36,10 +36,7 @@ Currently this process is slow. There are 48000x1000 fields.
 
 There is a script for creating smaller samples in the scripts folder.
 
-Doing some benchmarks revealed that 100 rows took 4 minutes to build.
-500 rows took 20 minutes. (20 Mb)
-That suggests that building 48000 rows will take 32 hours. (xD).
-We will work on improving this, but we can always share the database file among ourselves later.
+sample500.csv took about 20 seconds with the new speed improvements. That makes the big boss about 32 minutes.
 
 Read the file ```sh makeSamples.sh ``` for the complete instructions.
 ```sh
