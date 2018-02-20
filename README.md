@@ -28,6 +28,9 @@ npm install # this installs dependencies
 # !IMPORTANT Now you need to move the data file to the folder named 'secret'
 npm start # launches the webserver, it's reachable in the browser as long as the process is alive.
 ```
+
+Your app should now be running on [localhost:5000](http://localhost:5000/).
+
 ## Building the database
 
 If the database hasn't been built already it will do so automatically.
@@ -44,5 +47,8 @@ cd scripts
 bash makeSamples.sh
 ```
 
+You can rebuild the database with the command:
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+```sh
+npm test
+```
