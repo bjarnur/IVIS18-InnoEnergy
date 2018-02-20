@@ -12,7 +12,7 @@ for now until we want to pass dynamic content */
 app.use(express.static(path.join(__dirname + '/public')))
 
 app.get('/example', async function(req, res) {
-  let result = await db.queryById('735999114007366888')
+  let result = await db.consumptionById('735999114007366888')
   res.send(result)
 })
 
