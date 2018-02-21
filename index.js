@@ -24,12 +24,12 @@ app.get('/example2', async function(req, res) {
 })
 
 app.get('/map', async function(req,res){
-  // need to do some interaction between front-end and back-end
   res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
 })
 
 app.post('/search',async function(req,res){
   let result = await db.consumptionById(req.body.idx)
+  //TODO:later on we can send back building_info at this point
   res.send(result)
 })
 
