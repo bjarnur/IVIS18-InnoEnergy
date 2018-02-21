@@ -19,12 +19,16 @@ app.get('/example', async function(req, res) {
 })
 
 app.get('/example2', async function(req, res) {
-  let result = await db.infoById('735999114006906917')
+  let result = await db.infoById('735999114007366888')
   res.send(result)
 })
 
 app.get('/map', async function(req,res){
   res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
+})
+
+app.get('/demo', async function(req,res){
+  res.sendFile('demo.html',{root:path.join(__dirname + '/public' )});
 })
 
 app.post('/search',async function(req,res){

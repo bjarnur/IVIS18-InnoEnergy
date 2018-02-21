@@ -16,6 +16,7 @@ function parseData(data){
 
 function draw(data){
   var data = parseData(data);
+  d3.select('#chart-id').text("This is id:" + data['id']);
 
   //I prefer writing by my own, because theres is no docs for customization :(
   var chart = d3_timeseries()

@@ -62,8 +62,7 @@ npm test
 ## Visualization with backend
 
 ```sh
-get checkout feature/geomap
 npm start
 ```
-Go to [localhost:5000/map](http://localhost:5000/map),type ID and you'll see the
+Go to [localhost:5000/demo](http://localhost:5000/demo),type ID and you'll see the
 consumption over time.
