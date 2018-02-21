@@ -10,8 +10,19 @@
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBznsybYklQzSCfuFh1xWlal0xdA0cP-w&callback=initMap"></script>
 <script src="map.js"></script>
-<link href="css/map.css" rel="stylesheet" type="text/css"> 
-	
+<link href="css/map.css" rel="stylesheet" type="text/css">
+    <script>function initMap() {
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>	
 <title>IVIS18 - Group 1</title>
 <link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
