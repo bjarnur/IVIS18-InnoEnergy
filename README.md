@@ -52,3 +52,13 @@ You can rebuild the database with the command:
 ```sh
 npm test
 ```
+
+
+## Visualization with backend
+
+```sh
+get checkout feature/geomap
+npm start
+```
+Go to [localhost:5000/map](http://localhost:5000/map),type ID and you'll see the
+consumption over time.

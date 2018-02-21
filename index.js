@@ -3,8 +3,10 @@ const db = require('./lib/db/db.js')
 
 const express = require('express')
 const path = require("path")
+var bodyParser = require('body-parser');
 const app = express()
 
+app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 5000))
 /* This servers public/ as static, it will work
@@ -13,6 +15,16 @@ app.use(express.static(path.join(__dirname + '/public')))
 
 app.get('/example', async function(req, res) {
   let result = await db.consumptionById('735999114007366888')
+  res.send(result)
+})
+
+app.get('/map', async function(req,res){
+  res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
+})
+
+app.post('/search',async function(req,res){
+  let result = await db.consumptionById(req.body.idx)
+  //TODO:later on we can send back building_info at this point
   res.send(result)
 })
 
