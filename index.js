@@ -28,9 +28,9 @@ app.get('/map', async function(req,res){
   res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
 })
 
-app.post('/map',async function(req,res){
+app.post('/search',async function(req,res){
   let result = await db.consumptionById(req.body.idx)
-  console.log(result) // need to pass this to d3 frontend
+  res.send(result)
 })
 
 app.get('/hello', function(req, res) {
