@@ -11,6 +11,16 @@
 	
 <!--- Font Awesome Icons --->
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	
+<!--- D3.js --->
+<script src="//d3js.org/d3.v4.min.js"></script>
+	<style>
+	.line {
+	  fill: none;
+	  stroke: steelblue;
+	  stroke-width: 1.5px;
+	}
+	</style>
     
 <title>IVIS18 - Group 1</title>
 <link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
@@ -48,8 +58,7 @@
 			var map = new google.maps.Map(document.getElementById('map'), {
 			  zoom: 14,
 			  center: orebro, 
-			  styles: [
-					  {
+			  styles: [					  {
 						"elementType": "geometry",
 						"stylers": [
 						  {
@@ -158,7 +167,7 @@
 							"color": "#00b33c"
 						  },
 						  {
-							"saturation": -55
+							"saturation": -75
 						  },
 						  {
 							"lightness": 50
@@ -245,7 +254,7 @@
 							"color": "#0099ff"
 						  },
 						  {
-							"saturation": -55
+							"saturation": -75
 						  },
 						  {
 							"lightness": 30
@@ -323,12 +332,92 @@
   </section>
   <!-- About Section -->
   <section class="about" id="about">
-    <h2 class="hidden">About</h2>
-    <p class="text_column"></p>
+    <h2>Chart</h2>
+    <p id ="chart" class="text_chart">This is </p>
   </section>
   <!-- Stats Gallery Section -->
   <div class="gallery">
-    <div class="chart">D3.js chart</div>
+	  	<svg width="1150" height="500"></svg>
+	  	<script>
+	  		var svg = d3.select("svg"),
+				margin = {top: 20, right: 80, bottom: 30, left: 50},
+				width = svg.attr("width") - margin.left - margin.right,
+				height = svg.attr("height") - margin.top - margin.bottom,
+				g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			var parseTime = d3.timeParse("%H:%M");
+
+			var x = d3.scaleTime().range([0, width]),
+				y = d3.scaleLinear().range([height, 0]),
+				z = d3.scaleOrdinal(d3.schemeCategory10);
+
+			var line = d3.line()
+				.curve(d3.curveBasis)
+				.x(function(d) { return x(d.time); })
+				.y(function(d) { return y(d.energy); });
+
+			d3.tsv("dummydata.tsv", type, function(error, data) {
+			  if (error) throw error;
+
+			  var inout = data.columns.slice(1).map(function(id) {
+				return {
+				  id: id,
+				  values: data.map(function(d) {
+					return {time: d.time, energy: d[id]};
+					 
+				  })
+				};
+			  });
+				 //console.log("data in" + data);
+			  x.domain(d3.extent(data, function(d) { return d.time; }));
+
+			  y.domain([
+				d3.min(inout, function(c) { return d3.min(c.values, function(d) { return d.energy; }); }),
+				d3.max(inout, function(c) { return d3.max(c.values, function(d) { return d.energy; }); })
+			  ]);
+
+			  z.domain(inout.map(function(c) { return c.id; }));
+
+			  g.append("g")
+				  .attr("class", "axis axis--x")
+				  .attr("transform", "translate(0," + height + ")")
+				  .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%H:%M")));
+
+			  g.append("g")
+				  .attr("class", "axis axis--y")
+				  .call(d3.axisLeft(y))
+				.append("text")
+				  .attr("transform", "rotate(-90)")
+				  .attr("y", 6)
+				  .attr("dy", "0.71em")
+				  .attr("fill", "#000")
+				  .text("Energy, kWh");
+
+			  var energyLine = g.selectAll(".energyLine")
+				.data(inout)
+				.enter().append("g")
+				  .attr("class", "energyLine");
+
+			  energyLine.append("path")
+				  .attr("class", "line")
+				  .attr("d", function(d) { return line(d.values); })
+				  .style("stroke", function(d) { return z(d.id); });
+
+			  energyLine.append("text")
+				  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+				  .attr("transform", function(d) { return "translate(" + x(d.value.time) + "," + y(d.value.energy) + ")"; })
+				  .attr("x", 3)
+				  .attr("dy", "0.35em")
+				  .style("font", "10px sans-serif")
+				  .text(function(d) { return d.id; });
+			});
+
+			function type(d, _, columns) {
+			  d.time = parseTime(d.time);
+			  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+			  return d;
+			}
+	  	</script>
   </div>
   <!-- Parallax Section -->
 	<!---
@@ -342,12 +431,25 @@
 	  <section id="contact">
 		<article class="footer_column">
 		  <h3>Developers</h3>
-		  <img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>
-		  <p>About us. IMG - group photo? </p>
+		  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>--->
+		  <p class="righty">Amanda Bergström<br/>
+			  Ansh Gandhi<br/>
+			  Bjarni Gudmundson<br/>
+			  Gustaf Henning<br/>
+			  Jui-Yang Hsu<br/>
+			  Karolin Karlsson<br/>
+			  Tuncay Dagdelen<br/>
+			  Yunus Kocyigit</p>
 		</article>
 		<article class="footer_column">
 		  <h3>Contact</h3>
-		  <p>Emails school course etc.  </p>
+		  <p>ambergs@kth.se <br/>anshg@kth.se <br/>brgu@kth.se <br/> ghenning@kth.se <br/> jyhsu@kth.se <br>karok@kth.se <br>
+			tuncayda@kth.se <br/> kocyigit@kth.se 
+			 
+ 
+ 
+
+			</p>
 		</article>
 	</section>
   </footer>
@@ -358,7 +460,7 @@
     <div class="button">subscribe</div>
   </section> -->
   <!-- Copyrights Section -->
-  <div class="copyright">&copy;2018 - <strong>Copyright tag beacuse we're cool</strong></div>
+  <div class="copyright">2018 - <strong>IVIS18 Group 1</strong></div>
 </div>
 <!-- Main Container Ends -->
 </body>
