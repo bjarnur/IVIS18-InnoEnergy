@@ -6,8 +6,8 @@ function parseData(data){
   data.forEach(function(e){
     if(!isNaN(e['value'])){
       ret['data'].push({
-        timestamp: new Date(e['timestamp']),
-        consumption: parseFloat(e['value'])
+        time: new Date(e['timestamp']),
+        consump: parseFloat(e['value'])
       });
     }
   });
@@ -18,8 +18,8 @@ function draw(data){
   var data = parseData(data);
 
   var chart = d3_timeseries()
-            .addSerie(data['data'],{x:'timestamp',y:'consumption'},{interpolate:'monotone',color:"#333"})
-              .width(1200)
-
+             .addSerie(data['data'],{x:'time',y:'consump'},{interpolate:'monotone',color:"#FF7F50"})
+             .height(900)
+             .width(1400)
   chart('#chart')
 }
