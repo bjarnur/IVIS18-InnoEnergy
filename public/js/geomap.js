@@ -12,12 +12,24 @@ $(document).ready(function(){
     var params = {
       idx: $('#idx').val()
     };
+    var addr = "Brevduvegatan 8, Örebro"; // later will get from DB as follows
     e.preventDefault();
+    
+    //$.ajax({
+      //data: JSON.stringify(params),
+      //url: '/search_addr',
+      //type: 'POST',
+      //contentType: 'application/json',
+      //cache: false,
+      //timeout: 2000,
+          //success: function(data,status){
+            //addr = data // retrieve the address from DB
+          //},
+    //});
     
     //show the according location
     GMaps.geocode({
-      //later will get the address from DB of orebro_fuses by ID
-      address: "Brevduvegatan 8, Örebro",
+      address: addr,
       callback: function(results, status){
         if(status=='OK'){
           var latlng = results[0].geometry.location;
@@ -31,7 +43,7 @@ $(document).ready(function(){
       }
     });
 
-    //post this req to database
+    //To retrieve the value
     $.ajax({
       data: JSON.stringify(params),
       url: '/search',
