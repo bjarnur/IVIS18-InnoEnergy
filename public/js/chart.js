@@ -17,6 +17,7 @@ function parseData(data){
 function draw(data){
   var data = parseData(data);
 
+  //I prefer writing by my own, because theres is no docs for customization :(
   var chart = d3_timeseries()
              .addSerie(data['data'],{x:'time',y:'consump'},{interpolate:'monotone',color:"#FF7F50"})
              .height(900)

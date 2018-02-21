@@ -54,6 +54,11 @@ npm test
 ```
 
 
-## Interaction with Backend
-go localhost:5000/map, type the ID and you'll will the consumption over time of
-that ID
+## Visualization with backend
+
+```sh
+get checkout feature/geomap
+npm start
+```
+Go to [localhost:5000/map](http://localhost:5000/map),type ID and you'll see the
+consumption over time.

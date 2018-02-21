@@ -15,19 +15,8 @@ $(document).ready(function(){
     var addr = "Brevduvegatan 8, Örebro"; // later will get from DB as follows
     e.preventDefault();
     
-    //$.ajax({
-      //data: JSON.stringify(params),
-      //url: '/search_addr',
-      //type: 'POST',
-      //contentType: 'application/json',
-      //cache: false,
-      //timeout: 2000,
-          //success: function(data,status){
-            //addr = data // retrieve the address from DB
-          //},
-    //});
-    
-    //show the according location
+    //TODO:this will become callback function after quering from DB (to get
+    //address)
     GMaps.geocode({
       address: addr,
       callback: function(results, status){
@@ -43,7 +32,7 @@ $(document).ready(function(){
       }
     });
 
-    //To retrieve the value
+    //To retrieve the consumption data
     $.ajax({
       data: JSON.stringify(params),
       url: '/search',
