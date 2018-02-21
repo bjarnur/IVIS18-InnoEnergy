@@ -6,8 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!--- Map API --->
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
-<link href="css/map.css" rel="stylesheet" type="text/css">
+	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
+	<link href="css/map.css" rel="stylesheet" type="text/css">
+	
+<!--- Font Awesome Icons --->
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     
 <title>IVIS18 - Group 1</title>
 <link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
@@ -41,13 +44,13 @@
     <div id="map"></div>
 	  <script>
 		function initMap() {
-			var uluru = {lat: -25.363, lng: 131.044};
+			var orebro = {lat: 59.2739, lng: 15.2133};
 			var map = new google.maps.Map(document.getElementById('map'), {
-			  zoom: 4,
-			  center: uluru
+			  zoom: 12,
+			  center: orebro
 			});
 			var marker = new google.maps.Marker({
-			  position: uluru,
+			  position: orebro,
 			  map: map
 			});
 		  }
