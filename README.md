@@ -44,9 +44,9 @@ Currently this process is slow. There are 48000x1000 fields.
 
 There is a script for creating smaller samples in the scripts folder.
 
-sample500.csv took about 20 seconds with the new speed improvements. That makes the big boss about 32 minutes.
+sample500.csv took about 30 seconds with the new speed improvements. That makes the big boss about 32 minutes.
 
-Read the file ```sh makeSamples.sh ``` for the complete instructions.
+Read the file ``` makeSamples.sh ``` for the complete instructions.
 ```sh
 cd scripts
 bash makeSamples.sh

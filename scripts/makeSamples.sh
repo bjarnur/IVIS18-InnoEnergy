@@ -3,11 +3,11 @@
 #
 # Use this script to create small samples of the data.
 #
-# To test smaller datasets, you have to alter the dataLocation in lib/db/parser.js
-# and move the db.sqlite file from the secret folder to trigger the database
-# building.
+# To test smaller datasets, you have to alter the dataLocation in lib/db/tableConfigs.js
 #
-# then simply type npm start again.
+# then simply type npm test to rebuild the database again. It will delete the old one, 
+# so stash it somewhere if you want to save it for later
+#
 
 
 data_file=../secret/el_07_07_2017.csv
