@@ -1,4 +1,5 @@
 function createRandomData(n, range, rand) {
+  //just for debug
   if (range == null) range = [0, 100];
   if (rand == null) rand = 1 / 20;
 
