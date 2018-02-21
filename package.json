@@ -25,6 +25,7 @@
   "homepage": "https://github.com/elBjarnacho/IVIS18-InnoEnergy#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "d3-timeseries": "^1.0.1",
     "express": "^4.16.2",
     "fs": "0.0.1-security",
     "gmaps": "^0.4.24",
