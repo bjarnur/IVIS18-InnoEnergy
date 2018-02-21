@@ -16,9 +16,14 @@ app.get('/example', async function(req, res) {
   res.send(result)
 })
 
+app.get('/map', async function(req,res){
+  // need to do some interaction between front-end and back-end
+  res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
+})
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
 })
+
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port') + " [" + new Date().toLocaleString() + "]")
