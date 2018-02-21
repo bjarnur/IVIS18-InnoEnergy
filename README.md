@@ -52,3 +52,8 @@ You can rebuild the database with the command:
 ```sh
 npm test
 ```
+
+
+## Interaction with Backend
+go localhost:5000/map, type the ID and you'll will the consumption over time of
+that ID

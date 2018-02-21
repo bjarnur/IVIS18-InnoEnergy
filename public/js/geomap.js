@@ -52,6 +52,10 @@ $(document).ready(function(){
       cache: false,
       timeout: 2000,
     			success: function(data,status){
+            d3.select('#chart-wrapper').select('#chart').remove();
+            d3.select('#chart-wrapper')
+              .append('div')
+              .attr('id','chart');
             draw(data);
     			},
     });
