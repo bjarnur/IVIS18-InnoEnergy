@@ -263,11 +263,58 @@
 					  }
 					]
 			});
-			var marker = new google.maps.Marker({
-			  position: orebro,
-			  map: map,
-			  icon: "images/home-green.png"
-			});
+            
+            var icons = {
+          green: {
+            icon: 'images/home-green.png'
+          },
+          red: {
+            icon: 'images/home-red.png'
+          },
+          yellow: {
+            icon: 'images/home-yellow.png'
+          }
+        };
+
+        var features = [
+          {
+            position: new google.maps.LatLng(59.27562163725686, 15.219332817504892),
+            type: 'red'
+          }, {
+            position: new google.maps.LatLng(59.27614785296132, 15.197617653320322),
+            type: 'red'
+          }, {
+            position: new google.maps.LatLng(59.26768356399684, 15.222422722290048),
+            type: 'red'
+          }, {
+            position: new google.maps.LatLng(59.26698571712036, 15.196428335319752),
+            type: 'green'
+          }, {
+            position: new google.maps.LatLng(59.28259145795628, 15.183455589721689),
+            type: 'green'
+          }, {
+            position: new google.maps.LatLng(59.2740243487018, 15.243206060539364),
+            type: 'green'
+          }, {
+            position: new google.maps.LatLng(59.281654038440564, 15.217628515373463),
+            type: 'green'
+          }, {
+            position: new google.maps.LatLng(59.27375929462481, 15.223035848747486),
+            type: 'yellow'
+          }, {
+            position: new google.maps.LatLng(59.27334522476262, 15.184154546867603),
+            type: 'yellow'
+          }
+        ];
+
+        // Create markers.
+        features.forEach(function(feature) {
+          var marker = new google.maps.Marker({
+            position: feature.position,
+            icon: icons[feature.type].icon,
+            map: map
+          });
+        });
 		  }
 		
     </script>	
