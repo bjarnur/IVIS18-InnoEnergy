@@ -33,6 +33,11 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 
 ## Building the database
 
+When building the database you need to make sure that you have placed the relavant
+files in the "secret" folder, i.e. one csv file for consumption data and one csv
+file for additional information on buildings (use the name building_info.csv when
+saving the file). 
+
 If the database hasn't been built already it will do so automatically.
 The database file will also be located in the "secret" folder.
 Currently this process is slow. There are 48000x1000 fields.

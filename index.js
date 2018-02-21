@@ -16,6 +16,11 @@ app.get('/example', async function(req, res) {
   res.send(result)
 })
 
+app.get('/example2', async function(req, res) {
+  let result = await db.infoById('735999114006906917')
+  res.send(result)
+})
+
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
 })
