@@ -27,7 +27,8 @@
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
 <script>var __adobewebfontsappname__="dreamweaver";
 	
-	function toggleChart() {
+	function toggleChart(name) {
+		console.log(name);
 		var element = document.getElementById('toggled');
 		element.style.display = '';	
 	}
@@ -335,8 +336,9 @@
 				(function (marker, name, info) {
 					google.maps.event.addListener(marker, "click", function (e) {
 						//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-						infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div><button id ='infoBtn' onclick='setInfo(); toggleChart();'>Show more info</button></div></div>");
-						infoWindow.open(map, marker);
+						infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div></div></div>");
+						infoWindow.open(map, marker); setInfo(); toggleChart(name);
+
 					});
 				})(marker, name, info);
 
