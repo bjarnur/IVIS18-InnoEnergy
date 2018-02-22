@@ -79,7 +79,7 @@ ul li:hover a {
 .hero {
 	padding-top: 50px;
     background-color: #B3B3B3;
-	height: 600px;
+	height: 500px;
 }
 .light {
 	font-weight: bold;
@@ -540,6 +540,6 @@ nav ul li {
 	top: 58px;
 }
 #map {
-    height: 600px;
+    height: 500px;
     width: 100%;
 }
