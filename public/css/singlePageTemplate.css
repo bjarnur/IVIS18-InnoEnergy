@@ -538,5 +538,8 @@ nav ul li {
 	position: absolute;
 	left: 5px;
 	top: 58px;
-	
+}
+#map {
+    height: 600px;
+    width: 100%;
 }
