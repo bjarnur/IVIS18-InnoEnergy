@@ -27,13 +27,16 @@
 <!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
 <script>var __adobewebfontsappname__="dreamweaver";
 	
-	var chartGlobal = 'hej';
+	var chartGlobal = 'data/dummy1.tsv';
 	
 	function toggleChart(name) {
-		if (name == 'Rådmansgatan') {
+		
+		if (chartGlobal == 'data/dummy1.tsv') {
+			chartGlobal = 'data/dummy2.tsv'
 			drawChart('data/dummy2.tsv');
 		}
 		else {
+			chartGlobal = 'data/dummy1.tsv'
 			drawChart('data/dummy1.tsv');
 		}
 		var element = document.getElementById('toggled');
