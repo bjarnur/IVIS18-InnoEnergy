@@ -29,12 +29,15 @@
 	
 	function toggleChart() {
 		var element = document.getElementById('toggled');
-		if (element.style.display != 'none') {
-			element.style.display = 'none';
-		}
-		else {
-			element.style.display = '';
-		}		
+		element.style.display = '';	
+	}
+	
+	function setInfo() {
+		var textToWrite = '';
+		var textToWrite = document.getElementById('titleIW').textContent;
+		console.log(textToWrite);
+		var element = document.getElementById('markerinfo'); 
+		element.textContent = textToWrite;
 	}
 	</script>
 <script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
@@ -84,7 +87,7 @@
             ['Oljevägen', 59.2740243487018, 15.243206060539364, 'info about 5', 'green'],
             ['Norrbackavägen', 59.281654038440564, 15.217628515373463, 'info about 6', 'green'],
             ['Faktorigatan', 59.27375929462481, 15.223035848747486, 'info about 7', 'yellow'],
-            ['Otto E Andersens Gata, 59.27334522476262', 15.184154546867603, 'info about 8', 'yellow'],
+            ['Otto E Andersens Gata', 59.27334522476262, 15.184154546867603, 'info about 8', 'yellow'],
         ];
           
 		function initMap() {
@@ -315,11 +318,11 @@
         var marker, i
 
             for (i = 0; i < locations.length; i++) {  
-                var name = locations[i][0]
-                var lat = locations[i][1]
-                var long = locations[i][2]
-                var info =  locations[i][3]
-                var icon_id = icons[locations[i][4]].icon
+                var name = locations[i][0];
+                var lat = locations[i][1];
+                var long = locations[i][2];
+                var info =  locations[i][3];
+                var icon_id = icons[locations[i][4]].icon;
 
                 latlngset = new google.maps.LatLng(lat, long);
 
@@ -327,10 +330,11 @@
                     map: map, title: name , position: latlngset, icon: icon_id  
                     });
 
-                var content = "<h3>" + name +  '</h3>' + info     
+                var content = "<h3 id='titleIW'>" + name +  "</h3>" + info + "<br><button onclick='setInfo(); toggleChart();'>Show more info</button>";    
                 var infowindow = new google.maps.InfoWindow();
                 
-                google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+                google.maps.event.addListener(marker,'click', (
+					function(marker,content,infowindow){ 
                         return function() {
                             infowindow.setContent(content);
                             infowindow.open(map,marker);
@@ -347,12 +351,14 @@
   <!-- About Section -->
   <section class="about" id="about">
     <h2>Chart</h2>
-	  <button onclick="toggleChart();">hej</button>
+	  
   </section>
   <!-- Stats Gallery Section -->
-  <div class="gallery" id="toggled">
-	  <p class="text_chart">This is <span id="markerinfo">jher</span>.</p>
-	  	<svg width="1150" height="500"></svg>
+  <div class="gallery" id="toggled" style="display: none;">
+	  <center>
+		  <p class="text_chart">This is <span id="markerinfo">jher</span>.</p>
+		  <svg width="1130" height="500"></svg>
+	  </center>
 	  	<script>
 	  		var svg = d3.select("svg"),
 				margin = {top: 20, right: 80, bottom: 30, left: 50},
