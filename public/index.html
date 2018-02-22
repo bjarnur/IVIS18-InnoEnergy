@@ -330,7 +330,7 @@
                     map: map, title: name , position: latlngset, icon: icon_id  
                     });
 
-                var content = "<h3 id='titleIW'>" + name +  "</h3>" + info + "<br><button onclick='setInfo(); toggleChart();'>Show more info</button>";    
+                var content = "<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div><button onclick='setInfo(); toggleChart();'>Show more info</button></div></div>";    
                 var infowindow = new google.maps.InfoWindow();
                 
                 google.maps.event.addListener(marker,'click', (
