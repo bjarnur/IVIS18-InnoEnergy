@@ -325,26 +325,21 @@
                 var icon_id = icons[locations[i][4]].icon;
 
                 latlngset = new google.maps.LatLng(lat, long);
+				
+				var infoWindow = new google.maps.InfoWindow();
 
                 var marker = new google.maps.Marker({  
                     map: map, title: name , position: latlngset, icon: icon_id  
                     });
+				
+				(function (marker, name, info) {
+					google.maps.event.addListener(marker, "click", function (e) {
+						//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
+						infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div><button onclick='setInfo(); toggleChart();'>Show more info</button></div></div>");
+						infoWindow.open(map, marker);
+					});
+				})(marker, name, info);
 
-                var content = "<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div><button onclick='setInfo(); toggleChart();'>Show more info</button></div></div>";    
-                var infowindow = new google.maps.InfoWindow();
-                
-                google.maps.event.addListener(marker,'click', (
-					function(marker,content,infowindow){ 
-						
-                        return function() {
-							if (infowindow) {
-								console.log(infowindow);
-								infowindow.close();
-							}
-                            infowindow.setContent(content);
-                            infowindow.open(map,marker);
-                        };
-                    })(marker,content,infowindow)); 
               }
         } // InitMap End
         
@@ -457,7 +452,7 @@
 		<article class="footer_column">
 		  <h3>About</h3>
 		  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>--->
-		  
+		  <p>Group project in the course Infomation Visulatisation at Kungliga Tekniska Högskolan in co-operation with InnoEnergy. </p>
 		</article>
 		<article class="footer_column">
 		  <h3>Developers</h3>
