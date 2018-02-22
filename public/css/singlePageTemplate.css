@@ -514,10 +514,10 @@ nav ul li {
 }
 }
 
-/* InfoWindow for Marker */
+/* InfoWindow for Marker 
 
 .gm-style-iw {
-	width: 350px !important;
+	width: 120px !important;
 	top: 15px !important;
 	left: 0px !important;
 	background-color: #fff;
@@ -525,9 +525,8 @@ nav ul li {
 	border: 1px solid rgba(77, 77, 77, 0.6);
 	border-radius: 2px 2px 10px 10px;
 }
-
 #iw-container {
-	margin-bottom: 10px;
+	margin-bottom: 1px;
 }
 #iw-container .iw-title {
 	font-family: source-sans-pro;
@@ -541,22 +540,31 @@ nav ul li {
 #iw-container .iw-content {
 	font-size: 13px;
 	line-height: 18px;
-	font-weight: 400;
+	font-weight: 400px;
 	margin-right: 1px;
 	padding: 15px 5px 20px 15px;
 	max-height: 140px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
-.iw-content img {
-	float: right;
-	margin: 0 5px 5px 10px;	
-}
 .iw-subTitle {
     font-family: source-sans-pro;
 	font-size: 15px;
 	font-weight: 700;
 	padding: 5px 0;
+}
+#infoBtn {
+    background-color: #4d4d4d;
+    font-family: 10px source-sans-pro; 
+    color: white;
+    padding: 2px;
+    
+}
+
+/*
+.iw-content img {
+	float: right;
+	margin: 0 5px 5px 10px;	
 }
 .iw-bottom-gradient {
 	position: absolute;
