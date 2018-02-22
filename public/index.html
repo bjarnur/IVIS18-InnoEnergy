@@ -67,13 +67,19 @@
     </a>
     <nav>
       <ul>
-        <li><a href="#hero">HOME</a></li>
+        <li><a href="#hero">MAP</a></li>
         <li> <a href="#contact">CONTACT</a></li>
       </ul>
     </nav>
   </header>
   <!-- Hero Section -->
   <section class="hero" id="hero">
+	  <div class="floater">
+	    <p style="text-align: center;"><strong>Energy Status</strong></p>
+	    <p><img src="images/home-red.png" align="middle">Bad</p>
+        <p><img src="images/home-yellow.png" align="middle">Okey</p>
+        <p><img src="images/home-green.png" align="middle">Good</p>
+	  </div>
     <div id="map"></div>
 	  <script>
           var icons = {
@@ -105,6 +111,7 @@
 			var map = new google.maps.Map(document.getElementById('map'), {
 			  zoom: 14,
 			  center: orebro, 
+			  disableDefaultUI: true,
 			  styles: [					  {
 						"elementType": "geometry",
 						"stylers": [

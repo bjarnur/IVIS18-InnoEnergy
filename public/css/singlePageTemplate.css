@@ -2,7 +2,7 @@
 /* Body */
 body {
 	font-family: source-sans-pro;
-	background-color: #BDBDBD;
+	background-color: #FFF;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
@@ -16,7 +16,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	height: 1000px;
-	background-color: #E1E1E1;
+	background-color: #FFF;
 }
 /* Navigation */
 header {
@@ -27,7 +27,7 @@ header {
 	position: fixed;
 	left: 0px;
 	top: 0px;
-	z-index: 10;
+	z-index: 100;
 }
 .logo {
 	color: #fff;
@@ -530,4 +530,14 @@ nav ul li {
 	font-size: 15px;
 	padding: 10px;
 	color: #4d4d4d;
+}
+
+#hero .floater {
+	width: 120px;
+	background-color: rgba(255,255,255,0.70);
+	z-index: 10;
+	position: absolute;
+	left: 5px;
+	top: 58px;
+	
 }
