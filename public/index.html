@@ -413,6 +413,12 @@
 						  .attr("class", "axis axis--x")
 						  .attr("transform", "translate(0," + height + ")")
 						  .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%H:%M")));
+						
+					  var t = d3.transition()
+						.duration(3000)
+						.ease(d3.easeLinear)
+						.on("start", function(d){ console.log("transiton start") })
+						.on("end", function(d){ console.log("transiton end") })
 
 					  g.append("g")
 						  .attr("class", "axis axis--y")
@@ -432,7 +438,12 @@
 					  energyLine.append("path")
 						  .attr("class", "line")
 						  .attr("d", function(d) { return line(d.values); })
-						  .style("stroke", function(d) { return z(d.id); });
+						  .style("stroke", function(d) { return z(d.id); })
+						  .attr("stroke-dasharray", function(d){ return this.getTotalLength() })
+            			  .attr("stroke-dashoffset", function(d){ return this.getTotalLength() });
+						
+					  g.selectAll(".line").transition(t)
+            				.attr("stroke-dashoffset", 0)
 
 					  energyLine.append("text")
 						  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
