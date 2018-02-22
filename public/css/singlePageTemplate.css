@@ -515,6 +515,10 @@ nav ul li {
 }
 }
 
+#iw-container {
+    max-width: 200px;
+}
+
 .iw-title {
 	font-family: source-sans-pro;
 	font-size: 20px;
@@ -526,5 +530,4 @@ nav ul li {
 	font-size: 15px;
 	padding: 10px;
 	color: #4d4d4d;
-    width: 200px;
 }
