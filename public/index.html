@@ -63,6 +63,30 @@
   <section class="hero" id="hero">
     <div id="map"></div>
 	  <script>
+          var icons = {
+              green: {
+                icon: 'images/home-green.png'
+              },
+              red: {
+                icon: 'images/home-red.png'
+              },
+              yellow: {
+                icon: 'images/home-yellow.png'
+              }
+            };
+          
+        var locations = [
+            ['House 0', 59.27562163725686, 15.219332817504892, 'info about 0', 'red'],
+            ['House 1', 59.27614785296132, 15.197617653320322, 'info about 1', 'red'],
+            ['House 2', 59.26768356399684, 15.222422722290048, 'info about 2', 'red'],
+            ['House 3', 59.26698571712036, 15.196428335319752, 'info about 3', 'green'],
+            ['House 4', 59.28259145795628, 15.183455589721689, 'info about 4', 'green'],
+            ['House 5', 59.2740243487018, 15.243206060539364, 'info about 5', 'green'],
+            ['House 6', 59.281654038440564, 15.217628515373463, 'info about 6', 'green'],
+            ['House 7', 59.27375929462481, 15.223035848747486, 'info about 7', 'yellow'],
+            ['House 8', 59.27334522476262, 15.184154546867603, 'info about 8', 'yellow'],
+        ];
+          
 		function initMap() {
 			var orebro = {lat: 59.2739, lng: 15.2133};
 			var map = new google.maps.Map(document.getElementById('map'), {
@@ -282,80 +306,39 @@
 					  }
 					]
 			});
-            
-            var icons = {
-          green: {
-            icon: 'images/home-green.png'
-          },
-          red: {
-            icon: 'images/home-red.png'
-          },
-          yellow: {
-            icon: 'images/home-yellow.png'
-          }
-        };
 
-        var features = [
-          {
-            position: new google.maps.LatLng(59.27562163725686, 15.219332817504892),
-            type: 'red',
-            info: "Info about the house 1"
-          }, {
-            position: new google.maps.LatLng(59.27614785296132, 15.197617653320322),
-            type: 'red',
-            info: "Info about the house 2"
-          }, {
-            position: new google.maps.LatLng(59.26768356399684, 15.222422722290048),
-            type: 'red',
-            info: "Info about the house 3"
-          }, {
-            position: new google.maps.LatLng(59.26698571712036, 15.196428335319752),
-            type: 'green',
-            info: "Info about the house 4"
-          }, {
-            position: new google.maps.LatLng(59.28259145795628, 15.183455589721689),
-            type: 'green',
-            info: "Info about the house 5"
-          }, {
-            position: new google.maps.LatLng(59.2740243487018, 15.243206060539364),
-            type: 'green',
-            info: "Info about the house 6"
-          }, {
-            position: new google.maps.LatLng(59.281654038440564, 15.217628515373463),
-            type: 'green',
-            info: "Info about the house 7"
-          }, {
-            position: new google.maps.LatLng(59.27375929462481, 15.223035848747486),
-            type: 'yellow',
-            info: "Info about the house 8"
-          }, {
-            position: new google.maps.LatLng(59.27334522476262, 15.184154546867603),
-            type: 'yellow',
-            info: "Info about the house 9"
-          }
-        ];
-
-        // Create markers.
-        var marker;
-        features.forEach(function(feature) {
-            marker = new google.maps.Marker({
-            position: feature.position,
-            icon: icons[feature.type].icon,
-            map: map,
-             
-          });
-            var infowindow = new google.maps.InfoWindow({
-                content: feature.info,
-				position: this.position,
-                maxWidth: 200
-                });
-            marker.addListener('click', function() {
-				
-				console.log(marker.lat());
-            infowindow.open(map, marker);
-        });
-        });        
+            setMarkers(map,locations);
         }
+        
+        function setMarkers(map,locations){
+
+        var marker, i
+
+            for (i = 0; i < locations.length; i++) {  
+                var name = locations[i][0]
+                var lat = locations[i][1]
+                var long = locations[i][2]
+                var info =  locations[i][3]
+                var icon_id = icons[locations[i][4]].icon
+
+                latlngset = new google.maps.LatLng(lat, long);
+
+                var marker = new google.maps.Marker({  
+                    map: map, title: name , position: latlngset, icon: icon_id  
+                    });
+
+                var content = "<h3>" + name +  '</h3>' + "<br>Info: " + info     
+                var infowindow = new google.maps.InfoWindow();
+                
+                google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+                        return function() {
+                            infowindow.setContent(content);
+                            infowindow.open(map,marker);
+                        };
+                    })(marker,content,infowindow)); 
+              }
+        } // InitMap End
+        
 		
     </script>	
 	  <script async defer
