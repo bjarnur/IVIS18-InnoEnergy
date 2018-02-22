@@ -76,15 +76,15 @@
             };
           
         var locations = [
-            ['House 0', 59.27562163725686, 15.219332817504892, 'info about 0', 'red'],
-            ['House 1', 59.27614785296132, 15.197617653320322, 'info about 1', 'red'],
-            ['House 2', 59.26768356399684, 15.222422722290048, 'info about 2', 'red'],
-            ['House 3', 59.26698571712036, 15.196428335319752, 'info about 3', 'green'],
-            ['House 4', 59.28259145795628, 15.183455589721689, 'info about 4', 'green'],
-            ['House 5', 59.2740243487018, 15.243206060539364, 'info about 5', 'green'],
-            ['House 6', 59.281654038440564, 15.217628515373463, 'info about 6', 'green'],
-            ['House 7', 59.27375929462481, 15.223035848747486, 'info about 7', 'yellow'],
-            ['House 8', 59.27334522476262, 15.184154546867603, 'info about 8', 'yellow'],
+            ['Fredsgatan', 59.27562163725686, 15.219332817504892, 'info about 0', 'red'],
+            ['Folkungagatan', 59.27614785296132, 15.197617653320322, 'info about 1', 'red'],
+            ['Rådmansgatan', 59.26768356399684, 15.222422722290048, 'info about 2', 'red'],
+            ['Idrottsvägen', 59.26698571712036, 15.196428335319752, 'info about 3', 'green'],
+            ['Örnsköldsgatan', 59.28259145795628, 15.183455589721689, 'info about 4', 'green'],
+            ['Oljevägen', 59.2740243487018, 15.243206060539364, 'info about 5', 'green'],
+            ['Norrbackavägen', 59.281654038440564, 15.217628515373463, 'info about 6', 'green'],
+            ['Faktorigatan', 59.27375929462481, 15.223035848747486, 'info about 7', 'yellow'],
+            ['Otto E Andersens Gata, 59.27334522476262', 15.184154546867603, 'info about 8', 'yellow'],
         ];
           
 		function initMap() {
@@ -327,7 +327,7 @@
                     map: map, title: name , position: latlngset, icon: icon_id  
                     });
 
-                var content = "<h3>" + name +  '</h3>' + "<br>Info: " + info     
+                var content = "<h3>" + name +  '</h3>' + info     
                 var infowindow = new google.maps.InfoWindow();
                 
                 google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
