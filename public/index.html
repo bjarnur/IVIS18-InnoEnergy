@@ -288,43 +288,65 @@
         var features = [
           {
             position: new google.maps.LatLng(59.27562163725686, 15.219332817504892),
-            type: 'red'
+            type: 'red',
+            info: "Info about the house 1"
           }, {
             position: new google.maps.LatLng(59.27614785296132, 15.197617653320322),
-            type: 'red'
+            type: 'red',
+            info: "Info about the house 2"
           }, {
             position: new google.maps.LatLng(59.26768356399684, 15.222422722290048),
-            type: 'red'
+            type: 'red',
+            info: "Info about the house 3"
           }, {
             position: new google.maps.LatLng(59.26698571712036, 15.196428335319752),
-            type: 'green'
+            type: 'green',
+            info: "Info about the house 4"
           }, {
             position: new google.maps.LatLng(59.28259145795628, 15.183455589721689),
-            type: 'green'
+            type: 'green',
+            info: "Info about the house 5"
           }, {
             position: new google.maps.LatLng(59.2740243487018, 15.243206060539364),
-            type: 'green'
+            type: 'green',
+            info: "Info about the house 6"
           }, {
             position: new google.maps.LatLng(59.281654038440564, 15.217628515373463),
-            type: 'green'
+            type: 'green',
+            info: "Info about the house 7"
           }, {
             position: new google.maps.LatLng(59.27375929462481, 15.223035848747486),
-            type: 'yellow'
+            type: 'yellow',
+            info: "Info about the house 8"
           }, {
             position: new google.maps.LatLng(59.27334522476262, 15.184154546867603),
-            type: 'yellow'
+            type: 'yellow',
+            info: "Info about the house 9"
           }
         ];
 
         // Create markers.
+        var marker;
         features.forEach(function(feature) {
-          var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
             position: feature.position,
             icon: icons[feature.type].icon,
-            map: map
+            map: map,
+             
           });
+            var infowindow = new google.maps.InfoWindow({
+                content: feature.info,
+                maxWidth: 200
+                });
+            marker.addListener('click', function() {
+            infowindow.open(map, marker);
         });
-		  }
+        });
+        
+        // Create infobox for marker
+        
+        
+        }
 		
     </script>	
 	  <script async defer
