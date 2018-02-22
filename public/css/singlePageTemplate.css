@@ -2,7 +2,7 @@
 /* Body */
 body {
 	font-family: source-sans-pro;
-	background-color: #f2f2f2;
+	background-color: #BDBDBD;
 	margin-top: 0px;
 	margin-right: 0px;
 	margin-bottom: 0px;
@@ -16,7 +16,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	height: 1000px;
-	background-color: #FFFFFF;
+	background-color: #E1E1E1;
 }
 /* Navigation */
 header {
@@ -113,9 +113,8 @@ ul li:hover a {
 	padding-left: 20px;
 }
 .about {
-	width: 90%;
-	padding-left: 25px;
-	padding-right: 25px;
+	width: 100%;
+
 	padding-top: 10px;
 	display: inline-block;
 	background-color: #FFFFFF;
@@ -197,6 +196,7 @@ ul li:hover a {
 
 /* More info */
 footer {
+	margin-top: 5px;
 	background-color: #FFFFFF;
 	padding-bottom: 35px;
 	width: 100%;
