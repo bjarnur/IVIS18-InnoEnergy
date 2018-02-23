@@ -288,13 +288,13 @@ var marker, i;
 
 function createBuildingsLegend() {
 	var findDiv = document.getElementById('buildingsLegend');
-	var HTMLstring = '<p class="title">Buildings</p><ul>';
 	for (i = 0; i < locations.length; i++) {
-		var position = locations[i][0];
-		HTMLstring = HTMLstring.concat('<li onclick="centerMap(' + locations[i][1] +',' + locations[i][2] + ')">' + position + '</li>');
+		var node = document.createElement("li");
+		var textnode = document.createTextNode(locations[i][0]);
+		node.setAttribute('onclick', 'centerMap(' + locations[i][1] +',' + locations[i][2] + ')');
+		node.appendChild(textnode)
+		findDiv.appendChild(node);
 	}
-	HTMLstring = HTMLstring.concat('</ul>');
-	findDiv.innerHTML = HTMLstring;
 }
 
 function centerMap(latitude, longitude) {

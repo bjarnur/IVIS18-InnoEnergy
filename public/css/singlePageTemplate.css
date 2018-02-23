@@ -547,7 +547,7 @@ nav ul li {
     width: 100%;
 }
 
-#buildingsLegend {
+.buildingsLegendfloaty {
 	width: 200px;
 	height: 490px;
 	z-index: 10;
@@ -557,24 +557,22 @@ nav ul li {
 	background-color: rgba(255,255,255,0.90);
 	padding: 5px;
 	box-sizing: border-box;
+	overflow-y: scroll;
 }
 
-#buildingsLegend .title {
-	text-align: center;
-	font-weight: 800;
-} 
+
 
 .title {
 	text-align: center;
 	font-weight: 800;
 } 
 
-#buildingsLegend ul {
+.buildingsLegendfloaty ul {
 	list-style-type: none;
 	padding: 5px;
 }
 
-#buildingsLegend li {
+.buildingsLegendfloaty li {
 	color: #4d4d4d; 
 }
 
