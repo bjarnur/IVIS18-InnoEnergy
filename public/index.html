@@ -1,519 +1,93 @@
 <!doctype html>
 <html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--- Map API --->
-	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
-	<link href="css/map.css" rel="stylesheet" type="text/css">
-	
-<!--- Font Awesome Icons --->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-	
-<!--- D3.js --->
-<script src="https://d3js.org/d3.v4.min.js"></script>
-	<style>
-	.line {
-	  fill: none;
-	  stroke: steelblue;
-	  stroke-width: 1.5px;
-	}
-	</style>
-    
-<title>IVIS18 - Group 1</title>
-<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
-<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
-<script>var __adobewebfontsappname__="dreamweaver";
-	
-	var chartGlobal = 'data/dummy1.tsv';
-	
-	function toggleChart(name) {
-		
-		if (chartGlobal == 'data/dummy1.tsv') {
-			chartGlobal = 'data/dummy2.tsv'
-			drawChart('data/dummy2.tsv');
-		}
-		else {
-			chartGlobal = 'data/dummy1.tsv'
-			drawChart('data/dummy1.tsv');
-		}
-		var element = document.getElementById('toggled');
-		element.style.display = '';	
-	}
-	
-	function setInfo() {
-		var textToWrite = '';
-		var textToWrite = document.getElementById('titleIW').textContent;
-		var element = document.getElementById('markerinfo'); 
-		element.textContent = textToWrite;
-	}
-	</script>
-<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-<body>
-<!-- Main Container -->
-<div class="container"> 
-  <!-- Navigation -->
-  <header> <a href="">
-    <h4 class="logo">InnoEnergy </h4>
-    </a>
-    <nav>
-      <ul>
-        <li><a href="#hero">MAP</a></li>
-        <li> <a href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
-  </header>
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-	  <div class="floater">
-	    <p style="text-align: center;"><strong>Energy Status</strong></p>
-	    <p><img src="images/home-red.png" align="middle">Bad</p>
-        <p><img src="images/home-yellow.png" align="middle">Okey</p>
-        <p><img src="images/home-green.png" align="middle">Good</p>
-	  </div>
-    <div id="map"></div>
-      <script>
-          var icons = {
-              green: {
-                icon: 'images/home-green.png'
-              },
-              red: {
-                icon: 'images/home-red.png'
-              },
-              yellow: {
-                icon: 'images/home-yellow.png'
-              }
-            };
-          
-        var locations = [
-            ['Fredsgatan', 59.27562163725686, 15.219332817504892, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-            ['Folkungagatan', 59.27614785296132, 15.197617653320322, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-            ['Rådmansgatan', 59.26768356399684, 15.222422722290048, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-            ['Idrottsvägen', 59.26698571712036, 15.196428335319752, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-            ['Örnsköldsgatan', 59.28259145795628, 15.183455589721689, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-            ['Oljevägen', 59.2740243487018, 15.243206060539364, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-            ['Norrbackavägen', 59.281654038440564, 15.217628515373463, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-            ['Faktorigatan', 59.27375929462481, 15.223035848747486, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'yellow'],
-            ['Otto E Andersens Gata', 59.27334522476262, 15.184154546867603, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'yellow'],
-        ];
-          
-		function initMap() {
-			var orebro = {lat: 59.2739, lng: 15.2133};
-			var map = new google.maps.Map(document.getElementById('map'), {
-			  zoom: 14,
-			  center: orebro, 
-			  disableDefaultUI: true,
-			  styles: [					  {
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#f5f5f5"
-						  }
-						]
-					  },
-					  {
-						"elementType": "labels.icon",
-						"stylers": [
-						  {
-							"visibility": "off"
-						  }
-						]
-					  },
-					  {
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#616161"
-						  }
-						]
-					  },
-					  {
-						"elementType": "labels.text.stroke",
-						"stylers": [
-						  {
-							"color": "#f5f5f5"
-						  }
-						]
-					  },
-					  {
-						"featureType": "administrative.land_parcel",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#bdbdbd"
-						  }
-						]
-					  },
-					  {
-						"featureType": "administrative.neighborhood",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#000000"
-						  }
-						]
-					  },
-					  {
-						"featureType": "landscape.man_made",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"weight": 2
-						  }
-						]
-					  },
-					  {
-						"featureType": "landscape.man_made",
-						"elementType": "geometry.fill",
-						"stylers": [
-						  {
-							"color": "#dddddd"
-						  },
-						  {
-							"saturation": -100
-						  },
-						  {
-							"lightness": -5
-						  }
-						]
-					  },
-					  {
-						"featureType": "landscape.man_made",
-						"elementType": "geometry.stroke",
-						"stylers": [
-						  {
-							"color": "#ffffff"
-						  }
-						]
-					  },
-					  {
-						"featureType": "poi",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#eeeeee"
-						  }
-						]
-					  },
-					  {
-						"featureType": "poi",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#757575"
-						  }
-						]
-					  },
-					  {
-						"featureType": "poi.park",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#00b33c"
-						  },
-						  {
-							"saturation": -75
-						  },
-						  {
-							"lightness": 50
-						  }
-						]
-					  },
-					  {
-						"featureType": "poi.park",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#9e9e9e"
-						  }
-						]
-					  },
-					  {
-						"featureType": "road",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#ffffff"
-						  }
-						]
-					  },
-					  {
-						"featureType": "road.arterial",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#757575"
-						  }
-						]
-					  },
-					  {
-						"featureType": "road.highway",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#dadada"
-						  }
-						]
-					  },
-					  {
-						"featureType": "road.highway",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#616161"
-						  }
-						]
-					  },
-					  {
-						"featureType": "road.local",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#9e9e9e"
-						  }
-						]
-					  },
-					  {
-						"featureType": "transit.line",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#e5e5e5"
-						  }
-						]
-					  },
-					  {
-						"featureType": "transit.station",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#eeeeee"
-						  }
-						]
-					  },
-					  {
-						"featureType": "water",
-						"elementType": "geometry",
-						"stylers": [
-						  {
-							"color": "#0099ff"
-						  },
-						  {
-							"saturation": -75
-						  },
-						  {
-							"lightness": 30
-						  }
-						]
-					  },
-					  {
-						"featureType": "water",
-						"elementType": "labels.text.fill",
-						"stylers": [
-						  {
-							"color": "#9e9e9e"
-						  }
-						]
-					  }
-					]
-			});
+		<!--- Map API --->
+			<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
+			<link href="css/map.css" rel="stylesheet" type="text/css">
+			<script type="text/javascript" src="js/map.js"></script>
 
-            setMarkers(map,locations);
-        }
-        
-        function setMarkers(map,locations){
+		<!--- D3.js --->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script type="text/javascript" src="js/d3.js"></script>
 
-        var marker, i
+		<title>IVIS18 - Group 1</title>
+		<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
+		<!--The following script tag downloads a font from the Adobe Edge Web Fonts server for use within the web page. We recommend that you do not modify it.-->
+		<script>var __adobewebfontsappname__="dreamweaver";</script>
+		<script src="http://use.edgefonts.net/source-sans-pro:n2:default.js" type="text/javascript"></script>
 
-            for (i = 0; i < locations.length; i++) {  
-                var name = locations[i][0];
-                var lat = locations[i][1];
-                var long = locations[i][2];
-                var info =  locations[i][3];
-                var icon_id = icons[locations[i][4]].icon;
+	</head>
+	<body>
+		<!-- Main Container -->
+		<div class="container"> 
+		  <!-- Navigation -->
+		  <header> <a href="">
+			<h4 class="logo">InnoEnergy </h4>
+			</a>
+			<nav>
+			  <ul>
+				<li><a href="#hero">MAP</a></li>
+				<li> <a href="#contact">CONTACT</a></li>
+			  </ul>
+			</nav>
+		  </header>
 
-                latlngset = new google.maps.LatLng(lat, long);
-				
-				var infoWindow = new google.maps.InfoWindow();
+		  <!-- Map Section -->
+		  <section class="hero" id="hero">
+			  <div class="floater">
+				<p style="text-align: center;"><strong>Energy Status</strong></p>
+				<p><img src="images/home-red.png" align="middle">Bad</p>
+				<p><img src="images/home-yellow.png" align="middle">Okey</p>
+				<p><img src="images/home-green.png" align="middle">Good</p>
+			  </div>
+			  <div id="map"></div>
+			  <script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBznsybYklQzSCfuFh1xWlal0xdA0cP-w&callback=initMap"></script>
+		  </section>
 
-                var marker = new google.maps.Marker({  
-                    map: map, title: name , position: latlngset, icon: icon_id  
-                    });
-				
-				(function (marker, name, info) {
-					google.maps.event.addListener(marker, "click", function (e) {
-						//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-						infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div></div></div>");
-						infoWindow.open(map, marker); toggleChart(name);setInfo(); 
+		  <!-- Chart Section -->
+		  <section class="about" id="toggled" style="display: none;">
+			<h2>Chart</h2>
+			  <div class="gallery">
+				  <center>
+					  <p class="text_chart">Energy at <span id="markerinfo"></span>.</p>
+					  <svg width="1130" height="500"></svg>
+				  </center>
+			  </div>
+		  </section>
 
-					});
-				})(marker, name, info);
+		  <!-- More Info Section -->
+		  <footer>
+			  <section id="contact">
+				<article class="footer_column">
+				  <h3>About</h3>
+				  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>--->
+				  <p>Group project in the course Infomation Visulatisation at Kungliga Tekniska Högskolan in co-operation with InnoEnergy. </p>
+				</article>
+				<article class="footer_column">
+				  <h3>Developers</h3>
+				  <p class="righty">Amanda Bergström<br>
+					  Ansh Gandhi<br>
+					  Bjarni Gudmundson<br>
+					  Gustaf Henning<br>
+					  Jui-Yang Hsu<br>
+					  Karolin Karlsson<br>
+					  Tuncay Dagdelen<br>
+					  Yunus Kocyigit</p>
+				  <p class="lefty">ambergs@kth.se <br>anshg@kth.se <br>brgud@kth.se <br> ghenning@kth.se <br> jyhsu@kth.se <br>karok@kth.se <br> tuncayda@kth.se <br> kocyigit@kth.se 
 
-              }
-        } // InitMap End
-    </script>	
-	  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBznsybYklQzSCfuFh1xWlal0xdA0cP-w&callback=initMap"></script>
-  </section>
-  <!-- About Section -->
-  <section class="about" id="toggled" style="display: none;">
-    <h2>Chart</h2>
-	  <!-- Stats Gallery Section -->
-	  <div class="gallery">
-		  <center>
-			  <p class="text_chart">Energy at <span id="markerinfo"></span>.</p>
-			  <svg width="1130" height="500"></svg>
-		  </center>
-			<script>
-				
-				function drawChart(dummydata) {
-					d3.selectAll("svg > *").remove();
-					var svg = d3.select("svg"),
-						margin = {top: 20, right: 80, bottom: 30, left: 50},
-						width = svg.attr("width") - margin.left - margin.right,
-						height = svg.attr("height") - margin.top - margin.bottom,
-						g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+					</p>
+				</article>
+			</section>
+		  </footer>
 
-					var parseTime = d3.timeParse("%H:%M");
-
-					var x = d3.scaleTime().range([0, width]),
-						y = d3.scaleLinear().range([height, 0]),
-						z = d3.scaleOrdinal(d3.schemeCategory10);
-
-					var line = d3.line()
-						.curve(d3.curveBasis)
-						.x(function(d) { return x(d.time); })
-						.y(function(d) { return y(d.energy); });
-
-					d3.tsv(dummydata, type, function(error, data) {
-					  if (error) throw error;
-
-					  var inout = data.columns.slice(1).map(function(id) {
-						return {
-						  id: id,
-						  values: data.map(function(d) {
-							return {time: d.time, energy: d[id]};
-
-						  })
-						};
-					  });
-						 //console.log("data in" + data);
-					  x.domain(d3.extent(data, function(d) { return d.time; }));
-
-					  y.domain([
-						d3.min(inout, function(c) { return d3.min(c.values, function(d) { return d.energy; }); }),
-						d3.max(inout, function(c) { return d3.max(c.values, function(d) { return d.energy; }); })
-					  ]);
-
-					  z.domain(inout.map(function(c) { return c.id; }));
-
-					  g.append("g")
-						  .attr("class", "axis axis--x")
-						  .attr("transform", "translate(0," + height + ")")
-						  .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%H:%M")));
-						
-					  var t = d3.transition()
-						.duration(3000)
-						.ease(d3.easeLinear)
-						.on("start", function(d){ console.log("transiton start") })
-						.on("end", function(d){ console.log("transiton end") })
-
-					  g.append("g")
-						  .attr("class", "axis axis--y")
-						  .call(d3.axisLeft(y))
-						.append("text")
-						  .attr("transform", "rotate(-90)")
-						  .attr("y", 6)
-						  .attr("dy", "0.71em")
-						  .attr("fill", "#000")
-						  .text("Energy, kWh");
-
-					  var energyLine = g.selectAll(".energyLine")
-						.data(inout)
-						.enter().append("g")
-						  .attr("class", "energyLine");
-
-					  energyLine.append("path")
-						  .attr("class", "line")
-						  .attr("d", function(d) { return line(d.values); })
-						  .style("stroke", function(d) { return z(d.id); })
-						  .attr("stroke-dasharray", function(d){ return this.getTotalLength() })
-            			  .attr("stroke-dashoffset", function(d){ return this.getTotalLength() });
-						
-					  g.selectAll(".line").transition(t)
-            				.attr("stroke-dashoffset", 0)
-
-					  energyLine.append("text")
-						  .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-						  .attr("transform", function(d) { return "translate(" + x(d.value.time) + "," + y(d.value.energy) + ")"; })
-						  .attr("x", 3)
-						  .attr("dy", "0.35em")
-						  .style("font", "10px sans-serif")
-						  .text(function(d) { return d.id; });
-					});
-
-					function type(d, _, columns) {
-					  d.time = parseTime(d.time);
-					  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
-					  return d;
-					}
-				}
-			</script>
-	  </div>
-	  </section>
-  <!-- Parallax Section -->
-	<!---
-  <section class="banner">
-    <h2 class="parallax">BANNER</h2>
-    <p class="parallax_description">Some kind of banner to create a more interesting looking webpage.</p>
-  </section>
-	--->
-  <!-- More Info Section -->
-  <footer>
-	  <section id="contact">
-		<article class="footer_column">
-		  <h3>About</h3>
-		  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>--->
-		  <p>Group project in the course Infomation Visulatisation at Kungliga Tekniska Högskolan in co-operation with InnoEnergy. </p>
-		</article>
-		<article class="footer_column">
-		  <h3>Developers</h3>
-		  <p class="righty">Amanda Bergström<br/>
-			  Ansh Gandhi<br/>
-			  Bjarni Gudmundson<br/>
-			  Gustaf Henning<br/>
-			  Jui-Yang Hsu<br/>
-			  Karolin Karlsson<br/>
-			  Tuncay Dagdelen<br/>
-			  Yunus Kocyigit</p>
-		  <p class="lefty">ambergs@kth.se <br/>anshg@kth.se <br/>brgu@kth.se <br/> ghenning@kth.se <br/> jyhsu@kth.se <br>karok@kth.se <br>
-			tuncayda@kth.se <br/> kocyigit@kth.se 
-			 
- 
- 
-
-			</p>
-		</article>
-	</section>
-  </footer>
-  <!-- Footer Section -->
-  <!-- <section class="footer_banner">
-    <h2 class="hidden">Footer Banner Section </h2>
-    <p class="hero_header">FOR THE LATEST NEWS &amp; UPDATES</p>
-    <div class="button">subscribe</div>
-  </section> -->
-  <!-- Copyrights Section -->
-  <div class="copyright">2018 - <strong>IVIS18 Group 1</strong></div>
-</div>
-<!-- Main Container Ends -->
-</body>
+		  <!-- Copyrights Section -->
+		  <div class="copyright">2018 - <strong>IVIS18 Group 1</strong></div>
+		</div>
+		<!-- Main Container Ends -->
+	</body>
 </html>
