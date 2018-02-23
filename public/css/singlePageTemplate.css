@@ -541,7 +541,31 @@ nav ul li {
 }
 #map {
     height: 500px;
-    width: 100%;
+    width: 80%;
+	float: left;
+}
+
+#buildingsLegend {
+	width: 20%;
+	height: 500px;
+	float: right;
+	background-color: white;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+#buildingsLegend .title {
+	text-align: center;
+	font-weight: 800;
+} 
+
+#buildingsLegend ul {
+	list-style-type: none;
+	padding: 15px;
+}
+
+#buildingsLegend li {
+	color: #4d4d4d; 
 }
 
 .line {
