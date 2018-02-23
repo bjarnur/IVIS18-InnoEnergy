@@ -24,11 +24,11 @@ var locations = [
 	['Otto E Andersens Gata', 59.27334522476262, 15.184154546867603, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'yellow'],
 ];
 
-
+var map;
 
 function initMap() {
 	var orebro = {lat: 59.2739, lng: 15.2133};
-	var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 14,
 	  center: orebro, 
 	  disableDefaultUI: true,
@@ -291,12 +291,12 @@ function createBuildingsLegend() {
 	var HTMLstring = '<p class="title">Buildings</p><ul>';
 	for (i = 0; i < locations.length; i++) {
 		var position = locations[i][0];
-		HTMLstring = HTMLstring.concat('<li onclick="centerMap()">' + position + '</li>');
+		HTMLstring = HTMLstring.concat('<li onclick="centerMap(' + locations[i][1] +',' + locations[i][2] + ')">' + position + '</li>');
 	}
 	HTMLstring = HTMLstring.concat('</ul>');
 	findDiv.innerHTML = HTMLstring;
 }
 
-function centerMap() {
-	
+function centerMap(latitude, longitude) {
+	map.setCenter({lat: latitude, lng: longitude});
 }
