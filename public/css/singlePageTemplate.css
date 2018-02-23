@@ -558,6 +558,7 @@ nav ul li {
 	padding: 5px;
 	box-sizing: border-box;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 
@@ -574,6 +575,11 @@ nav ul li {
 
 .buildingsLegendfloaty li {
 	color: #4d4d4d; 
+}
+
+.buildingsLegendfloaty input {
+	margin: 5px;
+	width: 173px;
 }
 
 .line {
