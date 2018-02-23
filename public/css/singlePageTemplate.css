@@ -532,26 +532,31 @@ nav ul li {
 	color: #4d4d4d;
 }
 #hero .floater {
-	width: 120px;
-	background-color: rgba(255,255,255,0.70);
+	width: 200px;
+	height: 490px;
+	background-color: rgba(255,255,255,0.90);
 	z-index: 10;
 	position: absolute;
 	left: 5px;
-	top: 58px;
+	top: 55px;
+	padding: 5px;
+	box-sizing: border-box;
 }
 #map {
     height: 500px;
-    width: 80%;
-	float: left;
+    width: 100%;
 }
 
 #buildingsLegend {
-	width: 20%;
-	height: 500px;
-	float: right;
-	background-color: white;
-	box-sizing: border-box;
+	width: 200px;
+	height: 490px;
+	z-index: 10;
+	position: absolute;
+	right: 5px;
+	top: 55px;
+	background-color: rgba(255,255,255,0.90);
 	padding: 5px;
+	box-sizing: border-box;
 }
 
 #buildingsLegend .title {
@@ -559,9 +564,14 @@ nav ul li {
 	font-weight: 800;
 } 
 
+.title {
+	text-align: center;
+	font-weight: 800;
+} 
+
 #buildingsLegend ul {
 	list-style-type: none;
-	padding: 15px;
+	padding: 5px;
 }
 
 #buildingsLegend li {
