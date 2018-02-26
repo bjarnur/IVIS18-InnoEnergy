@@ -273,8 +273,6 @@ var marker, i;
 
 		var infoWindow = new google.maps.InfoWindow();
 		
-		
-		
 		var marker = new google.maps.Marker({  
 			map: map, title: name , position: latlngset, icon: icon_id  
 			});
@@ -285,8 +283,8 @@ var marker, i;
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
 				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div></div></div>");
 				infoWindow.open(map, marker); toggleChart(name); setInfo(); 
-
 			});
+            
 		})(marker, name, info);
 	}
 		markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
@@ -314,9 +312,7 @@ function filterMarkers(type) {
 		for (i = 0; i < locations.length; i++) {
 			if (type == locations[i][4]) {
 				filteredLocations.push(locations[i]);
-
 			}
-
 		}
 	}
 	console.log(filteredLocations);
@@ -342,7 +338,6 @@ function searchStreetName(street) {
 			continue;
 		}
 	}
-	
 }
 
 function centerMap(latitude, longitude) {
