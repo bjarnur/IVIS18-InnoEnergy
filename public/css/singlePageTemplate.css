@@ -41,9 +41,9 @@ header {
     color: #004494;
 	font-weight: bold;
 	text-align: undefined;
-	width: 10%;
+	height: 50px;
 	float: left;
-	margin-top: 15px;
+	margin-top: 0px;
 	margin-left: 25px;
 	letter-spacing: 4px;
 }
