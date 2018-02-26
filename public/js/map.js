@@ -11,7 +11,17 @@ var icons = {
 		icon: 'images/home-yellow.png'
 	  }
 	};
-          
+          /*
+function httpBuildings(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/example", false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+console.log(httpGet("f"))
+*/
+
 var locations = [
 	['Fredsgatan', 59.27562163725686, 15.219332817504892, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
 	['Folkungagatan', 59.27614785296132, 15.197617653320322, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
@@ -26,7 +36,13 @@ var locations = [
 
 var map;
 
-function initMap() {
+function loadBuildings() {       
+    $.getJSON("/buildings").then(function(result){    	    	
+    	initMap(result);
+	});
+}
+
+function initMap(buildings) {
 	var orebro = {lat: 59.2739, lng: 15.2133};
 	map = new google.maps.Map(document.getElementById('map'), {
 	  zoom: 14,
@@ -247,29 +263,33 @@ function initMap() {
 			]
 	});
 
-	setMarkers(map,locations);
+	setMarkers(map,buildings);
 }
 
-function setMarkers(map,locations) {
-var markers = [];
-var marker, i;
+async function setMarkers(map,buildings) {
+	
+	var markers = [];
+	console.log(Object.keys(buildings).length);
+	for (var i = 0; i < Object.keys(buildings).length; i++) {  
+		
+		var building = buildings[i]
+		var name = building.address;
+		var info =  building.additional;
+		var icon_id = 'images/home-green.png'; //TODO use fuse type here
 
-	for (i = 0; i < locations.length; i++) {  
-		var name = locations[i][0];
-		var info =  locations[i][3];
-		var icon_id = icons[locations[i][4]].icon;
-
-        
-		latlngset = {lat: locations[i][1], lng: locations[i][2]};
-			//new google.maps.LatLng(lat, long);
+		try {
+			latlngset = await getCoordinates(building);
+		}        
+		catch(error) {
+			continue;
+			console.log(error)
+		}
+		//console.log(latlngset);
 
 		var infoWindow = new google.maps.InfoWindow();
-		
-		
-		
 		var marker = new google.maps.Marker({  
 			map: map, title: name , position: latlngset, icon: icon_id  
-			});
+		});
 		markers.push(marker);
 
 		(function (marker, name, info) {
@@ -280,7 +300,8 @@ var marker, i;
 
 			});
 		})(marker, name, info);
-	}
+
+	}	
 	var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
 }
@@ -299,4 +320,27 @@ function createBuildingsLegend() {
 
 function centerMap(latitude, longitude) {
 	map.setCenter({lat: latitude, lng: longitude});
+}
+
+function getCoordinates(building) {
+	var res;
+	return new Promise(function(resolve, reject) {
+		GMaps.geocode({
+			address: building.address,
+			callback: function(results, status){
+				if(status=='OK'){
+					var latlng = results[0].geometry.location;
+				 	res = {
+						lat: latlng.lat(),
+						lng: latlng.lng()
+					};
+					resolve(res);
+				}
+				else {
+					//Center of Orebro as fallback
+					reject({lat: 59.2739, lng: 15.2133});					
+				}
+			}
+		});
+	});
 }

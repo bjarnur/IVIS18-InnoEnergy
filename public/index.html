@@ -5,12 +5,15 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!--- Map API --->
-			<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
-			<link href="css/map.css" rel="stylesheet" type="text/css">
-			<script type="text/javascript" src="js/map.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/gmaps.js"></script>
 
-		<!--- D3.js --->
+		<!--- Map API -->
+		<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"> </script>
+		<link href="css/map.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/map.js"></script>
+
+		<!--- D3.js -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 		<script type="text/javascript" src="js/d3.js"></script>
 
@@ -56,7 +59,7 @@
 				  </script>
 			  </div>
 			  <script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBznsybYklQzSCfuFh1xWlal0xdA0cP-w&callback=initMap"></script>
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBznsybYklQzSCfuFh1xWlal0xdA0cP-w&callback=loadBuildings"></script>
 		  </section>
 
 		  <!-- Chart Section -->
@@ -75,7 +78,7 @@
 			  <section id="contact">
 				<article class="footer_column">
 				  <h3>About</h3>
-				  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>--->
+				  <!--<img src="images/placeholder.jpg" alt="" width="400" height="200" class="cards"/>-->
 				  <p>Group project in the course Infomation Visulatisation at Kungliga Tekniska Högskolan in co-operation with InnoEnergy. </p>
 				</article>
 				<article class="footer_column">

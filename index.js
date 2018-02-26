@@ -19,7 +19,12 @@ app.get('/example', async function(req, res) {
 })
 
 app.get('/example2', async function(req, res) {
-  let result = await db.infoById('735999114007366888')
+  let result = await db.infoById('735999114007078620')
+  res.send(result)
+})
+
+app.get('/buildings', async function(req, res) {
+  let result = await db.getAllBuildings()
   res.send(result)
 })
 
@@ -32,6 +37,7 @@ app.get('/demo', async function(req,res){
 })
 
 app.post('/search',async function(req,res){
+  console.log(req.body.idx)
   let result = await db.consumptionById(req.body.idx)
   //TODO:later on we can send back building_info at this point
   res.send(result)
