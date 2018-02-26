@@ -5,7 +5,7 @@
     Green color: #96c147 
     Grey: #444 */
 
-/* Body */
+    /* Body */
 body {
 	font-family: 'Titillium Web', sans-serif;
     color: #444;
@@ -16,16 +16,16 @@ body {
 	margin-left: 0px;
 	font-style: normal;
 	font-weight: 200;
-}
-/* Container */
+    }
+    /* Container */
 .container {
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	height: 1000px;
 	background-color: #fff;
-}
-/* Navigation */
+    }
+    /* Navigation */
 header {
 	width: 100%;
 	height: 50px;
@@ -36,7 +36,7 @@ header {
 	left: 0px;
 	top: 0px;
 	z-index: 100;
-}
+    }
 .logo {
     color: #004494;
 	font-weight: bold;
@@ -46,18 +46,18 @@ header {
 	margin-top: 0px;
 	margin-left: 25px;
 	letter-spacing: 4px;
-}
+    }
 nav {
 	float: right;
 	width: 50%;
     color: #004494;
 	text-align: right;
 	margin-right: 25px;
-}
+    }
 header nav ul {
 	list-style: none;
 	float: right;
-}
+    }
 nav ul li {
 	float: left;
 	font-size: 14px;
@@ -66,18 +66,18 @@ nav ul li {
 	letter-spacing: 2px;
 	font-weight: bold;
 	transition: all 0.3s linear;
-}
-/* Links in header */
+    }
+    /* Links in header */
 nav ul li a {
     color: #004494;
 	text-decoration: none;
-}
+    }
 nav ul li a:visited {
 	color: #004494;
-}
+    }
 nav ul li a:hover {
 	color: #96c147;
-}
+    } 
 .hero_header {
 	color: #004494;
 	text-align: center;
@@ -86,34 +86,33 @@ nav ul li a:hover {
 	margin-bottom: 0px;
 	margin-left: 0px;
 	letter-spacing: 4px;
-}
-/* Hero Section */
+    }
+    /* Hero Section */
 .hero {
 	padding-top: 50px;
 	height: 500px;
-}
+    }
 #map {
     height: 500px;
     width: 100%;
-}
+    }
 #iw-container {
     font-family: 'Titillium-Regular', sans-serif;
     max-width: 200px;
-}
-
+    }
 .iw-title {
 	font-family: 'Titillium-Regular', sans-serif;
 	font-size: 20px;
 	padding: 10px;
 	color: #444;
-}
+    }
 .iw-infotext {
     font-family: 'Titillium-Regular', sans-serif;
 	font-size: 15px;
 	padding: 10px;
 	color: #444;
-}
-/* The chart */
+    }
+    /* The chart */
 .about {
 	width: 100%;
 	box-sizing: border-box;
@@ -122,11 +121,11 @@ nav ul li a:hover {
 	display: inline-block;
 	background-color: #fff;
 	margin-top: 0px;
-}
+    }
 .about h2 {
     color: #96c147;
-}
-/* Stats Gallery */
+    }
+    /* Stats Gallery */
 .gallery {
 	clear: both;
 	display: inline-block;
@@ -137,63 +136,62 @@ nav ul li a:hover {
 	padding-top: 0px;
 	margin-top: -5px;
 	margin-bottom: 0px;
-}
+    }
 .text_chart {
 	width: 100%;
 	text-align: justify;
 	font-weight: lighter;
 	float: left;
 	color: #444;
-}
+    }
 .gallery div .nopad {
 	padding: 0;
 	margin: 0;
 	display: inline;
-}
+    }
 svg {
     font-family: 'Titillium Web', sans-serif;
-}
+    }
 .line {
-	  fill: none;
-	  stroke: #004494;
-	  stroke-width: 1.5px;
+    fill: none;
+    stroke: #004494;
+    stroke-width: 1.5px;
 	}
-
-/* About and Contacts */
+    /* About and Contacts */
 footer {
 	margin-top: 5px;
 	background-color: #fff;
 	padding-bottom: 35px;
 	width: 100%;
     display: inline-block;
-}
+    }
 .footer_column {
 	width: 50%;
 	text-align: center;
 	padding-top: 30px;
 	float: left;
-}
+    }
 footer .footer_column h3 {
 	color: #96c147;
 	text-align: center;
-}
+    }
 footer .footer_column p {
 	color: #444;
 	background-color: #fff;
-}
+    }
 footer .footer_column .righty {
 	text-align: right;
 	text-transform: uppercase;
 	width: 42%;
 	float: left;
 	padding: 0;
-}
+    }
 footer .footer_column .lefty {
 	text-align: left;
 	width: 20%;
 	float: left;
 	padding: 0;
-}
+    }
 footer .footer_column p {
 	padding-left: 30px;
 	padding-right: 30px;
@@ -202,7 +200,7 @@ footer .footer_column p {
 	font-weight: lighter;
 	margin-left: 20px;
 	margin-right: 20px;
-}
+    }
 .copyright {
     border-top-width: 2px;
     border-top-color: #004494;
@@ -214,15 +212,12 @@ footer .footer_column p {
 	text-transform: uppercase;
 	font-weight: lighter;
 	letter-spacing: 2px;
-}
-
-
-
+    }
 .title {
     color: #96c147;
 	text-align: center;
 	font-weight: 800;
-} 
+    } 
 #hero .floater {
 	width: 200px;
 	height: 490px;
@@ -233,16 +228,15 @@ footer .footer_column p {
 	top: 55px;
 	padding: 5px;
 	box-sizing: border-box;
-}
+    }
 #hero ul {
     list-style-type: none;
 	padding: 5px;
-}
+    }
 #hero li {
     color: #444;
-}
-
-/* Building Floaty whit search*/
+    }
+    /* Building Floaty whit search*/
 .buildingsLegendfloaty {
 	width: 200px;
 	height: 490px;
@@ -255,32 +249,31 @@ footer .footer_column p {
 	box-sizing: border-box;
 	overflow-y: scroll;
 	overflow-x: hidden;
-}
+    }
 .buildingsLegendfloaty input {
 	margin: 5px;
 	width: 173px;
-}
-/* Autocomplete search field */
+    }
+    /* Autocomplete search field */
 .autocomplete {
-  /*the container must be positioned relative:*/
+    /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
     width: 182px;
-}
+    }
 input {
     font-family: 'Titillium Web', sans-serif;
     color: #444;
     border: 1px solid transparent;
     font-size: 16px;
-
-}
+    }
 input[type=text] {
     background-color: #fff;
     border-width: 1px;
     border-color: #004494;
     width: 172px;
     padding: 5px;
-}
+    }
 input[type=submit] {
     text-align: right;
     background-color: rgba(68, 68, 68, 0.50);
@@ -291,31 +284,30 @@ input[type=submit] {
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 5px;
-}
+    }
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-top: 90%;
-left: 5px;
-right: -7px;
-}
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 90%;
+    left: 5px;
+    right: -7px;
+    }
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-}
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;  
+    }
 .autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
-}
+    /*when hovering an item:*/
+    background-color: #d4d4d4;
+    }
 .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: #444 !important;
-  color: #fff;
-}
-
+    /*when navigating through the items using the arrow keys:*/
+    background-color: #444 !important;
+    color: #fff;
+    }

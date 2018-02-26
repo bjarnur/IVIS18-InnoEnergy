@@ -50,7 +50,6 @@ function drawChart(dummydata) {
 		  id: id,
 		  values: data.map(function(d) {
 			return {time: d.time, energy: d[id]};
-
 		  })
 		};
 	  });
@@ -93,7 +92,7 @@ function drawChart(dummydata) {
 	  energyLine.append("path")
 		  .attr("class", "line")
 		  .attr("d", function(d) { return line(d.values); })
-		  .style("stroke", function(d) { return z(d.id); })
+		  .style("stroke", "#004494")
 		  .attr("stroke-dasharray", function(d){ return this.getTotalLength() })
 		  .attr("stroke-dashoffset", function(d){ return this.getTotalLength() });
 
@@ -105,7 +104,7 @@ function drawChart(dummydata) {
 		  .attr("transform", function(d) { return "translate(" + x(d.value.time) + "," + y(d.value.energy) + ")"; })
 		  .attr("x", 3)
 		  .attr("dy", "0.35em")
-		  .style("font", "10px sans-serif")
+		  .style("font", "10px 'Titillium Web', sans-serif")
 		  .text(function(d) { return d.id; });
 	});
 
