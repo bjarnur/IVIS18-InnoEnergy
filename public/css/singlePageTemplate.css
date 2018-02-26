@@ -9,6 +9,7 @@
     /* Body */
 body {
 	font-family: 'Titillium Web', sans-serif;
+	font-size: 16px;
     color: #444;
 	background-color: #fff;
 	margin-top: 0px;
@@ -103,9 +104,9 @@ nav ul li a:hover {
     }
 .iw-title {
 	font-family: 'Titillium Web', sans-serif;
-	font-size: 20px;
+	font-size: 16px;
 	padding: 10px;
-	color: #444;
+	color: #96c147;
     }
 .iw-infotext {
     font-family: 'Titillium Web', sans-serif;
