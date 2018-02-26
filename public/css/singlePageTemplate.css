@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* Body */
 body {
-	font-family: 'Titillium-Regular', Helvetica, Arial, sans-serif;
+	font-family: 'Titillium Web', sans-serif;
 	background-color: #FFF;
 	margin-top: 0px;
 	margin-right: 0px;
@@ -520,13 +520,13 @@ nav ul li {
 }
 
 .iw-title {
-	font-family: source-sans-pro;
+	font-family: 'Titillium-Regular';
 	font-size: 20px;
 	padding: 10px;
 	color: #4d4d4d;
 }
 .iw-infotext {
-    font-family: source-sans-pro;
+    font-family: 'Titillium-Regular';
 	font-size: 15px;
 	padding: 10px;
 	color: #4d4d4d;
