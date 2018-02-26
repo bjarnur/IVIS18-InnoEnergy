@@ -39,6 +39,7 @@ var map;
 function loadBuildings() {       
     $.getJSON("/buildings").then(function(result){    	    	
     	initMap(result);
+    	createBuildingsLegend(result);
 	});
 }
 
@@ -274,7 +275,7 @@ async function setMarkers(map,buildings) {
 		
 		var building = buildings[i]
 		var name = building.address;
-		var info =  building.additional;
+		var info =  "Fuse type: " + building.fuse;
 		var icon_id = 'images/home-green.png'; //TODO use fuse type here
 		var latlngset = {
 			lat: parseFloat(building.latitude), 
@@ -302,12 +303,12 @@ async function setMarkers(map,buildings) {
 }
 
 
-function createBuildingsLegend() {
+function createBuildingsLegend(buildings) {
 	var findDiv = document.getElementById('buildingsLegend');
-	for (i = 0; i < locations.length; i++) {
+	for (i = 0; i < buildings.length; i++) {
 		var node = document.createElement("li");
-		var textnode = document.createTextNode(locations[i][0]);
-		node.setAttribute('onclick', 'centerMap(' + locations[i][1] +',' + locations[i][2] + ')');
+		var textnode = document.createTextNode(buildings[i].address);
+		node.setAttribute('onclick', 'centerMap(' + buildings[i].latitude +',' + buildings[i].longitude + ')');
 		node.appendChild(textnode)
 		findDiv.appendChild(node);
 	}
