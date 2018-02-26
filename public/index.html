@@ -43,10 +43,13 @@
 		  <!-- Map Section -->
 		  <section class="hero" id="hero">
 			  <div class="floater">
-				<p class="title">Energy Status</p>
-				<p><img src="images/home-red.png" align="middle">Bad</p>
-				<p><img src="images/home-yellow.png" align="middle">Okey</p>
-				<p><img src="images/home-green.png" align="middle">Good</p>
+				<p class="title">Fuse Types</p>
+				  <ul>
+					<li onClick="filterMarkers('all');">Show all</li>
+				  	<li onClick="filterMarkers('red');">Bad</li>
+					<li onClick="filterMarkers('yellow');">Okey</li>
+					<li onClick="filterMarkers('green');">Good</li>
+				  </ul>
 			  </div>
 			  <div id="map"></div>
 			  <div class="buildingsLegendfloaty">

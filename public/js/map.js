@@ -32,7 +32,7 @@ function buildingsArray (input) {
 	}
 }
 
-var map;
+var map;var markers = []; var markerCluster = null;
 
 function initMap() {
 	var orebro = {lat: 59.2739, lng: 15.2133};
@@ -258,17 +258,17 @@ function initMap() {
 	setMarkers(map,locations);
 }
 
-function setMarkers(map,locations) {
-var markers = [];
+function setMarkers(map,posArray) {
+
 var marker, i;
 
-	for (i = 0; i < locations.length; i++) {  
-		var name = locations[i][0];
-		var info =  locations[i][3];
-		var icon_id = icons[locations[i][4]].icon;
+	for (i = 0; i < posArray.length; i++) {  
+		var name = posArray[i][0];
+		var info =  posArray[i][3];
+		var icon_id = icons[posArray[i][4]].icon;
 
         
-		latlngset = {lat: locations[i][1], lng: locations[i][2]};
+		latlngset = {lat: posArray[i][1], lng: posArray[i][2]};
 			//new google.maps.LatLng(lat, long);
 
 		var infoWindow = new google.maps.InfoWindow();
@@ -289,10 +289,39 @@ var marker, i;
 			});
 		})(marker, name, info);
 	}
-	var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+		markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+	console.log(markerCluster);
 
 }
 
+function clearOverlays() {
+  for (var i = 0; i < markers.length; i++ ) {
+    markers[i].setMap(null);
+  }
+  markers.length = 0;
+	markers = [];
+	markerCluster.clearMarkers();
+}
+
+function filterMarkers(type) {
+	clearOverlays();
+	markerCluster=null;
+	var filteredLocations = [];
+	if (type == 'all') {
+			filteredLocations = locations;
+		}
+	else {
+		for (i = 0; i < locations.length; i++) {
+			if (type == locations[i][4]) {
+				filteredLocations.push(locations[i]);
+
+			}
+
+		}
+	}
+	console.log(filteredLocations);
+	setMarkers(map, filteredLocations);
+}
 
 function createBuildingsLegend() {
 	var findDiv = document.getElementById('buildingsLegend');
