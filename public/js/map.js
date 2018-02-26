@@ -276,15 +276,10 @@ async function setMarkers(map,buildings) {
 		var name = building.address;
 		var info =  building.additional;
 		var icon_id = 'images/home-green.png'; //TODO use fuse type here
-
-		try {
-			latlngset = await getCoordinates(building);
-		}        
-		catch(error) {
-			continue;
-			console.log(error)
-		}
-		//console.log(latlngset);
+		var latlngset = {
+			lat: parseFloat(building.latitude), 
+			lng: parseFloat(building.longitude)
+		};
 
 		var infoWindow = new google.maps.InfoWindow();
 		var marker = new google.maps.Marker({  
@@ -320,27 +315,4 @@ function createBuildingsLegend() {
 
 function centerMap(latitude, longitude) {
 	map.setCenter({lat: latitude, lng: longitude});
-}
-
-function getCoordinates(building) {
-	var res;
-	return new Promise(function(resolve, reject) {
-		GMaps.geocode({
-			address: building.address,
-			callback: function(results, status){
-				if(status=='OK'){
-					var latlng = results[0].geometry.location;
-				 	res = {
-						lat: latlng.lat(),
-						lng: latlng.lng()
-					};
-					resolve(res);
-				}
-				else {
-					//Center of Orebro as fallback
-					reject({lat: 59.2739, lng: 15.2133});					
-				}
-			}
-		});
-	});
 }
