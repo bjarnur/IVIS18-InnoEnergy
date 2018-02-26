@@ -265,20 +265,21 @@ footer .footer_column p {
   /*the container must be positioned relative:*/
     position: relative;
     display: inline-block;
-    width: 160px;
+    width: 182px;
 }
 input {
     font-family: 'Titillium Web', sans-serif;
     color: #444;
     border: 1px solid transparent;
     font-size: 16px;
+
 }
 input[type=text] {
     background-color: #fff;
     border-width: 1px;
     border-color: #004494;
-    width: 100%;
-    padding: 10px;
+    width: 172px;
+    padding: 5px;
 }
 input[type=submit] {
     text-align: right;
@@ -298,9 +299,9 @@ input[type=submit] {
   border-top: none;
   z-index: 99;
   /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
+top: 90%;
+left: 5px;
+right: -7px;
 }
 .autocomplete-items div {
   padding: 10px;
