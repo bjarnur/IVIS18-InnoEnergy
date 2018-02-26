@@ -51,15 +51,15 @@
 			  <div id="map"></div>
 			  <div class="buildingsLegendfloaty">
 				  <p class="title">Buildings</p>
-				    <form autocomplete="off" action="#">
 					  <div class="autocomplete" style="width:300px;">
-						<input id="myInput" type="text" name="myCountry" placeholder="Search...">
+						<input id="myInput" type="text" name="myBuilding" placeholder="Search...">
 					  </div>
-					  <input type="submit">
-					</form>		
+					  <input type="submit" onclick="searchStreetName(document.getElementById('myInput').value);">	
 				  <ul id="buildingsLegend"></ul>
 				  <script>
-				  createBuildingsLegend();
+				    createBuildingsLegend();
+					buildingsArray();
+					autocomplete(document.getElementById("myInput"), buildings);
 				  </script>
 			  </div>
 			  <script async defer
