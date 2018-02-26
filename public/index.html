@@ -51,7 +51,12 @@
 			  <div id="map"></div>
 			  <div class="buildingsLegendfloaty">
 				  <p class="title">Buildings</p>
-				  <input placeholder="Search..."> 
+				    <form autocomplete="off" action="#">
+					  <div class="autocomplete" style="width:300px;">
+						<input id="myInput" type="text" name="myCountry" placeholder="Search...">
+					  </div>
+					  <input type="submit">
+					</form>		
 				  <ul id="buildingsLegend"></ul>
 				  <script>
 				  createBuildingsLegend();
