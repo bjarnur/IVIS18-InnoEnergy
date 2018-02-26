@@ -287,10 +287,11 @@ input[type=submit] {
     color: #fff;
     border-radius: 5px;
     width: auto;
-    padding: 5px;
+    padding: 4px;
     padding-left: 10px;
     padding-right: 10px;
-    margin-right: 5px;
+    margin-left: 121px;
+	font-size: 14px;
 }
 .autocomplete-items {
   position: absolute;
