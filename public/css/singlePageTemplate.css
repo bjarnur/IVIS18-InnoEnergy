@@ -285,26 +285,25 @@ input[type=submit] {
     padding-right: 10px;
     margin-left: 126px;
 	font-size: 14px;
-}
+    }
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
 	top: 90%;
 	left: 5px;
 	right: -7px;
-}
+    }
 .autocomplete-items div {
-  padding: 5px;
-  cursor: pointer;
-	font-size: 14px;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-}
-
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+    }
 .autocomplete-items div:hover {
     /*when hovering an item:*/
     background-color: #d4d4d4;
