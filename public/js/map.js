@@ -281,7 +281,7 @@ var marker, i;
 		(function (marker, name, info) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-content'><div class='iw-subTitle'>" + info + "</div></div></div>");
+				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-infotext'>" + info + "</div></div>");
 				infoWindow.open(map, marker); toggleChart(name); setInfo(); 
 			});
             

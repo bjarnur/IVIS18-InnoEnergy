@@ -65,7 +65,6 @@ nav ul li {
 	font-size: 14px;
 	text-align: left;
 	margin-right: 25px;
-	letter-spacing: 2px;
 	font-weight: bold;
 	transition: all 0.3s linear;
     }
@@ -105,13 +104,14 @@ nav ul li a:hover {
 .iw-title {
 	font-family: 'Titillium Web', sans-serif;
 	font-size: 16px;
-	padding: 10px;
+	padding: 0px;
 	color: #96c147;
+    font-weight: 800;
     }
 .iw-infotext {
     font-family: 'Titillium Web', sans-serif;
-	font-size: 15px;
-	padding: 10px;
+	font-size: 14px;
+	padding: 0px;
 	color: #444;
     }
     /* The chart */
@@ -151,9 +151,9 @@ nav ul li a:hover {
 	margin: 0;
 	display: inline;
     }
-svg {
-    font-family: 'Titillium Web', sans-serif;
-    }
+g {
+    font-family: 'Titillium Web', sans-serif; 
+}
 .line {
     fill: none;
     stroke: #004494;
