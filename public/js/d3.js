@@ -76,19 +76,19 @@ function drawChart(dummydata) {
 		.on("end", function(d){ console.log("transiton end") })
 
 	  g.append("g")
-		  .attr("class", "axis axis--y")
-		  .call(d3.axisLeft(y))
-		.append("text")
-		  .attr("transform", "rotate(-90)")
-		  .attr("y", 6)
-		  .attr("dy", "0.71em")
-		  .attr("fill", "#000")
-		  .text("Energy, kWh");
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("fill", "#000")
+            .text("Energy, kWh");
 
 	  var energyLine = g.selectAll(".energyLine")
-		.data(inout)
-		.enter().append("g")
-		  .attr("class", "energyLine");
+            .data(inout)
+            .enter().append("g")
+            .attr("class", "energyLine");
 
 	  energyLine.append("path")
 		  .attr("class", "line")
