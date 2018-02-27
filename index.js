@@ -33,6 +33,14 @@ app.get('/buildingsByAddress/:addr', async function(req, res) {
   res.send(result)
 })
 
+/**
+example usage:
+http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-04 */
+app.get('/consumptionOnIntervalById/:id/:from/:to', async function(req, res) {
+  let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to)
+  res.send(result)
+})
+
 app.get('/map', async function(req,res){
   res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
 })
