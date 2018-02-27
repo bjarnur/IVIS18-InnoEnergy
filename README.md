@@ -38,6 +38,13 @@ files in the "secret" folder, i.e. one csv file for consumption data and one csv
 file for additional information on buildings (use the name building_info.csv when
 saving the file). 
 
+*NOTE*: Make sure you download the latest version of the building_info file to ensure 
+the correct behavior. You can make sure that you have the latest version by checking
+that the columns longitude and latitude exist. If you are downloading this file for the 
+first time, delete the file db.sqlite from the secret folder before running npm start. 
+If you experience some issues, try shutting node off and running it once more, sometimes we 
+need to start it twice to generate all tables (we should probably look into this :) ). 
+
 If the database hasn't been built already it will do so automatically.
 The database file will also be located in the "secret" folder.
 Currently this process is slow. There are 48000x1000 fields.
