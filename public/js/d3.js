@@ -50,7 +50,6 @@ function drawChart(dummydata) {
 		  id: id,
 		  values: data.map(function(d) {
 			return {time: d.time, energy: d[id]};
-
 		  })
 		};
 	  });
@@ -76,24 +75,24 @@ function drawChart(dummydata) {
 		.on("end", function(d){ console.log("transiton end") })
 
 	  g.append("g")
-		  .attr("class", "axis axis--y")
-		  .call(d3.axisLeft(y))
-		.append("text")
-		  .attr("transform", "rotate(-90)")
-		  .attr("y", 6)
-		  .attr("dy", "0.71em")
-		  .attr("fill", "#000")
-		  .text("Energy, kWh");
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("fill", "#000")
+            .text("Energy, kWh");
 
 	  var energyLine = g.selectAll(".energyLine")
-		.data(inout)
-		.enter().append("g")
-		  .attr("class", "energyLine");
+            .data(inout)
+            .enter().append("g")
+            .attr("class", "energyLine");
 
 	  energyLine.append("path")
 		  .attr("class", "line")
 		  .attr("d", function(d) { return line(d.values); })
-		  .style("stroke", function(d) { return z(d.id); })
+		  .style("stroke", "#004494")
 		  .attr("stroke-dasharray", function(d){ return this.getTotalLength() })
 		  .attr("stroke-dashoffset", function(d){ return this.getTotalLength() });
 
@@ -105,7 +104,7 @@ function drawChart(dummydata) {
 		  .attr("transform", function(d) { return "translate(" + x(d.value.time) + "," + y(d.value.energy) + ")"; })
 		  .attr("x", 3)
 		  .attr("dy", "0.35em")
-		  .style("font", "10px sans-serif")
+		  .style("font", "10px 'Titillium Web', sans-serif")
 		  .text(function(d) { return d.id; });
 	});
 
