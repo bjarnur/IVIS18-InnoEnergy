@@ -43,6 +43,20 @@ function loadBuildings() {
 	});
 }
 
+function searchBuildings() {
+	
+	var address = document.getElementById("buildingSearchField").value;
+	if(address == "") {
+		//Handle empty search
+		loadBuildings();
+	}
+
+	$.getJSON("/buildingsByAddress/" + address).then(function(result){    	    	
+    	initMap(result);
+    	createBuildingsLegend(result);
+	});	
+}
+
 function initMap(buildings) {
 	var orebro = {lat: 59.2739, lng: 15.2133};
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -267,7 +281,7 @@ function initMap(buildings) {
 	setMarkers(map,buildings);
 }
 
-async function setMarkers(map,buildings) {
+function setMarkers(map,buildings) {
 	
 	var markers = [];
 	console.log(Object.keys(buildings).length);
@@ -305,6 +319,8 @@ async function setMarkers(map,buildings) {
 
 function createBuildingsLegend(buildings) {
 	var findDiv = document.getElementById('buildingsLegend');
+	findDiv.innerHTML = '';
+
 	for (i = 0; i < buildings.length; i++) {
 		var node = document.createElement("li");
 		var textnode = document.createTextNode(buildings[i].address);

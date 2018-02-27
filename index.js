@@ -28,6 +28,11 @@ app.get('/buildings', async function(req, res) {
   res.send(result)
 })
 
+app.get('/buildingsByAddress/:addr', async function(req, res) {
+  let result = await db.getBuildingsByAddress(req.params.addr)  
+  res.send(result)
+})
+
 app.get('/map', async function(req,res){
   res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
 })
