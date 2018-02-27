@@ -12,7 +12,9 @@ $(document).ready(function(){
     var params = {
       idx: $('#idx').val()
     };
-    var addr = "Brevduvegatan 8, Örebro"; // later will get from DB as follows
+    console.log(params.idx)
+    var addr = params.idx;
+    //var addr = "Brevduvegatan 8, Örebro"; // later will get from DB as follows
     e.preventDefault();
     
     //TODO:this will become callback function after quering from DB (to get
