@@ -126,7 +126,7 @@ function initMap(buildings) {
 					"saturation": -100
 				  },
 				  {
-					"lightness": -5
+					"lightness": 10
 				  }
 				]
 			  },
@@ -162,13 +162,13 @@ function initMap(buildings) {
 				"elementType": "geometry",
 				"stylers": [
 				  {
-					"color": "#00b33c"
+					"color": "#96c147"
 				  },
 				  {
-					"saturation": -75
+					"saturation": -20
 				  },
 				  {
-					"lightness": 50
+					"lightness": 0
 				  }
 				]
 			  },
@@ -249,13 +249,13 @@ function initMap(buildings) {
 				"elementType": "geometry",
 				"stylers": [
 				  {
-					"color": "#0099ff"
+					"color": "#004494"
 				  },
 				  {
-					"saturation": -75
+					"saturation": -40
 				  },
 				  {
-					"lightness": 30
+					"lightness": 60
 				  }
 				]
 			  },
@@ -376,4 +376,6 @@ function searchStreetName(street) {
 
 function centerMap(latitude, longitude) {
 	map.setCenter({lat: latitude, lng: longitude});
+    map.setZoom(16);
 }
+
