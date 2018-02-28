@@ -12,30 +12,14 @@ var icons = {
 	  }
 	};
 
-var locations = [
-	['Fredsgatan', 59.27562163725686, 15.219332817504892, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-	['Folkungagatan', 59.27614785296132, 15.197617653320322, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-	['Rådmansgatan', 59.26768356399684, 15.222422722290048, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'red'],
-	['Idrottsvägen', 59.26698571712036, 15.196428335319752, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-	['Örnsköldsgatan', 59.28259145795628, 15.183455589721689, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-	['Oljevägen', 59.2740243487018, 15.243206060539364, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-	['Norrbackavägen', 59.281654038440564, 15.217628515373463, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'green'],
-	['Faktorigatan', 59.27375929462481, 15.223035848747486, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'yellow'],
-	['Otto E Andersens Gata', 59.27334522476262, 15.184154546867603, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur est velit, dictum at nulla non, porta aliquam quam.', 'yellow'],
-];
 
 var buildings = [];
-
-function buildingsArray (input) {
-	for (i = 0; i < locations.length; i++) {  
-		buildings.push(locations[i][0]);
-	}
-}
 
 var map;var markers = []; var markerCluster = null;
 
 function loadBuildings() {       
-    $.getJSON("/buildings").then(function(result){    	    	
+    $.getJSON("/buildings").then(function(result){  
+		console.log(result);
     	initMap(result);
     	createBuildingsLegend(result);
 	});
@@ -58,7 +42,7 @@ function searchBuildings() {
 function initMap(buildings) {
 	var orebro = {lat: 59.2739, lng: 15.2133};
 	map = new google.maps.Map(document.getElementById('map'), {
-	  zoom: 14,
+	  zoom: 12,
 	  center: orebro, 
 	  disableDefaultUI: true,
 	  styles: [					  {
@@ -304,7 +288,7 @@ function setMarkers(map,buildings) {
 		(function (marker, name, info) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name + "</div><div class='iw-infotext'>" + info + "</div></div>");
+				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace(';', ',') + "</div><div class='iw-infotext'>" + info + "</div></div>");
 				infoWindow.open(map, marker); toggleChart(name); setInfo(); 
 			});
             
@@ -348,7 +332,7 @@ function createBuildingsLegend(buildings) {
 
 	for (i = 0; i < Object.keys(buildings).length; i++) {
 		var node = document.createElement("li");
-		var textnode = document.createTextNode(buildings[i].address);
+		var textnode = document.createTextNode(buildings[i].address.replace(/"/g, "").replace(";", ","));
 		node.setAttribute('onclick', 'centerMap(' + buildings[i].latitude +',' + buildings[i].longitude + ')');
 		node.appendChild(textnode)
 		findDiv.appendChild(node);

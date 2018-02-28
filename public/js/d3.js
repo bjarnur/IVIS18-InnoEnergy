@@ -1,4 +1,8 @@
 // JavaScript Document
+
+
+// /consumptionOnIntervalById/:id/:from/:to
+
 var chartGlobal = 'data/dummy1.tsv';
 	
 	function toggleChart(name) {
