@@ -338,6 +338,16 @@ function filterMarkers(type) {
 }
 
 function createBuildingsLegend(buildings) {
+    console.log(buildings);
+    buildings.sort(function(a, b){
+    var nameA=a.address.toLowerCase(), nameB=b.address.toLowerCase()
+    if (nameA < nameB) //sort string ascending
+        return -1 
+    if (nameA > nameB)
+        return 1
+    return 0 //default return value (no sorting)
+});
+    console.log(buildings);
 	var findDiv = document.getElementById('buildingsLegend');
 	findDiv.innerHTML = '';
 
