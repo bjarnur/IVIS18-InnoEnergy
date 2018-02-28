@@ -283,4 +283,5 @@ footer .footer_column p {
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 100%;
+	font-size: 14px;
 }
