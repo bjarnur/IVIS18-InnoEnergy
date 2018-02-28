@@ -9,7 +9,7 @@ var chartGlobal = 'data/dummy1.tsv';
 		
 		console.log(id);
 		
-		$.getJSON("/consumptionOnIntervalById/735999114000793384/2012-01-01/2012-01-04").then(function(result){  
+		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-01-04").then(function(result){  
 			console.log("JSON result " + typeof result[0].timestamp);
 			drawJSONChart(result);
 		});
