@@ -33,6 +33,11 @@ app.get('/buildingsByAddress/:addr', async function(req, res) {
   res.send(result)
 })
 
+app.get('/buildingsByFuse/:fuse',async function(req,res){
+  let result = await db.getBuildingsByFuse(req.params.fuse)
+  res.send(result)
+})
+
 /**
 example usage:
 http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-04 */
@@ -50,7 +55,7 @@ app.get('/demo', async function(req,res){
 })
 
 app.post('/search',async function(req,res){
-  console.log(req.body.idx)
+  //console.log(req.body.idx)
   let result = await db.consumptionById(req.body.idx)
   //TODO:later on we can send back building_info at this point
   res.send(result)

@@ -30,7 +30,7 @@ var map;var markers = []; var markerCluster = null;
 
 function loadBuildings() {       
     $.getJSON("/buildings").then(function(result){  
-		console.log(result);
+		//console.log(result);
     	initMap(result);
     	createBuildingsLegend(result);
 	});
@@ -276,8 +276,8 @@ function initMap(buildings) {
 
 function setMarkers(map,buildings) {
 
-	console.log(buildings[0]);
-	console.log(Object.keys(buildings).length);
+	//console.log(buildings[0]);
+	//console.log(Object.keys(buildings).length);
 	for (var i = 0; i < Object.keys(buildings).length; i++) {  
 		
 		var building = buildings[i];
@@ -300,7 +300,7 @@ function setMarkers(map,buildings) {
 		(function (marker, name, info, buildingid) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-				console.log(marker);
+				//console.log(marker);
 				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace(';', ',') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
 				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(); 
 			});
@@ -318,32 +318,42 @@ function clearOverlays() {
 	markers = [];
 	markerCluster.clearMarkers();
 }
-console.log(buildings);
 function filterMarkers(type) {
-    console.log("Buildings: "+buildings);
-    console.log("Type: "+type);
 	clearOverlays();
 	markerCluster = null;
+  var ret;
 	var filteredLocations = [];
-	if (type == 'all') {
-			filteredLocations = buildings;
-		}
-	else {
-		for (i = 0; i < buildings.length; i++) {
-			if (type == buildings[i][4]) {
-				filteredLocations.push(buildings[i]);
-			}
-		}
-	}
-	console.log(filteredLocations);
-	setMarkers(map, filteredLocations);
+  if(type == 'all'){
+    $.getJSON("buildings").then(function(result){
+      initMap(result);
+      createBuildingsLegend(result);
+    })
+
+  }
+  else{
+    $.getJSON("/buildingsByFuse/" + type).then(function(result){
+      initMap(result);
+      createBuildingsLegend(result);
+    });
+  }
+	//if (type == 'all') {
+			//filteredLocations = buildings;
+		//}
+	//else {
+		//for (i = 0; i < buildings.length; i++) {
+			//if (type == buildings[i][4]) {
+				//filteredLocations.push(buildings[i]);
+			//}
+		//}
+	//}
+	//console.log(filteredLocations);
 }
 
 function createBuildingsLegend(buildings) {
 	var findDiv = document.getElementById('buildingsLegend');
 	findDiv.innerHTML = '';
 
-	console.log(buildings);
+	//console.log(buildings);
 
 	for (i = 0; i < Object.keys(buildings).length; i++) {
 		var node = document.createElement("li");
@@ -357,7 +367,7 @@ function createBuildingsLegend(buildings) {
 function searchStreetName(street) {
 	for (i=0; i <locations.length; i++) {
 		if (street == locations[i][0]) {
-			console.log({lat: locations[i][1], lng: locations[i][2]});
+			//console.log({lat: locations[i][1], lng: locations[i][2]});
 			centerMap(locations[i][1], locations[i][2]);
 			continue;
 		}
