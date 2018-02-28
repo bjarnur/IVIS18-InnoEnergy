@@ -13,6 +13,7 @@ var chartGlobal = 'data/dummy1.tsv';
 			console.log("JSON result " + typeof result[0].timestamp);
 			drawJSONChart(result);
 		});
+		
 		/*
 		if (chartGlobal == 'data/dummy1.tsv') {
 			chartGlobal = 'data/dummy2.tsv'
@@ -129,34 +130,7 @@ function drawChart(dummydata) {
 
 function drawJSONChart(file) {
 	
-	//var data = JSON.parse(file);
 	var data = file;
-	/*
-	var data = [
-              {
-                "xVal": "2012-01-01 01:00:00",
-                "yVal": "2"
-              },
-              {
-                "xVal": "2012-01-01 02:00:00",
-                "yVal": "4"
-              },
-              {
-                "xVal": "2012-01-01 03:00:00",
-                "yVal": "1"
-              },
-              {
-                "xVal": "2012-01-01 04:00:00",
-                "yVal": "5"
-              },
-              {
-                "xVal": "2012-01-01 05:00:00",
-                "yVal": "3"
-              }
-          ];
-	/*
-	[{"id":"735999114000793384","timestamp":"2012-01-01 01:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 02:00:00","value":"20.0"},{"id":"735999114000793384","timestamp":"2012-01-01 03:00:00","value":"20.0"},{"id":"735999114000793384","timestamp":"2012-01-01 04:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 05:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 06:00:00","value":"20.0"}
-	*/
 	console.log(data);
 	
 	
