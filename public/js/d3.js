@@ -11,7 +11,19 @@ var chartGlobal = 'data/dummy1.tsv';
 		
 		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-12-31").then(function(result){  
 			console.log("JSON result " + typeof result[0].timestamp);
-			drawJSONChart(result);
+			if ((result[0].value != "0") || (result[0].value != null)) {
+				console.log("hej " + result[0].value);
+				drawJSONChart(result);
+				var element = document.getElementById('toggled');
+				element.style.display = '';	
+			}
+			if ((result[0].value == 'null') || (result[0].value == "0")) {
+				console.log("no data"); // need to do something about these cases 
+				var element = document.getElementById('toggled');
+				element.style.display = '';
+				element.style.height = '200px';
+			}
+			
 		});
 		
 		/*
@@ -24,8 +36,7 @@ var chartGlobal = 'data/dummy1.tsv';
 			drawChart('data/dummy1.tsv');
 		}
 		*/
-		var element = document.getElementById('toggled');
-		element.style.display = '';	
+		
 	}
 	
 	function setInfo() {
@@ -132,7 +143,6 @@ function drawJSONChart(file) {
 	
 	var data = file;
 	console.log(data);
-	
 	
 	d3.selectAll("svg > *").remove();
 	var svg = d3.select("svg"),
