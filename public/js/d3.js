@@ -47,10 +47,17 @@ var chartGlobal = 'data/dummy1.tsv';
 		nameelement.textContent = building.address.replace(/"/g, '').replace(';', ',');
 		
 		var fuseelement = document.getElementById('fuseinfo');
-		fuseelement.textContent = building.fuse;
+		fuseelement.textContent = building.fuse + ' Ampere';
 		
-		var addelement = document.getElementById('addinfo');
-		addelement.textContent = building.additional_info;
+		if (building.additional_info != "") {
+			var addelement = document.getElementById('addinfo');
+			addelement.textContent = 'Additional information: ' + building.additional_info;
+		}
+		if (building.additional_info == "") {
+			var addelement = document.getElementById('addinfo');
+			addelement.textContent = '';
+		}
+		
 		
 		var subelement = document.getElementById('subinfo');
 		subelement.textContent = building.subscription;
