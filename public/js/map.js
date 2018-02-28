@@ -44,8 +44,8 @@ function searchBuildings() {
 		loadBuildings();
 	}
 
-	$.getJSON("/buildingsByAddress/" + address).then(function(result){    	    	
-    	initMap(result);
+	$.getJSON("/buildingsByAddress/" + address).then(function(result){   
+    	//initMap(result);
     	createBuildingsLegend(result);
 	});	
 }
@@ -325,7 +325,7 @@ function filterMarkers(type) {
     $.getJSON("buildings").then(function(result){
       initMap(result);
       createBuildingsLegend(result);
-    })
+    });
 
   }
   else{
