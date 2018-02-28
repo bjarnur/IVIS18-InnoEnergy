@@ -282,7 +282,7 @@ function setMarkers(map,buildings) {
 		var building = buildings[i];
 		var buildingid = buildings[i].id;
 		var name = building.address;
-		var info =  "Fuse type: " + building.fuse + " A";
+		var info =  "Fuse type: " + building.fuse + " Ampere";
 		var icon_id = icons[building.fuse].icon; 
 		var latlngset = {
 			lat: parseFloat(building.latitude), 
