@@ -10,7 +10,6 @@
 
 		<!--- Map API -->
 		<script type="text/javascript" src="js/markerclusterer.js"></script>
-		<link href="css/map.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="js/map.js"></script>
 
 		<!--- D3.js -->
@@ -78,10 +77,14 @@
 
 		  <!-- Chart Section -->
 		  <section class="about" id="toggled" style="display: none;">
-			<h2>Chart</h2>
+			<h2><span id="markerinfo"></span></h2>
 			  <div class="gallery">
 				  <center>
-					  <p class="text_chart">Energy at <span id="markerinfo"></span>.</p>
+					  <div class="chart_info">
+						  <p class="text_chart">Fuse type: <span id="fuseinfo"></span></p>
+						  <p class="text_chart">Additional information: <span id="addinfo"></span></p>
+						  <p class="text_chart">Subscription: <span id="subinfo"></span></p>
+					  </div>
 					  <svg width="1130" height="500"></svg>
 				  </center>
 			  </div>
@@ -116,4 +119,4 @@
 		</div>
 		<!-- Main Container Ends -->
 	</body>
-</html>>>
+</html>

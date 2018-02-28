@@ -118,7 +118,7 @@ nav ul li a:hover {
 	width: 100%;
 	box-sizing: border-box;
     padding-left: 50px;
-	padding-top: 10px;
+	padding-top: 0px;
 	display: inline-block;
 	background-color: #fff;
 	margin-top: 0px;
@@ -138,12 +138,18 @@ nav ul li a:hover {
 	margin-top: -5px;
 	margin-bottom: 0px;
     }
-.text_chart {
+.chart_info {
+	padding-bottom: 15px;
+	overflow: auto;
+}
+#toggled .text_chart {
 	width: 100%;
 	text-align: justify;
 	font-weight: lighter;
 	float: left;
 	color: #444;
+	padding: 0px; 
+	margin: 0px;
     }
 .gallery div .nopad {
 	padding: 0;

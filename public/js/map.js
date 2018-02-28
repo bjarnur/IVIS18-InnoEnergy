@@ -296,15 +296,15 @@ function setMarkers(map,buildings) {
 		markers.push(marker);
 		
 
-		(function (marker, name, info, buildingid) {
+		(function (marker, name, info, buildingid, building) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
 				//console.log(marker);
 				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace('; Örebro', '') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
-				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(); 
+				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(building); 
 			});
             
-		})(marker, name, info, buildingid);	
+		})(marker, name, info, buildingid, building);	
 	}
 	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m', maxZoom: 15});
 }
