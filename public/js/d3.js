@@ -7,35 +7,10 @@ var chartGlobal = 'data/dummy1.tsv';
 	
 	function toggleChart(name, id) {
 		
-		console.log(id);
-		
-		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-12-31").then(function(result){  
-			console.log("JSON result " + typeof result[0].timestamp);
-			if ((result[0].value != "0") || (result[0].value != null)) {
-				console.log("hej " + result[0].value);
-				drawJSONChart(result);
-				var element = document.getElementById('toggled');
-				element.style.display = '';	
-			}
-			if ((result[0].value == 'null') || (result[0].value == "0")) {
-				console.log("no data"); // need to do something about these cases 
-				var element = document.getElementById('toggled');
-				element.style.display = '';
-				element.style.height = '200px';
-			}
-			
+		$.getJSON("/consumptionById/" + id).then(function(result){  
+      //console.log(result);
+			drawJSONChart(result);
 		});
-		
-		/*
-		if (chartGlobal == 'data/dummy1.tsv') {
-			chartGlobal = 'data/dummy2.tsv'
-			drawChart('data/dummy2.tsv');
-		}
-		else {
-			chartGlobal = 'data/dummy1.tsv'
-			drawChart('data/dummy1.tsv');
-		}
-		*/
 		
 	}
 	
@@ -160,6 +135,7 @@ function drawChart(dummydata) {
 function drawJSONChart(file) {
 	
 	var data = file;
+  console.log("ConsumptionById data");
 	console.log(data);
 	
 	d3.selectAll("svg > *").remove();
