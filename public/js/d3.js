@@ -9,7 +9,7 @@ var chartGlobal = 'data/dummy1.tsv';
 		
 		console.log(id);
 		
-		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-01-04").then(function(result){  
+		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-12-31").then(function(result){  
 			console.log("JSON result " + typeof result[0].timestamp);
 			drawJSONChart(result);
 		});
@@ -162,13 +162,13 @@ function drawJSONChart(file) {
 	
 	d3.selectAll("svg > *").remove();
 	var svg = d3.select("svg"),
-		margin = {top: 20, right: 80, bottom: 30, left: 50},
+		margin = {top: 20, right: 80, bottom: 30, left: 30},
 		width = svg.attr("width") - margin.left - margin.right,
 		height = svg.attr("height") - margin.top - margin.bottom,
 		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 	// parse the date / time
-	var parseTime = d3.timeFormat("%Y-%m-%d %HH");
+	var parseTime = d3.timeFormat("%Y-%m-%d");
 
 	// set the ranges
 	var x = d3.scaleLinear().range([0, width]);
@@ -177,12 +177,13 @@ function drawJSONChart(file) {
 	// define the line
 	var valueline = d3.line()
 		.x(function(d) { return x(d.timestamp); })
-		.y(function(d) { return y(d.value); });
+		.y(function(d) { return y(d.value); })
+		.curve(d3.curveMonotoneX);
 	
 	data.forEach(function(d) {
 		  //d.timestamp = parseTime(new Date(d.timestamp));
 		  //d.value = +d.value;
-			d.timestamp = new Date(d.timestamp);
+			d.timestamp = new Date(d.timestamp); // Parsing dates not work ATM
 			d.value = +d.value;
 		  return d;
 	  });
@@ -196,19 +197,20 @@ function drawJSONChart(file) {
 	  svg.append("path")
 		  .data(data)
 		  .attr("class", "line")
+		  .attr("transform", "translate (" + 20 + " 0)")
 		  .attr("d", valueline(data));
 
 	  // Add the X Axis
 	  svg.append("g")
-		  .attr("transform", "translate(0," + height + ")")
-		  .call(d3.axisBottom(x).ticks(5));
+		  .attr("transform", "translate(20," + height + ")")
+		  .call(d3.axisBottom(x));
 
 	  // Add the Y Axis
-	  svg.append("g")
-		  .call(d3.axisLeft(y).ticks(5));
+	  svg.append("g").attr("transform", "translate (" + 20 + ", 0)")
+		  .call(d3.axisLeft(y));
 	
 	svg.append("text")
-	  .attr("transform", "translate(" + (width / 2) + " ," +
+	  .attr("transform", "translate(20+" + (width / 2) + " ," +
 		(height + margin.top + 20) + ")")
 	  .style("text-anchor", "middle")
 	  .text("Date");
