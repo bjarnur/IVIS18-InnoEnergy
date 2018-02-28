@@ -263,22 +263,13 @@ footer .footer_column p {
 	background-color: rgba(255,255,255,0.90);
 	padding: 5px;
 	box-sizing: border-box;
-	overflow-y: scroll;
+	overflow-y: hidden;
 	overflow-x: hidden;
     }
 .buildingsLegendfloaty input {
 	margin: 5px;
 	width: 173px;
-    }
-    /* Autocomplete search field */
-.autocomplete {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
-    width: 182px;
-    }
-input {
-    font-family: 'Titillium Web', sans-serif;
+	font-family: 'Titillium Web', sans-serif;
     color: #444;
     border-width: 1px;
     border-color: #004494;
@@ -287,49 +278,9 @@ input {
     padding: 5px;
     font-size: 14px;
     }
-input[type=text] {
-    background-color: #fff;
-    border-width: 1px;
-    border-color: #004494;
-    width: 172px;
-    padding: 5px;
-    }
-input[type=submit] {
-    text-align: right;
-    background-color: rgba(68, 68, 68, 0.50);
-    color: #fff;
-    border-radius: 5px;
-    width: auto;
-    padding: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-left: 126px;
-	font-size: 14px;
-    }
-.autocomplete-items {
-    position: absolute;
-    border: 1px solid #d4d4d4;
-    border-bottom: none;
-    border-top: none;
-    z-index: 99;
-    /*position the autocomplete items to be the same width as the container:*/
-	top: 90%;
-	left: 5px;
-	right: -7px;
-    }
-.autocomplete-items div {
-    padding: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-    }
-.autocomplete-items div:hover {
-    /*when hovering an item:*/
-    background-color: #d4d4d4;
-    }
-.autocomplete-active {
-    /*when navigating through the items using the arrow keys:*/
-    background-color: #444 !important;
-    color: #fff;
-    }
+
+.buildingsLegendScroll {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 100%;
+}

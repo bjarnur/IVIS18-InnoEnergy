@@ -33,6 +33,7 @@ function loadBuildings() {
 		//console.log(result);
     	initMap(result);
     	createBuildingsLegend(result);
+		document.getElementById("buildingSearchField").value = '';
 	});
 }
 
