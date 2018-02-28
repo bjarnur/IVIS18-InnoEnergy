@@ -131,7 +131,33 @@ function drawJSONChart(file) {
 	
 	//var data = JSON.parse(file);
 	var data = file;
-	console.log(data[2]);
+	/*
+	var data = [
+              {
+                "xVal": "2012-01-01 01:00:00",
+                "yVal": "2"
+              },
+              {
+                "xVal": "2012-01-01 02:00:00",
+                "yVal": "4"
+              },
+              {
+                "xVal": "2012-01-01 03:00:00",
+                "yVal": "1"
+              },
+              {
+                "xVal": "2012-01-01 04:00:00",
+                "yVal": "5"
+              },
+              {
+                "xVal": "2012-01-01 05:00:00",
+                "yVal": "3"
+              }
+          ];
+	/*
+	[{"id":"735999114000793384","timestamp":"2012-01-01 01:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 02:00:00","value":"20.0"},{"id":"735999114000793384","timestamp":"2012-01-01 03:00:00","value":"20.0"},{"id":"735999114000793384","timestamp":"2012-01-01 04:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 05:00:00","value":"19.0"},{"id":"735999114000793384","timestamp":"2012-01-01 06:00:00","value":"20.0"}
+	*/
+	console.log(data);
 	
 	
 	d3.selectAll("svg > *").remove();
@@ -142,21 +168,23 @@ function drawJSONChart(file) {
 		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 	// parse the date / time
-	var parseTime = d3.timeFormat("%Y-%m-%d");
+	var parseTime = d3.timeFormat("%Y-%m-%d %HH");
 
 	// set the ranges
-	var x = d3.scaleTime().range([0, width]);
+	var x = d3.scaleLinear().range([0, width]);
 	var y = d3.scaleLinear().range([height, 0]);
 
 	// define the line
 	var valueline = d3.line()
 		.x(function(d) { return x(d.timestamp); })
 		.y(function(d) { return y(d.value); });
-
+	
 	data.forEach(function(d) {
-		  d.timestamp = parseTime(new Date(d.timestamp));
-		  d.value = +d.value;
-		
+		  //d.timestamp = parseTime(new Date(d.timestamp));
+		  //d.value = +d.value;
+			d.timestamp = new Date(d.timestamp);
+			d.value = +d.value;
+		  return d;
 	  });
 
 	  // Scale the range of the data
@@ -168,15 +196,21 @@ function drawJSONChart(file) {
 	  svg.append("path")
 		  .data(data)
 		  .attr("class", "line")
-		  .attr("d", valueline);
+		  .attr("d", valueline(data));
 
 	  // Add the X Axis
 	  svg.append("g")
 		  .attr("transform", "translate(0," + height + ")")
-		  .call(d3.axisBottom(x));
+		  .call(d3.axisBottom(x).ticks(5));
 
 	  // Add the Y Axis
 	  svg.append("g")
-		  .call(d3.axisLeft(y));
+		  .call(d3.axisLeft(y).ticks(5));
+	
+	svg.append("text")
+	  .attr("transform", "translate(" + (width / 2) + " ," +
+		(height + margin.top + 20) + ")")
+	  .style("text-anchor", "middle")
+	  .text("Date");
 		  
 }
