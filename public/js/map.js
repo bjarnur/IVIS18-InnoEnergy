@@ -270,29 +270,32 @@ function setMarkers(map,buildings) {
 	console.log(Object.keys(buildings).length);
 	for (var i = 0; i < Object.keys(buildings).length; i++) {  
 		
-		var building = buildings[i]
+		var building = buildings[i];
+		var buildingid = buildings[i].id;
 		var name = building.address;
-		var info =  "Fuse type: " + building.fuse;
+		var info =  "Fuse type: " + building.fuse + " A";
 		var icon_id = 'images/home-green.png'; //TODO use fuse type here
 		var latlngset = {
 			lat: parseFloat(building.latitude), 
 			lng: parseFloat(building.longitude)
 		};
-
+		
 		var infoWindow = new google.maps.InfoWindow();
 		var marker = new google.maps.Marker({  
-			map: map, title: name , position: latlngset, icon: icon_id  
+			map: map, title: name , position: latlngset, icon: icon_id, id: buildingid  
 		});
 		markers.push(marker);
+		
 
-		(function (marker, name, info) {
+		(function (marker, name, info, buildingid) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
-				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace(';', ',') + "</div><div class='iw-infotext'>" + info + "</div></div>");
-				infoWindow.open(map, marker); toggleChart(name); setInfo(); 
+				console.log(marker);
+				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace(';', ',') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
+				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(); 
 			});
             
-		})(marker, name, info);	
+		})(marker, name, info, buildingid);	
 	}
 	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }

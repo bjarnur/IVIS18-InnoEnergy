@@ -5,7 +5,14 @@
 
 var chartGlobal = 'data/dummy1.tsv';
 	
-	function toggleChart(name) {
+	function toggleChart(name, id) {
+		
+		console.log(id);
+		
+		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-01-04").then(function(result){  
+			console.log(result);
+
+		});
 		
 		if (chartGlobal == 'data/dummy1.tsv') {
 			chartGlobal = 'data/dummy2.tsv'
