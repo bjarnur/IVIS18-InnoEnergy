@@ -7,10 +7,8 @@ var chartGlobal = 'data/dummy1.tsv';
 	
 	function toggleChart(name, id) {
 		
-		console.log(id);
-		
-		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-12-31").then(function(result){  
-			console.log("JSON result " + typeof result[0].timestamp);
+		$.getJSON("/consumptionById/" + id).then(function(result){  
+      //console.log(result);
 			drawJSONChart(result);
 		});
 		
@@ -131,6 +129,7 @@ function drawChart(dummydata) {
 function drawJSONChart(file) {
 	
 	var data = file;
+  console.log("ConsumptionById data");
 	console.log(data);
 	
 	

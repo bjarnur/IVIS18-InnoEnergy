@@ -38,28 +38,31 @@ app.get('/buildingsByFuse/:fuse',async function(req,res){
   res.send(result)
 })
 
+app.get('/consumptionById/:id',async function(req,res){
+  let result = await db.getConsumptionById(req.params.id)
+  res.send(result)
+})
+
 /**
 example usage:
-http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-04 */
+http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-01 */
 app.get('/consumptionOnIntervalById/:id/:from/:to', async function(req, res) {
   let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to)
   res.send(result)
 })
 
-app.get('/map', async function(req,res){
-  res.sendFile('geomap.html',{root:path.join(__dirname + '/public' )});
+
+//for DEBUG
+app.get('/ttest',async function(req,res){
+  let result = await db.getConsumptionById('735999114006654405');
 })
 
-app.get('/demo', async function(req,res){
-  res.sendFile('demo.html',{root:path.join(__dirname + '/public' )});
-})
-
-app.post('/search',async function(req,res){
-  //console.log(req.body.idx)
-  let result = await db.consumptionById(req.body.idx)
-  //TODO:later on we can send back building_info at this point
-  res.send(result)
-})
+//app.post('/search',async function(req,res){
+  ////console.log(req.body.idx)
+  //let result = await db.consumptionById(req.body.idx)
+  ////TODO:later on we can send back building_info at this point
+  //res.send(result)
+//})
 
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
