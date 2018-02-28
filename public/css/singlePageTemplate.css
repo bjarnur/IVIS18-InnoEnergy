@@ -280,8 +280,12 @@ footer .footer_column p {
 input {
     font-family: 'Titillium Web', sans-serif;
     color: #444;
-    border: 1px solid transparent;
-    font-size: 16px;
+    border-width: 1px;
+    border-color: #004494;
+    border-style: solid;
+    border-radius: 2px;
+    padding: 5px;
+    font-size: 14px;
     }
 input[type=text] {
     background-color: #fff;

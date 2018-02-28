@@ -299,7 +299,7 @@ function setMarkers(map,buildings) {
 			google.maps.event.addListener(marker, "click", function (e) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
 				//console.log(marker);
-				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace(';', ',') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
+				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace('; Örebro', '') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
 				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(); 
 			});
             
@@ -342,7 +342,7 @@ function createBuildingsLegend(buildings) {
 
 	for (i = 0; i < Object.keys(buildings).length; i++) {
 		var node = document.createElement("li");
-		var textnode = document.createTextNode(buildings[i].address.replace(/"/g, "").replace(";", ","));
+		var textnode = document.createTextNode(buildings[i].address.replace(/"/g, "").replace("; Örebro", ""));
 		node.setAttribute('onclick', 'centerMap(' + buildings[i].latitude +',' + buildings[i].longitude + ')');
 		node.appendChild(textnode)
 		findDiv.appendChild(node);
