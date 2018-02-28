@@ -24,9 +24,6 @@ var icons = {
 	  }
 	};
 
-
-
-
 var buildings = [];
 
 var map;var markers = []; var markerCluster = null;
@@ -278,8 +275,7 @@ function initMap(buildings) {
 }
 
 function setMarkers(map,buildings) {
-	
-	
+
 	console.log(buildings[0]);
 	console.log(Object.keys(buildings).length);
 	for (var i = 0; i < Object.keys(buildings).length; i++) {  
@@ -311,7 +307,7 @@ function setMarkers(map,buildings) {
             
 		})(marker, name, info, buildingid);	
 	}
-	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 15});
+	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'images/m', maxZoom: 15});
 }
 
 function clearOverlays() {
@@ -322,18 +318,20 @@ function clearOverlays() {
 	markers = [];
 	markerCluster.clearMarkers();
 }
-
+console.log(buildings);
 function filterMarkers(type) {
+    console.log("Buildings: "+buildings);
+    console.log("Type: "+type);
 	clearOverlays();
-	markerCluster=null;
+	markerCluster = null;
 	var filteredLocations = [];
 	if (type == 'all') {
-			filteredLocations = locations;
+			filteredLocations = buildings;
 		}
 	else {
-		for (i = 0; i < locations.length; i++) {
-			if (type == locations[i][4]) {
-				filteredLocations.push(locations[i]);
+		for (i = 0; i < buildings.length; i++) {
+			if (type == buildings[i][4]) {
+				filteredLocations.push(buildings[i]);
 			}
 		}
 	}
