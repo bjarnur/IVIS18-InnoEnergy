@@ -9,11 +9,11 @@ var chartGlobal = 'data/dummy1.tsv';
 		
 		console.log(id);
 		
-		$.getJSON("/consumptionOnIntervalById/" + id + "/2012-01-01/2012-01-04").then(function(result){  
-			console.log(result);
-
+		$.getJSON("/consumptionOnIntervalById/735999114000793384/2012-01-01/2012-01-04").then(function(result){  
+			console.log("JSON result " + typeof result[0].timestamp);
+			drawJSONChart(result);
 		});
-		
+		/*
 		if (chartGlobal == 'data/dummy1.tsv') {
 			chartGlobal = 'data/dummy2.tsv'
 			drawChart('data/dummy2.tsv');
@@ -22,6 +22,7 @@ var chartGlobal = 'data/dummy1.tsv';
 			chartGlobal = 'data/dummy1.tsv'
 			drawChart('data/dummy1.tsv');
 		}
+		*/
 		var element = document.getElementById('toggled');
 		element.style.display = '';	
 	}
@@ -124,4 +125,58 @@ function drawChart(dummydata) {
 	  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
 	  return d;
 	}
+}
+
+function drawJSONChart(file) {
+	
+	//var data = JSON.parse(file);
+	var data = file;
+	console.log(data[2]);
+	
+	
+	d3.selectAll("svg > *").remove();
+	var svg = d3.select("svg"),
+		margin = {top: 20, right: 80, bottom: 30, left: 50},
+		width = svg.attr("width") - margin.left - margin.right,
+		height = svg.attr("height") - margin.top - margin.bottom,
+		g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	// parse the date / time
+	var parseTime = d3.timeFormat("%Y-%m-%d");
+
+	// set the ranges
+	var x = d3.scaleTime().range([0, width]);
+	var y = d3.scaleLinear().range([height, 0]);
+
+	// define the line
+	var valueline = d3.line()
+		.x(function(d) { return x(d.timestamp); })
+		.y(function(d) { return y(d.value); });
+
+	data.forEach(function(d) {
+		  d.timestamp = parseTime(new Date(d.timestamp));
+		  d.value = +d.value;
+		
+	  });
+
+	  // Scale the range of the data
+	  x.domain(d3.extent(data, function(d) { return d.timestamp; }));
+	  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+		
+	console.log(data);
+	  // Add the valueline path.
+	  svg.append("path")
+		  .data(data)
+		  .attr("class", "line")
+		  .attr("d", valueline);
+
+	  // Add the X Axis
+	  svg.append("g")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(d3.axisBottom(x));
+
+	  // Add the Y Axis
+	  svg.append("g")
+		  .call(d3.axisLeft(y));
+		  
 }
