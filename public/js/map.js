@@ -276,8 +276,6 @@ function initMap(buildings) {
 
 function setMarkers(map,buildings) {
 
-	//console.log(buildings[0]);
-	//console.log(Object.keys(buildings).length);
 	for (var i = 0; i < Object.keys(buildings).length; i++) {  
 		
 		var building = buildings[i];
@@ -336,24 +334,11 @@ function filterMarkers(type) {
       createBuildingsLegend(result);
     });
   }
-	//if (type == 'all') {
-			//filteredLocations = buildings;
-		//}
-	//else {
-		//for (i = 0; i < buildings.length; i++) {
-			//if (type == buildings[i][4]) {
-				//filteredLocations.push(buildings[i]);
-			//}
-		//}
-	//}
-	//console.log(filteredLocations);
 }
 
 function createBuildingsLegend(buildings) {
 	var findDiv = document.getElementById('buildingsLegend');
 	findDiv.innerHTML = '';
-
-	//console.log(buildings);
 
 	for (i = 0; i < Object.keys(buildings).length; i++) {
 		var node = document.createElement("li");
@@ -367,7 +352,6 @@ function createBuildingsLegend(buildings) {
 function searchStreetName(street) {
 	for (i=0; i <locations.length; i++) {
 		if (street == locations[i][0]) {
-			//console.log({lat: locations[i][1], lng: locations[i][2]});
 			centerMap(locations[i][1], locations[i][2]);
 			continue;
 		}
