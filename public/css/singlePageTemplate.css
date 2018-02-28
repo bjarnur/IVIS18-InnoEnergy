@@ -237,6 +237,21 @@ footer .footer_column p {
 #hero li {
     color: #444;
     }
+#hero ul #showAll{
+    text-align: center;
+    font-weight: bold;
+}
+#hero ul #img_div{
+    width: 40px;
+    vertical-align: middle;
+    display: inline-block;
+}
+#hero ul #type_text{
+    width: 100px;
+    vertical-align: middle;
+    display: inline-block;
+    padding-left: 10px;
+}
     /* Building Floaty whit search*/
 .buildingsLegendfloaty {
 	width: 200px;

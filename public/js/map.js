@@ -1,14 +1,26 @@
 // JavaScript Document
 
 var icons = {
-	  green: {
-		icon: 'images/home-green.png'
+    16: {
+		icon: 'images/house-pink.png'
 	  },
-	  red: {
-		icon: 'images/home-red.png'
+    20: {
+		icon: 'images/house-red.png'
 	  },
-	  yellow: {
-		icon: 'images/home-yellow.png'
+    25: {
+		icon: 'images/house-orange.png'
+	  },
+    35: {
+		icon: 'images/house-green.png'
+	  },
+    50: {
+		icon: 'images/house-turquoise.png'
+	  },
+    63: {
+		icon: 'images/house-blue.png'
+	  },
+    Effekt: {
+		icon: 'images/house-purple.png'
 	  }
 	};
 
@@ -276,7 +288,7 @@ function setMarkers(map,buildings) {
 		var buildingid = buildings[i].id;
 		var name = building.address;
 		var info =  "Fuse type: " + building.fuse + " A";
-		var icon_id = 'images/home-green.png'; //TODO use fuse type here
+		var icon_id = icons[building.fuse].icon; 
 		var latlngset = {
 			lat: parseFloat(building.latitude), 
 			lng: parseFloat(building.longitude)
@@ -299,7 +311,7 @@ function setMarkers(map,buildings) {
             
 		})(marker, name, info, buildingid);	
 	}
-	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+	markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', maxZoom: 15});
 }
 
 function clearOverlays() {
