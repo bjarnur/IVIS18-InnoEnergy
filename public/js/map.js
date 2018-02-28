@@ -13,6 +13,8 @@ var icons = {
 	};
 
 
+
+
 var buildings = [];
 
 var map;var markers = []; var markerCluster = null;
