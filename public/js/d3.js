@@ -8,8 +8,17 @@ var chartGlobal = 'data/dummy1.tsv';
 	function toggleChart(name, id) {
 		
 		$.getJSON("/consumptionById/" + id).then(function(result){  
-      //console.log(result);
-			drawJSONChart(result);
+			  if (result['2012'].length != 0) {
+				  drawJSONChart(result['2012']);
+				  var element = document.getElementById('toggled');
+				  element.style.display = '';	
+			  }
+        else{
+          console.log("no data"); // need to do something about these cases 
+          var element = document.getElementById('toggled');
+          element.style.display = '';
+          element.style.height = '200px';
+        }
 		});
 		
 	}
@@ -154,21 +163,21 @@ function drawJSONChart(file) {
 
 	// define the line
 	var valueline = d3.line()
-		.x(function(d) { return x(d.timestamp); })
-		.y(function(d) { return y(d.value); })
+		.x(function(d) { return x(d.date); })
+		.y(function(d) { return y(d.val); })
 		.curve(d3.curveMonotoneX);
 	
 	data.forEach(function(d) {
 		  //d.timestamp = parseTime(new Date(d.timestamp));
 		  //d.value = +d.value;
-			d.timestamp = new Date(d.timestamp); // Parsing dates not work ATM
-			d.value = +d.value;
+			d.date= new Date(d.date); // Parsing dates not work ATM
+			d.val = +d.val;
 		  return d;
 	  });
 
 	  // Scale the range of the data
-	  x.domain(d3.extent(data, function(d) { return d.timestamp; }));
-	  y.domain([0, d3.max(data, function(d) { return d.value; })]);
+	  x.domain(d3.extent(data, function(d) { return d.date; }));
+	  y.domain([0, d3.max(data, function(d) { return d.val; })]);
 		
 	console.log(data);
 	  // Add the valueline path.
