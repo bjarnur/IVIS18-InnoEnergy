@@ -3,8 +3,10 @@ const db = require('./lib/db/db.js')
 
 const express = require('express')
 const path = require("path")
-var bodyParser = require('body-parser');
 const app = express()
+
+let util = require('./lib/db/util')
+let bodyParser = require('body-parser')
 
 app.use(bodyParser.json());
 
@@ -29,7 +31,7 @@ app.get('/buildings', async function(req, res) {
 })
 
 app.get('/buildingsByAddress/:addr', async function(req, res) {
-  let result = await db.getBuildingsByAddress(req.params.addr)  
+  let result = await db.getBuildingsByAddress(req.params.addr)
   res.send(result)
 })
 
@@ -44,11 +46,24 @@ app.get('/consumptionById/:id',async function(req,res){
 })
 
 /**
-example usage:
-http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-01 */
-app.get('/consumptionOnIntervalById/:id/:from/:to', async function(req, res) {
+* example usage:
+* http://localhost:5000/consumptionOnIntervalById/735999114007366888/2008-01-01/2017-01-01/
+*
+*/
+app.get('/consumptionOnIntervalById/:id/:from/:to/', async function(req, res) {
   let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to)
-  res.send(result)
+  util.sendFormatted(res, result)
+})
+
+/**
+* example usage:
+* http://localhost:5000/consumptionOnIntervalById/735999114000793384/2008-01-01/2017-01-01/[year|month|day]
+*
+* If anything else but the parameters above are supplied for time the normal consumptionOnIntervalById will be returned
+*/
+app.get('/consumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {
+  let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to, req.params.time)
+  util.sendFormatted(res, result)
 })
 
 

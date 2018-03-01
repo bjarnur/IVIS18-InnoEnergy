@@ -5,7 +5,7 @@
 #
 # To test smaller datasets, you have to alter the dataLocation in lib/db/tableConfigs.js
 #
-# then simply type npm test to rebuild the database again. It will delete the old one, 
+# then simply type npm test to rebuild the database again. It will delete the old one,
 # so stash it somewhere if you want to save it for later
 #
 
@@ -21,7 +21,8 @@ if [ "$dir" == "$PWD" ]; then
   fi
   head -n 100 $data_file > ../secret/sample100.csv
   head -n 500 $data_file > ../secret/sample500.csv
-  echo "Success! Don't forget to alter the path in lib/db/parser.js"
+  head -n 5000 $data_file > ../secret/sample10000.csv
+  echo "Success! Don't forget to alter the path in lib/db/tableConfig.js"
   echo "To build the database again, move the db.sqlite file out of the secret folder."
 else
   echo "Please execute this script from the directory its in. Exiting."
