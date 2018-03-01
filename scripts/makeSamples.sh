@@ -21,7 +21,8 @@ if [ "$dir" == "$PWD" ]; then
   fi
   head -n 100 $data_file > ../secret/sample100.csv
   head -n 500 $data_file > ../secret/sample500.csv
-  head -n 5000 $data_file > ../secret/sample10000.csv
+  head -n 2000 $data_file > ../secret/sample2000.csv
+  head -n 10000 $data_file > ../secret/sample10000.csv
   echo "Success! Don't forget to alter the path in lib/db/tableConfig.js"
   echo "To build the database again, move the db.sqlite file out of the secret folder."
 else
