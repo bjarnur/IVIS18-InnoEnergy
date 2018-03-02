@@ -144,7 +144,7 @@ function drawChart(dummydata) {
 function drawJSONChart(file) {
 	
 	var data = file;
-  console.log("ConsumptionById data");
+    console.log("ConsumptionById data");
 	console.log(data);
 	
 	d3.selectAll("svg > *").remove();
