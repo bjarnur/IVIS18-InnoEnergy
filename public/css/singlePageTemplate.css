@@ -161,8 +161,18 @@ g {
     width: auto;
     margin-left: 10px;
 }
-g g{
-    width: auto;
+.barChart{
+    width: 250px;
+    height: 500px;
+    float: right;
+    margin-left: 75%;
+	position: absolute;
+    border-color: #004494;
+    border: 2px;
+}
+.lineChart {
+    width: 1200px;
+    float: left;
 }
 .line {
     fill: none;
