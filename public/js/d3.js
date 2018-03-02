@@ -184,16 +184,16 @@ function drawJSONChart(file) {
 	  svg.append("path")
 		  .data(data)
 		  .attr("class", "line")
-		  .attr("transform", "translate (" + 20 + " 0)")
+		  .attr("transform", "translate (" + 30 + ", 0)")
 		  .attr("d", valueline(data));
 
 	  // Add the X Axis
 	  svg.append("g")
-		  .attr("transform", "translate(20," + height + ")")
+		  .attr("transform", "translate(30," + height + ")")
 		  .call(d3.axisBottom(x));
 
 	  // Add the Y Axis
-	  svg.append("g").attr("transform", "translate (" + 20 + ", 0)")
+	  svg.append("g").attr("transform", "translate (" + 30 +", 0)")
 		  .call(d3.axisLeft(y));
 	
 	svg.append("text")

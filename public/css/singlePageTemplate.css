@@ -157,7 +157,12 @@ nav ul li a:hover {
 	display: inline;
     }
 g {
-    font-family: 'Titillium Web', sans-serif; 
+    font-family: 'Titillium Web', sans-serif;
+    width: auto;
+    margin-left: 10px;
+}
+g g{
+    width: auto;
 }
 .line {
     fill: none;
