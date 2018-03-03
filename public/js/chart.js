@@ -171,12 +171,13 @@ function updateYearlyChart(){
   .classed('active',function(d){
     return selectedYr === d.yr;
   })
-
+  
+  console.log(bMonthlyChart);
   if(!bMonthlyChart){
     initMonthlyChart();
   }
   else{
-    d3.select("#MonthlylineChartWrapper").select("svg").remove();
+    d3.select("#MonthlylineChartWrapper").selectAll("svg").remove();
     d3.select('#MonthlybarChartWrapper').selectAll('svg').remove();
   }
 
@@ -208,7 +209,7 @@ function updateMonthlyChart(){
 
 	let x = d3.scaleLinear().range([10, wLine]),
 	    y = d3.scaleLinear().range([hLine, 0]);
-      color = d3.scaleOrdinal(d3.schemeCategory10);
+      color = d3.scaleOrdinal(d3.schemeCategory20);
 
   // set domain
   x.domain([1,31]);
@@ -306,6 +307,8 @@ function updateMonthlyChart(){
       .style('opacity', 0);
   })
   
+  
+  bars.select('text').remove();
   bars.append('text')
    .text(function(d){
     return months[d.month] + ": " + d.sum;
