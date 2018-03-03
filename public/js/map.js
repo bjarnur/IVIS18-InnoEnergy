@@ -301,7 +301,9 @@ function setMarkers(map,buildings) {
 				//Wrap the content inside an HTML DIV in order to set height and width of InfoWindow.
 				//console.log(marker);
 				infoWindow.setContent("<div id='iw-container'><div class='iw-title' id='titleIW'>" + name.replace(/"/g, '').replace('; Örebro', '') + "</div><div class='iw-infotext'>" + info +  "</div></div>");
-				infoWindow.open(map, marker); toggleChart(name, buildingid); setInfo(building); 
+				infoWindow.open(map, marker); 
+        renderChart(buildingid); 
+        setInfo(building); 
 			});
             
 		})(marker, name, info, buildingid, building);	

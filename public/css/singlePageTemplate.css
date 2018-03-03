@@ -161,7 +161,7 @@ g {
     width: auto;
     margin-left: 10px;
 }
-.barChart{
+#barChart{
     width: 250px;
     height: 500px;
     float: right;
@@ -170,7 +170,7 @@ g {
     border-color: #004494;
     border: 2px;
 }
-.lineChart {
+#lineChart {
     width: 1200px;
     float: left;
 }

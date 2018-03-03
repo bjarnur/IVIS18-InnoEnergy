@@ -1,27 +1,29 @@
-function parseData(data){
-  var ret = {};
-  ret['id'] = data[0].id;
-  ret['data'] = [];
+//Manager of the chart related to this id
+function renderChart(id){
+  //refresh all related charts
+  d3.selectAll("svg").remove();
 
-  data.forEach(function(e){
-    if(!isNaN(e['value'])){
-      ret['data'].push({
-        time: new Date(e['timestamp']),
-        consump: parseFloat(e['value'])
-      });
+  //FIXME: It takes so long to use consumptionOnIntervalById on yearly level
+
+  //Monthly part
+  let selectedYr;
+  $.getJSON("/consumptionOnIntervalById/"+id+"/2012-01-01/2018-01-01/month").then(function(result){
+    //drawYearlyBarChart(result);
+    for(let yr in result){
+      drawMonthlyChart(yr,result[yr],id);
     }
   });
-  return ret;
 }
+function drawMonthlyChart(yr,data,id){
+  //console.log(yr);
+  //console.log(data);
 
-function draw(data){
-  var data = parseData(data);
-  d3.select('#chart-id').text("This is id:" + data['id']);
-
-  //I prefer writing by my own, because theres is no docs for customization :(
-  var chart = d3_timeseries()
-             .addSerie(data['data'],{x:'time',y:'consump'},{interpolate:'monotone',color:"#FF7F50"})
-             .height(900)
-             .width(1400)
-  chart('#chart')
 }
+function drawDailyChart(month,data,id){
+  d3.select("#dailyChart").remove();
+}
+//function drawChart(result){
+  //console.log("drawChart");
+  //console.log(result);
+//}
+//function 

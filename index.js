@@ -16,7 +16,7 @@ for now until we want to pass dynamic content */
 app.use(express.static(path.join(__dirname + '/public')))
 
 app.get('/example', async function(req, res) {
-  let result = await db.consumptionById('735999114000793384')
+  let result = await db.consumptionById('735999114006943486')
   res.send(result)
 })
 
@@ -71,13 +71,6 @@ app.get('/consumptionOnIntervalById/:id/:from/:to/:time', async function(req, re
 app.get('/ttest',async function(req,res){
   let result = await db.getConsumptionById('735999114006654405');
 })
-
-//app.post('/search',async function(req,res){
-  ////console.log(req.body.idx)
-  //let result = await db.consumptionById(req.body.idx)
-  ////TODO:later on we can send back building_info at this point
-  //res.send(result)
-//})
 
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
