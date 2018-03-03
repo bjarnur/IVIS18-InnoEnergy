@@ -18,7 +18,7 @@ var curId = -1;
 
 //drawing related
 var	margin = {top: 20, right: 80, bottom: 30, left: 30};
-var canvasLineW = 1030,canvasLineH = 500;
+var canvasLineW = 930,canvasLineH = 500;
 var canvasBarW = 360, canvasBarH = 500;
 var wLine = canvasLineW- margin.left - margin.right,
     hLine = canvasLineH - margin.top - margin.bottom;

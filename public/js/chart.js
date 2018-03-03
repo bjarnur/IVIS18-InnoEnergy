@@ -16,9 +16,8 @@ function renderChart(id){
 
   $.getJSON("/consumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/month").then(function(result){
 
-    var element = document.getElementById('toggled');
     if(Object.keys(result).length != 0){
-      element.style.display = '';
+      document.getElementById('toggled').style.display = '';
       drawYearlyChart(parseYearlyData(result));
     }
     else{
@@ -27,6 +26,7 @@ function renderChart(id){
   });
 }
 
+/*Draw the upper chart*/
 function drawYearlyChart(chData){
 
   //Line Chart 
@@ -41,7 +41,7 @@ function drawYearlyChart(chData){
 
 
 	// set range
-	let x = d3.scaleLinear().range([0, wLine]),
+	let x = d3.scaleLinear().range([10, wLine]),
 	    y = d3.scaleLinear().range([hLine, 0]);
       color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -60,16 +60,14 @@ function drawYearlyChart(chData){
   d3.select('svg g.lineChart')
     .append("g")
     .attr("class", "axis xAxis")
-    .attr("transform", "translate(10," + hLine+ ")")
+    .attr("transform", "translate(2," + hLine+ ")")
     .call(d3.axisBottom(x));
 
   d3.select('svg g.lineChart')
     .append("g")
     .attr("class", "axis yAxis")
+    .attr("transform", "translate(" + 10+",0)")
     .call(d3.axisLeft(y))
-    .append("text")
-    .attr("transform", "translate(" + 100 +",0)")
-    .text("Energy, kWh");
 
   let line = d3.line()
       .curve(d3.curveBasis)
@@ -81,9 +79,6 @@ function drawYearlyChart(chData){
     .data(chData)
     .enter().append("g")
     .attr("class", "yr-line")
-    .attr("id",function(d){
-      return "yr-line" + d.yr;
-    })
     .on('click',function(d){
       selectedYr = d.yr;
       updateYearlyChart();
@@ -155,10 +150,10 @@ function drawYearlyChart(chData){
    .text(function(d){
     return d.yr + ": " + d.sum;
    })
-  .style('font-size','20px')
+  .style('font-size','25px')
   .attr('x',10)
   .attr('y',function(d){
-    return (barY(d.yr) + barY.bandwidth()/2);
+    return (barY(d.yr) + 10 +  barY.bandwidth()/2);
   });
 
 
@@ -182,14 +177,14 @@ function updateYearlyChart(){
   }
   else{
     d3.select("#MonthlylineChartWrapper").select("svg").remove();
+    d3.select('#MonthlybarChartWrapper').selectAll('svg').remove();
   }
 
   updateMonthlyChart();
 
 }
 function initMonthlyChart(){
-  var element = document.getElementById('toggled2');
-  element.style = '';
+  document.getElementById('toggled2').style='';
   bMonthlyChart = true; 
 }
 function updateMonthlyChart(){
@@ -199,9 +194,8 @@ function updateMonthlyChart(){
     return "/"+yr+"-01-01/"+(yr+1)+"-01-01/day";
   }
 
-  $.getJSON("consumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(result){
-    let chData = parseMonthlyData(result[selectedYr]);
-    console.log(chData);
+  $.getJSON("consumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
+    let chData = parseMonthlyData(res[selectedYr]);
 
     let chartSVG = d3.select('#MonthlylineChartWrapper')
       .append("svg")
@@ -212,13 +206,13 @@ function updateMonthlyChart(){
           .classed('lineChart2',true)
           .attr('transform',"translate(" + margin.left + "," + margin.top + ")");
 
-	let x = d3.scaleLinear().range([0, wLine]),
+	let x = d3.scaleLinear().range([10, wLine]),
 	    y = d3.scaleLinear().range([hLine, 0]);
       color = d3.scaleOrdinal(d3.schemeCategory10);
 
   // set domain
   x.domain([1,31]);
-  y.domain([50,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
+  y.domain([40,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
   color.domain(chData.map(function(d){return d.month;}));
 
   // month indicator
@@ -231,15 +225,14 @@ function updateMonthlyChart(){
   d3.select('svg g.lineChart2')
     .append("g")
     .attr("class", "axis xAxis")
-    .attr("transform", "translate(10," + hLine+ ")")
+    .attr("transform", "translate(2," + hLine+ ")")
     .call(d3.axisBottom(x));
 
   d3.select('svg g.lineChart2')
     .append("g")
     .attr("class", "axis yAxis")
+    .attr("transform", "translate(" + 10 +",0)")
     .call(d3.axisLeft(y))
-    .append("text")
-    .attr("transform", "translate(" + 100 +",0)")
 
   let line = d3.line()
       .curve(d3.curveBasis)
@@ -285,11 +278,12 @@ function updateMonthlyChart(){
         .classed('barChart2',true)
         .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-  barY.domain(chData.map(function(d){return d.month;}))
+  let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
+  barY.domain(sortedData.map(function(d){return d.month;}))
   barX.domain([0,d3.max(chData,function(d){return d.sum;})])
 
   let bars = d3.select('svg g.barChart2').selectAll(".yr-bar2")
-  .data(chData)
+  .data(sortedData)
   .enter()
   .append("g")
   .attr("class","yr-bar2")

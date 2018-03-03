@@ -45,7 +45,6 @@ function parseYearlyData(chData){
 }
 
 function parseMonthlyData(chData){
-  console.log(chData);
   var ret = [];
   for(let month in chData){
     var mData = {};

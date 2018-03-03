@@ -165,26 +165,26 @@ g {
     width: 250px;
     height: 500px;
     float: right;
-    margin-left: 75%;
-	position: absolute;
+    margin-left: 65%;
+    position: absolute;
     border-color: #004494;
     border: 2px;
 }
 #MonthlylineChartWrapper {
-    width: 1200px;
+    width: 1000px;
     float: left;
 }
 #MonthlybarChartWrapper{
     width: 250px;
     height: 500px;
     float: right;
-    margin-left: 75%;
-	position: absolute;
+    margin-left: 65%;
+    position: absolute;
     border-color: #004494;
     border: 2px;
 }
 #lineChartWrapper {
-    width: 1200px;
+    width: 1000px;
     float: left;
 }
 .barText{
@@ -196,7 +196,7 @@ g {
     stroke-width: 3.5px;
 	}
 .active .line{
-  stroke-width: 6px;
+  stroke-width: 7px;
 }
     /* About and Contacts */
 footer {
