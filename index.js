@@ -57,7 +57,7 @@ app.get('/consumptionOnIntervalById/:id/:from/:to/', async function(req, res) {
 
 /**
 * example usage:
-* http://localhost:5000/consumptionOnIntervalById/735999114000793384/2008-01-01/2017-01-01/[year|month|day]
+* http://localhost:5000/consumptionOnIntervalById/735999114006943486/2008-01-01/2017-01-01/[year|month|day]
 *
 * If anything else but the parameters above are supplied for time the normal consumptionOnIntervalById will be returned
 */

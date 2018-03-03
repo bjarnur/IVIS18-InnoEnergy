@@ -24,3 +24,22 @@ function setInfo(building) {
 }
 
 
+function parseYearlyData(chData){
+  var ret = [];
+  for(let yr in chData){
+    var yrData = {};
+    yrData['sum'] = 0;
+    yrData['yr'] = yr;
+    yrData['vals'] = [];
+    for(let month in chData[yr]){
+      yrData['sum'] += chData[yr][month].sum;
+      yrData['vals'][parseInt(month)-1] = {
+        time: month,
+        val: chData[yr][month].sum,
+        cnt: chData[yr][month].count
+      };
+    }
+    ret.push(yrData);
+  }
+  return ret;
+}
