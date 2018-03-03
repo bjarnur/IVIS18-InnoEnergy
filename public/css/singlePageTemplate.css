@@ -170,6 +170,19 @@ g {
     border-color: #004494;
     border: 2px;
 }
+#MonthlylineChartWrapper {
+    width: 1200px;
+    float: left;
+}
+#MonthlybarChartWrapper{
+    width: 250px;
+    height: 500px;
+    float: right;
+    margin-left: 75%;
+	position: absolute;
+    border-color: #004494;
+    border: 2px;
+}
 #lineChartWrapper {
     width: 1200px;
     float: left;

@@ -43,3 +43,24 @@ function parseYearlyData(chData){
   }
   return ret;
 }
+
+function parseMonthlyData(chData){
+  console.log(chData);
+  var ret = [];
+  for(let month in chData){
+    var mData = {};
+    mData['sum'] = 0;
+    mData['month'] = month;
+    mData['vals'] = [];
+    for(let day in chData[month]){
+      mData['sum'] += chData[month][day].sum;
+      mData['vals'][parseInt(day)-1] = {
+        time: day,
+        val: chData[month][day].sum,
+        cnt: chData[month][day].count
+      };
+    }
+    ret[parseInt(month)-1] = mData;
+  }
+  return ret;
+}
