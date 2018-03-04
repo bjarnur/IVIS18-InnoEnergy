@@ -35,7 +35,7 @@ for df in pd.read_csv(data_source, chunksize=10000):
 
     # drop data into database
     start_time = time.time()
-    d.to_sql(table_name, con, if_exists="append")
+    d.to_sql(table_name, con, if_exists="append", index=False) # we might want to index it but it takes about 1.5 gb more
     print("--- %s seconds ---" % (time.time() - start_time))
 
     start_time = time.time()
