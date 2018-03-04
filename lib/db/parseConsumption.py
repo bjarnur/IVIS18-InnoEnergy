@@ -15,12 +15,8 @@ database_location='secret/db.sqlite'
 # load data
 
 start_time = time.time()
-#df = pd.read_csv('secret/sample100.csv')
+# chunk size of 10k will take about 10 gb of your RAM.
 for df in pd.read_csv(data_source, chunksize=10000):
-
-    df.head()
-    print("--- %s seconds ---" % (time.time() - start_time))
-
     #stacked = df.unstack()
     #stacked
     # dt = df.transpose()
@@ -28,10 +24,9 @@ for df in pd.read_csv(data_source, chunksize=10000):
     #pd.melt(dt, id_vars='date', value_vars=dt.iloc[:,1:])
     #pd.melt(dt, id_vars=dt.iloc[0,:], value_vars='date')
     #pd.melt(df, id_vars="date", value_vars=df.iloc[:,0])
-    start_time = time.time()
-    d = pd.melt(df, id_vars='date', value_vars=df.iloc[:,1:])
-    print("--- %s seconds ---" % (time.time() - start_time))
-
+    d = pd.melt(df, id_vars=['date'], value_vars=df.iloc[:,1:])
+    d = d.rename(columns={'date': 'timestamp', 'variable': 'id'})
+    d['timestamp'] = pd.to_datetime(d['timestamp'])
     # Read sqlite query results into a pandas DataFrame
     start_time = time.time()
     con = lite.connect(database_location)
@@ -40,7 +35,7 @@ for df in pd.read_csv(data_source, chunksize=10000):
 
     # drop data into database
     start_time = time.time()
-    d.to_sql(table_name, con, if_exists="append", index=False)
+    d.to_sql(table_name, con, if_exists="append")
     print("--- %s seconds ---" % (time.time() - start_time))
 
     start_time = time.time()
@@ -48,10 +43,6 @@ for df in pd.read_csv(data_source, chunksize=10000):
     print("--- %s seconds ---" % (time.time() - start_time))
 
     # Verify that result of SQL query is stored in the dataframe
-    start_time = time.time()
     print(d.head())
-    print("--- %s seconds ---" % (time.time() - start_time))
 
-    start_time = time.time()
     con.close()
-    print("--- %s seconds ---" % (time.time() - start_time))
