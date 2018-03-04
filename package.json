@@ -4,8 +4,8 @@
   "description": "Visualization project Group 1 2018 KTH",
   "main": "index.js",
   "scripts": {
-    "start": "node lib/db/parser.js && python lib/db/parseConsumption.py && node index.js",
-    "test": "rm ./secret/*.sqlite; npm start"
+    "start": "node lib/db/parser.js && node index.js",
+    "test": "rm ./secret/*.sqlite; python3 lib/db/parseConsumption.py && npm start"
   },
   "repository": {
     "type": "git",
