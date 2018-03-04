@@ -124,12 +124,30 @@ function drawYearlyChart(chData){
   .append("g")
   .attr("class","yr-bar")
 
+
   bars.append("rect")
   .attr("y", function(d) { return barY(d.yr); })
-  .attr("width", function(d) {return barX(d.sum); } )
-  .attr("height", barY.bandwidth())
   .attr("fill", function(d) {return color(d.yr);})
-  .on('click',function(d){
+  .attr("height", barY.bandwidth())
+  .attr("width",0)
+  .transition()
+  .duration(1000)
+  .attr("width", function(d) {return barX(d.sum); } )
+  
+
+  bars.append('text')
+  .style('font-size','25px')
+  .style('fill','#FFF')
+  .attr('x',10)
+  .attr('y',function(d){
+    console.log(d);
+    return (barY(d.yr) + 10 +  barY.bandwidth()/2);
+  })
+  .text(function(d){
+   return d.yr + ": " + d.sum;
+  });
+
+  bars.on('click',function(d){
     selectedYr = d.yr;
     updateYearlyChart();
   })
@@ -145,18 +163,6 @@ function drawYearlyChart(chData){
       .duration(1500)
       .style('opacity', 0);
   })
-  
-  bars.append('text')
-   .text(function(d){
-    return d.yr + ": " + d.sum;
-   })
-  .style('font-size','25px')
-  .attr('x',10)
-  .attr('y',function(d){
-    return (barY(d.yr) + 10 +  barY.bandwidth()/2);
-  });
-
-
   function makeBarYAxis(g){
     g.call(d3.axisLeft(barY));
     g.select(".domain").remove();
@@ -291,10 +297,28 @@ function updateMonthlyChart(){
 
   bars.append("rect")
   .attr("y", function(d) { return barY(d.month); })
-  .attr("width", function(d) {return barX(d.sum); } )
-  .attr("height", barY.bandwidth())
   .attr("fill", function(d) {return color(d.month);})
-  .on('mouseover', function(d) {
+  .attr("height", barY.bandwidth())
+  .attr("width",0)
+  .transition()
+  .duration(1000)
+  .attr("width", function(d) {return barX(d.sum); } )
+  
+  
+  bars.select('text').remove();
+  bars.append('text')
+   .text(function(d){
+    return months[d.month] + ": " + d.sum;
+   })
+  .style('font-size','15px')
+  .style("fill","#FFF")
+  .attr('x',10)
+  .attr('y',function(d){
+    return (barY(d.month)+10 + barY.bandwidth()/2);
+  });
+
+
+  bars.on('mouseover', function(d) {
     d3.select('#mLabel')
       .text(months[d.month])
       .transition()
@@ -306,20 +330,6 @@ function updateMonthlyChart(){
       .duration(1500)
       .style('opacity', 0);
   })
-  
-  
-  bars.select('text').remove();
-  bars.append('text')
-   .text(function(d){
-    return months[d.month] + ": " + d.sum;
-   })
-  .style('font-size','15px')
-  .attr('x',10)
-  .attr('y',function(d){
-    return (barY(d.month)+10 + barY.bandwidth()/2);
-  });
-
-
   function makeBarYAxis(g){
     g.call(d3.axisLeft(barY));
     g.select(".domain").remove();
