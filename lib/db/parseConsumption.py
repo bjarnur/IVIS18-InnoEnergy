@@ -1,7 +1,5 @@
 # coding: utf-8
 
-# In[536]:
-
 import pandas as pd
 import numpy as np
 import sqlite3 as lite
