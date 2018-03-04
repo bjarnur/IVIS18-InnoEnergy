@@ -47,23 +47,25 @@ app.get('/consumptionById/:id',async function(req,res){
 
 /**
 * example usage:
-* http://localhost:5000/consumptionOnIntervalById/735999114007366888/2008-01-01/2017-01-01/
+* http://localhost:5000/consumptionOnIntervalById/735999114007366888/month
 *
 */
-app.get('/consumptionOnIntervalById/:id/:from/:to/', async function(req, res) {
-  let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to)
+app.get('/consumptionOnIntervalById/:id/:time', async function(req, res) {
+  let result = await db.getConsumptionByDate(req.params.id, req.params.time)
   util.sendFormatted(res, result)
 })
 
 /**
 * example usage:
-* http://localhost:5000/consumptionOnIntervalById/735999114006943486/2008-01-01/2017-01-01/[year|month|day]
+* http://localhost:5000/consumptionOnIntervalById/735999114006943486/[year|month|day]/2008-01-01/2017-01-01
 *
 * If anything else but the parameters above are supplied for time the normal consumptionOnIntervalById will be returned
 */
-app.get('/consumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {
-  let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to, req.params.time)
+app.get('/consumptionOnIntervalById/:id/:time/:from/:to', async function(req, res) {
+  console.time('consumptionOnIntervalById with ' + req.params.time)
+  let result = await db.getConsumptionByDate(req.params.id, req.params.time, req.params.from, req.params.to)
   util.sendFormatted(res, result)
+  console.timeEnd('consumptionOnIntervalById with ' + req.params.time)
 })
 
 app.get('/maximumConsumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {

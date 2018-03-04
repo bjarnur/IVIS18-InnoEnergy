@@ -14,6 +14,8 @@ function renderChart(id){
   init(id);
 
   $.getJSON("/maximumConsumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/month").then(function(result){
+  //$.getJSON("/consumptionOnIntervalById/"+curId+"/month/2012-01-01/2018-01-01").then(function(result){
+
 
     if(Object.keys(result).length != 0){
       document.getElementById('toggled').style.display = '';
@@ -114,7 +116,7 @@ function drawYearlyChart(chData){
         .attr("class", "line")
         .attr("d", function(d) { return line(d.vals); })
         .style("stroke", function(d) { return color(d.yr); })
-    
+
 
   //Bar Chart Section
   let barSVG = d3.select('#barChartWrapper')
@@ -151,7 +153,7 @@ function drawYearlyChart(chData){
   .transition()
   .duration(1000)
   .attr("width", function(d) {return barX(d.sum); } )
-  
+
 
   //Add text (I don't know how to customize tick)
   //Note: need to add before addEventListner
@@ -202,7 +204,7 @@ function updateYearlyChart(){
   .classed('active',function(d){
     return selectedYr === d.yr;
   })
-  
+
   if(!bMonthlyChart){
     initMonthlyChart();
   }
@@ -219,7 +221,7 @@ function updateYearlyChart(){
 /*Open the monthly chart canvas*/
 function initMonthlyChart(){
   document.getElementById('toggled2').style='';
-  bMonthlyChart = true; 
+  bMonthlyChart = true;
 }
 
 /*When clicking the bar of line on yearly plot, this function will be called*/
@@ -227,12 +229,15 @@ function updateMonthlyChart(){
   d3.select('#selectedYr').text(selectedYr);
 
   function yrRange(yr){
+    //return "/day/"+yr+"-01-01/"+(yr+1)+"-01-01";
     return "/"+yr+"-01-01/"+(yr+1)+"-01-01/day";
   }
 
   //Get the consumption data of selected yr
   $.getJSON("maximumConsumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
+    console.log(res)
     let chData = parseMonthlyData(res);
+    console.log(chData)
 
     //Same as above
     //FIXME: duplicated code, some bad smell...Orz
@@ -350,8 +355,8 @@ function updateMonthlyChart(){
     .transition()
     .duration(1000)
     .attr("width", function(d) {return barX(d.sum); } )
-    
-    
+
+
     bars.select('text').remove();
     bars.append('text')
      .text(function(d){
