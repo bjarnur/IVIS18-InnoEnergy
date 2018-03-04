@@ -13,7 +13,7 @@ function init(id){
 function renderChart(id){
   init(id);
 
-  $.getJSON("/maximumConsumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/hour").then(function(result){
+  $.getJSON("/maximumConsumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/month").then(function(result){
 
     if(Object.keys(result).length != 0){
       document.getElementById('toggled').style.display = '';
@@ -232,8 +232,8 @@ function updateMonthlyChart(){
   }
 
   //Get the consumption data of selected yr
-  $.getJSON("consumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
-    let chData = parseMonthlyData(res[selectedYr]);
+  $.getJSON("maximumConsumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
+    let chData = parseMonthlyData(res);
 
     //Same as above
     //FIXME: duplicated code, some bad smell...Orz
@@ -252,7 +252,7 @@ function updateMonthlyChart(){
 
     // set domain
     x.domain([1,31]);
-    y.domain([40,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
+    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
     color.domain(chData.map(function(d){return d.month;}));
 
     //Month indicator

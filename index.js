@@ -67,7 +67,18 @@ app.get('/consumptionOnIntervalById/:id/:from/:to/:time', async function(req, re
 })
 
 app.get('/maximumConsumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {
-  let result = await db.getMaxConsumptionByDate(req.params.id, req.params.from, req.params.to, req.params.time)
+  let time = req.params.time
+  let result = {}
+  switch(time) {
+    case 'month':
+      result = await db.getMonthlyMaxConsumption(req.params.id, req.params.from, req.params.to, req.params.time)
+      break
+    case 'day':
+      result = await db.getDailyMaxConsumption(req.params.id, req.params.from, req.params.to, req.params.time)
+      break
+    default:
+      break
+  }  
   util.sendFormatted(res, result)
 })
 

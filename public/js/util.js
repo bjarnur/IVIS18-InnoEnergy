@@ -67,20 +67,21 @@ function parseYearlyData2(chData){
 
 function parseMonthlyData(chData){
   var ret = [];
+  console.log(chData);
   for(let month in chData){
     var mData = {};
-    mData['sum'] = 0;
+    mData['sum'] = chData[month].sum;
     mData['month'] = month;
     mData['vals'] = [];
-    for(let day in chData[month]){
-      mData['sum'] += chData[month][day].sum;
+    for(let day in chData[month].values){
       mData['vals'][parseInt(day)-1] = {
         time: day,
-        val: chData[month][day].sum,
-        cnt: chData[month][day].count
+        val: chData[month].values[day],
+        //cnt: chData[month][day].count
       };
     }
     ret[parseInt(month)-1] = mData;
   }
+  //console.log(ret)
   return ret;
 }
