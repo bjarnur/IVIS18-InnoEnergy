@@ -4,3 +4,5 @@ npm-debug.log
 # keep the folder but ignore the content
 secret/*
 !secret/.gitkeep
+package-lock.json
+package.json
