@@ -80,8 +80,14 @@ function parseMonthlyData(chData){
         //cnt: chData[month][day].count
       };
     }
-    ret[parseInt(month)-1] = mData;
+    if(month == "Capacity") {
+      //Hacky-hack :)
+      ret[12] = mData;
+    }
+    else {
+      ret[parseInt(month)-1] = mData;
+    }
   }
-  //console.log(ret)
+  console.log(ret)
   return ret;
 }

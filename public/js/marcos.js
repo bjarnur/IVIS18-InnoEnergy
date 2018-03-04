@@ -12,7 +12,8 @@ var months = {
   "09":"September",
   "10":"October",
   "11":"November",
-  "12":"December"
+  "12":"December",
+  "Capacity":"Capacity"
 }
 var curId = -1;
 

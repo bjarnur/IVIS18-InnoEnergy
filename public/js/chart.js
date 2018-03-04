@@ -47,7 +47,7 @@ function drawYearlyChart(chData){
 
   //Set domain
   x.domain([1,12]);
-  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
+  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
   color.domain(chData.map(function(d){return d.yr;}));
 
   //Yr indicator
@@ -252,7 +252,7 @@ function updateMonthlyChart(){
 
     // set domain
     x.domain([1,31]);
-    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val})})]);
+    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
     color.domain(chData.map(function(d){return d.month;}));
 
     //Month indicator
