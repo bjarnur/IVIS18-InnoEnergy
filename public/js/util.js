@@ -44,6 +44,27 @@ function parseYearlyData(chData){
   return ret;
 }
 
+function parseYearlyData2(chData){
+ var ret = [];
+  for(let yr in chData){
+    var yrData = {};
+    yrData['sum'] = chData[yr].sum;
+    yrData['yr'] = yr;
+    yrData['vals'] = [];
+    //yrData['vals'] = chData[yr].values;
+    for(let month in chData[yr].values) {
+      yrData['vals'][parseInt(month)-1] = {
+        time: month,
+        val: chData[yr].values[month],
+        //cnt: 1
+      };
+    }
+    ret.push(yrData);
+  }
+  return ret;
+}
+
+
 function parseMonthlyData(chData){
   var ret = [];
   for(let month in chData){

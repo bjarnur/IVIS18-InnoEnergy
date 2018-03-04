@@ -66,6 +66,15 @@ app.get('/consumptionOnIntervalById/:id/:from/:to/:time', async function(req, re
   util.sendFormatted(res, result)
 })
 
+app.get('/maximumConsumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {
+  let result = await db.getMaxConsumptionByDate(req.params.id, req.params.from, req.params.to, req.params.time)
+  util.sendFormatted(res, result)
+})
+
+app.get('/fuseCapacity/:id',async function(req,res){
+  let result = constants.FUSES[req.params.id]
+  res.send(result)
+})
 
 //for DEBUG
 app.get('/ttest',async function(req,res){

@@ -13,11 +13,12 @@ function init(id){
 function renderChart(id){
   init(id);
 
-  $.getJSON("/consumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/month").then(function(result){
+  $.getJSON("/maximumConsumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/hour").then(function(result){
 
     if(Object.keys(result).length != 0){
       document.getElementById('toggled').style.display = '';
-      drawYearlyChart(parseYearlyData(result));
+      //drawYearlyChart(parseYearlyData(result));
+      drawYearlyChart(parseYearlyData2(result));
     }
     else{
       console.log(curId + "doesn't have data");
