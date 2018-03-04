@@ -74,6 +74,17 @@ function drawYearlyChart(chData){
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.val); });
 
+  chartSVG.append('rect')
+      .attr('x', -1 * (wLine+30))
+      .attr('y', -1 * hLine)
+      .attr('height', hLine)
+      .attr('class', 'curtain')
+      .attr('transform', 'rotate(180)')
+      .style('fill', '#ffffff')
+      .attr('width', wLine-15)
+      .transition()
+      .duration(5000)
+      .attr('width',0);
 
   let lines= d3.select('svg g.lineChart').selectAll(".yr-line")
     .data(chData)
@@ -241,6 +252,18 @@ function updateMonthlyChart(){
     .attr("transform", "translate(" + 10 +",0)")
     .call(d3.axisLeft(y))
 
+  chartSVG.append('rect')
+      .attr('x', -1 * (wLine+30))
+      .attr('y', -1 * hLine)
+      .attr('height', hLine)
+      .attr('class', 'curtain')
+      .attr('transform', 'rotate(180)')
+      .style('fill', '#ffffff')
+      .attr('width', wLine-15)
+      .transition()
+      .duration(5000)
+      .attr('width',0);
+
   let line = d3.line()
       .curve(d3.curveBasis)
       .x(function(d) { return x(d.time); })
@@ -319,12 +342,15 @@ function updateMonthlyChart(){
 
 
   bars.on('mouseover', function(d) {
+    console.log(d3.select('#m-line'+d.month));
+    d3.select('#m-line'+d.month).classed('active',true);
     d3.select('#mLabel')
       .text(months[d.month])
       .transition()
       .style('opacity', 1);
   })
   .on('mouseout', function(d) {
+    d3.select('#m-line'+d.month).classed('active',false);
     d3.select('#mLabel')
       .transition()
       .duration(1500)
