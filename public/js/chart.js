@@ -17,8 +17,7 @@ function renderChart(id){
 
     if(Object.keys(result).length != 0){
       document.getElementById('toggled').style.display = '';
-      //drawYearlyChart(parseYearlyData(result));
-      drawYearlyChart(parseYearlyData2(result));
+      drawYearlyChart(parseYearlyData(result));
     }
     else{
       console.log(curId + "doesn't have data");
