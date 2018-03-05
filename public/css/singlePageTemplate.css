@@ -161,6 +161,25 @@ g {
     width: auto;
     margin-left: 10px;
 }
+.yr-bar text {
+    font-size: 14px;
+    fill: #fff;
+}
+
+.yr-bar2 text {
+    font-size: 14px;
+    fill: #fff;
+}
+#yrLabel {
+    font-size: 100px;
+    font-weight: 'bold';
+    fill: #ddd; 
+}
+#mLabel {
+    font-size: 100px;
+    font-weight: 'bold';
+    fill: #ddd; 
+}
 #barChartWrapper{
     width: 250px;
     height: 500px;

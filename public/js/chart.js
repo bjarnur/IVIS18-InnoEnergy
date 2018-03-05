@@ -54,8 +54,8 @@ function drawYearlyChart(chData){
   //Yr indicator
   d3.select('svg g.lineChart')
     .append('text')
-    .attrs({'id': 'yrLabel', 'x': 70, 'y': 250})
-    .styles({'font-size': '100px', 'font-weight': 'bold', 'fill': '#ddd'});
+    .attrs({'id': 'yrLabel', 'x': 70, 'y': 400});
+    //.styles({'font-size': '100px', 'font-weight': 'bold', 'fill': '#ddd'});
 
   //Render Axis
   d3.select('svg g.lineChart')
@@ -142,24 +142,23 @@ function drawYearlyChart(chData){
   .data(chData)
   .enter()
   .append("g")
-  .attr("class","yr-bar")
-
-
+  .attr("class","yr-bar");
+  
   bars.append("rect")
-  .attr("y", function(d) { return barY(d.yr); })
-  .attr("fill", function(d) {return color(d.yr);})
-  .attr("height", barY.bandwidth())
-  .attr("width",0)
-  .transition()
-  .duration(1000)
-  .attr("width", function(d) {return barX(d.sum); } )
-
+    .attr("y", function(d) { return barY(d.yr); })
+    .attr("fill", function(d) {return color(d.yr);})
+    .attr("height", barY.bandwidth())
+    .attr("width",0)
+    .transition()
+    .duration(1000)
+    .attr("width", function(d) {return barX(d.sum); } )
+    
 
   //Add text (I don't know how to customize tick)
   //Note: need to add before addEventListner
   bars.append('text')
-  .style('font-size','25px')
-  .style('fill','#FFF')
+  //.style('font-size','25px')
+ //.style('fill','#FFF')
   .attr('x',10)
   .attr('y',function(d){
     console.log(d);
@@ -262,8 +261,8 @@ function updateMonthlyChart(){
     //Month indicator
     d3.select('svg g.lineChart2')
       .append('text')
-      .attrs({'id': 'mLabel', 'x': 70, 'y': 400})
-      .styles({'font-size': '80px', 'font-weight': 'bold', 'fill': '#ddd'});
+      .attrs({'id': 'mLabel', 'x': 70, 'y': 400});
+     // .styles({'font-size': '80px', 'font-weight': 'bold', 'fill': '#ddd'});
 
     //Render Axis
     d3.select('svg g.lineChart2')
@@ -362,8 +361,8 @@ function updateMonthlyChart(){
      .text(function(d){
       return months[d.month] + ": " + d.sum;
      })
-    .style('font-size','15px')
-    .style("fill","#FFF")
+   // .style('font-size','12px')
+   // .style("fill","#FFF")
     .attr('x',10)
     .attr('y',function(d){
       return (barY(d.month)+10 + barY.bandwidth()/2);
