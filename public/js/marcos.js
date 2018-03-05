@@ -25,3 +25,5 @@ var wLine = canvasLineW- margin.left - margin.right,
     hLine = canvasLineH - margin.top - margin.bottom;
 var wBar = canvasBarW - margin.left - margin.right,
     hBar = canvasBarH - margin.top - margin.bottom;
+
+var selectedMonth = [];

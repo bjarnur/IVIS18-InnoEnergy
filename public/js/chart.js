@@ -7,10 +7,11 @@ function init(id){
   bMonthlyChart = false;
   selectedYr = -1
   curId = id;
+  selectedMonth = [];
+
 }
 
 /*Manager of the chart related to this id*/
-//FIXME: It takes so long to use consumptionOnIntervalById on yearly level
 function renderChart(id){
   init(id);
 
@@ -57,7 +58,6 @@ function drawYearlyChart(chData){
   d3.select('svg g.lineChart')
     .append('text')
     .attrs({'id': 'yrLabel', 'x': 70, 'y': 400});
-    //.styles({'font-size': '100px', 'font-weight': 'bold', 'fill': '#ddd'});
 
   //Render Axis
   d3.select('svg g.lineChart')
@@ -192,8 +192,6 @@ function drawYearlyChart(chData){
   //Add text (I don't know how to customize tick)
   //Note: need to add before addEventListner
   bars.append('text')
-  //.style('font-size','25px')
- //.style('fill','#FFF')
   .attr('x',textMargin*2)
   .attr('y',function(d){
     return (barY(d.yr) + 5 +  barY.bandwidth()/2);
@@ -203,7 +201,6 @@ function drawYearlyChart(chData){
   });
 
   bars.append('text')
-  //.style('font-size','25px')
  .style('fill','#000000')
   .attr('x',-25)
   .attr('y',function(d){
@@ -255,6 +252,7 @@ function updateYearlyChart(){
   }
   else{
     //re-render
+    selectedMonth = [];
     d3.select("#MonthlylineChartWrapper").selectAll("svg").remove();
     d3.select('#MonthlybarChartWrapper').selectAll('svg').remove();
   }
@@ -311,7 +309,6 @@ function updateMonthlyChart(){
     d3.select('svg g.lineChart2')
       .append('text')
       .attrs({'id': 'mLabel', 'x': 70, 'y': 400});
-     // .styles({'font-size': '80px', 'font-weight': 'bold', 'fill': '#ddd'});
 
     //Render Axis
     d3.select('svg g.lineChart2')
@@ -469,10 +466,39 @@ function updateMonthlyChart(){
         .style('opacity', 0);
       }
     })
+    .on('click',function(d){
+      if(d){
+        let indx = selectedMonth.indexOf(d.month);
+        if(indx == -1){
+          selectedMonth.push(d.month);
+        }
+        else{
+          selectedMonth.splice(indx,1);
+        }
+        redrawMonthlyChart();
+      }
+    })
     function makeBarYAxis(g){
       g.call(d3.axisLeft(barY));
       g.select(".domain").remove();
     }
      barSVG.append("g").call(makeBarYAxis);
     })
+}
+
+function redrawMonthlyChart(){
+  d3.selectAll('.m-line')
+  .style("opacity",function(d){
+    if(selectedMonth.length == 0){
+      return 1;
+    }
+    else{
+      if(selectedMonth.indexOf(d.month) != -1){
+        return 1;
+      }
+      else{
+        return 0.1;
+      }
+    }
+  })
 }

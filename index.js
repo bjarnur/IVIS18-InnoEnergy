@@ -89,11 +89,6 @@ app.get('/fuseCapacity/:id',async function(req,res){
   res.send(result)
 })
 
-//for DEBUG
-app.get('/ttest',async function(req,res){
-  let result = await db.getConsumptionById('735999114006654405');
-})
-
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
 })
