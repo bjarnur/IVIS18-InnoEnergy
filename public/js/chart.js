@@ -2,6 +2,7 @@
 function init(id){
   document.getElementById('toggled').style = 'display: none;';
   document.getElementById('toggled2').style = 'display: none;';
+  d3.select("#nodata").text('');
   d3.selectAll("svg").remove();
   bMonthlyChart = false;
   selectedYr = -1
@@ -14,19 +15,17 @@ function renderChart(id){
   init(id);
 
   $.getJSON("/maximumConsumptionOnIntervalById/"+curId+"/2012-01-01/2018-01-01/month").then(function(result){
-  //$.getJSON("/consumptionOnIntervalById/"+curId+"/month/2012-01-01/2018-01-01").then(function(result){
-
-
-    if(Object.keys(result).length != 0){
-      document.getElementById('toggled').style.display = '';
+  
+    document.getElementById('toggled').style.display = '';
+    if(Object.keys(result).length > 1){
       drawYearlyChart(parseYearlyData(result));
     }
     else{
+      d3.select("#nodata").text('Sorry... No Data Here');
       console.log(curId + "doesn't have data");
     }
   });
 }
-
 /*Draw the upper chart*/
 function drawYearlyChart(chData){
 
@@ -41,14 +40,17 @@ function drawYearlyChart(chData){
           .attr('transform',"translate(" + margin.left + "," + margin.top + ")");
 
 
-	//Set range
-	let x = d3.scaleLinear().range([10, wLine]),
-	    y = d3.scaleLinear().range([hLine, 0]);
+  //Set range
+  let x = d3.scaleLinear().range([10, wLine]),
+      y = d3.scaleLinear().range([hLine, 0]);
       color = d3.scaleOrdinal(d3.schemeCategory10);
 
   //Set domain
   x.domain([1,12]);
-  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
+  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){
+    if(typeof d == 'undefined') return 0;
+    else return d.val + 2;
+  })})]);
   color.domain(chData.map(function(d){return d.yr;}));
 
   //Yr indicator
@@ -72,6 +74,7 @@ function drawYearlyChart(chData){
 
   //Energy line def
   let line = d3.line()
+      .defined(function(d) { return d; })
       .curve(d3.curveBasis)
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.val); });
@@ -95,6 +98,18 @@ function drawYearlyChart(chData){
     .data(chData)
     .enter().append("g")
     .attr("class", "yr-line")
+    .style("opacity",function(d){
+      if(d.yr == "Capacity"){
+        for(let i=0;i<d.vals.length;++i){
+          if (typeof d.vals[i] !== "undefined" && d.vals[i].val != 0){
+            return 1;
+          }
+        }
+        return 0;
+      }
+      else
+        return 1;
+    })
     .on('click',function(d){
       selectedYr = d.yr;
       updateYearlyChart();
@@ -161,7 +176,6 @@ function drawYearlyChart(chData){
  //.style('fill','#FFF')
   .attr('x',10)
   .attr('y',function(d){
-    console.log(d);
     return (barY(d.yr) + 10 +  barY.bandwidth()/2);
   })
   .text(function(d){
@@ -234,9 +248,7 @@ function updateMonthlyChart(){
 
   //Get the consumption data of selected yr
   $.getJSON("maximumConsumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
-    console.log(res)
     let chData = parseMonthlyData(res);
-    console.log(chData)
 
     //Same as above
     //FIXME: duplicated code, some bad smell...Orz
@@ -255,8 +267,14 @@ function updateMonthlyChart(){
 
     // set domain
     x.domain([1,31]);
-    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
-    color.domain(chData.map(function(d){return d.month;}));
+    y.domain([0,d3.max(chData,function(c){
+      if(c) {
+        return d3.max(c.vals,function(d){
+          if(typeof d == 'undefined') return 0;
+          else return d.val + 2;
+      })}
+    })]);   
+    color.domain(chData.map(function(d){ if(d) return d.month; }));
 
     //Month indicator
     d3.select('svg g.lineChart2')
@@ -291,6 +309,7 @@ function updateMonthlyChart(){
         .attr('width',0);
 
     let line = d3.line()
+        .defined(function(d) { return d; })
         .curve(d3.curveBasis)
         .x(function(d) { return x(d.time); })
         .y(function(d) { return y(d.val); });
@@ -301,8 +320,8 @@ function updateMonthlyChart(){
       .data(chData)
       .enter().append("g")
       .attr("class", "m-line")
-      .attr("id",function(d){
-        return "m-line" + d.month;
+      .attr("id",function(d){ 
+        if(d) return "m-line" + d.month; 
       })
       .on('mouseover', function(d) {
         d3.select('#mLabel')
@@ -319,8 +338,8 @@ function updateMonthlyChart(){
 
     lines.append("path")
           .attr("class", "line")
-          .attr("d", function(d) { return line(d.vals); })
-          .style("stroke", function(d) { return color(d.month); })
+          .attr("d", function(d) { if(d) {return line(d.vals); }})
+          .style("stroke", function(d) { if(d) {return color(d.month); }})
 
     let barSVG = d3.select('#MonthlybarChartWrapper')
         .append("svg")
@@ -335,55 +354,58 @@ function updateMonthlyChart(){
     let barY = d3.scaleBand().range([hBar,0]).padding(0.1);
     let barX = d3.scaleLinear().range([0,wBar]);
     //The bar chart will be sorted, but the color of each month is the same
-    let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
+    //let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
 
-    barY.domain(sortedData.map(function(d){return d.month;}))
-    barX.domain([0,d3.max(chData,function(d){return d.sum;})])
+    barY.domain(chData.map(function(d){ if(d) return d.month;}))
+    barX.domain([0,d3.max(chData,function(d){if(d) return d.sum;})])
 
     let bars = d3.select('svg g.barChart2').selectAll(".yr-bar2")
-    .data(sortedData)
+    .data(chData)
     .enter()
     .append("g")
     .attr("class","yr-bar2")
 
     bars.append("rect")
-    .attr("y", function(d) { return barY(d.month); })
-    .attr("fill", function(d) {return color(d.month);})
+    .attr("y", function(d) { if(d) return barY(d.month); })
+    .attr("fill", function(d) {if(d) return color(d.month);})
     .attr("height", barY.bandwidth())
     .attr("width",0)
     .transition()
     .duration(1000)
-    .attr("width", function(d) {return barX(d.sum); } )
+    .attr("width", function(d) {if(d) return barX(d.sum); } )
 
 
     bars.select('text').remove();
     bars.append('text')
      .text(function(d){
-      return months[d.month] + ": " + d.sum;
+      if(d) return months[d.month] + ": " + d.sum;
      })
    // .style('font-size','12px')
    // .style("fill","#FFF")
     .attr('x',10)
     .attr('y',function(d){
-      return (barY(d.month)+10 + barY.bandwidth()/2);
+      if(d) return (barY(d.month)+10 + barY.bandwidth()/2);
     });
 
 
     //Highlight hovered month (use id to get related line)
     bars.on('mouseover', function(d) {
-      console.log(d3.select('#m-line'+d.month));
+      if(d) {
       d3.select('#m-line'+d.month).classed('active',true);
       d3.select('#mLabel')
         .text(months[d.month])
         .transition()
         .style('opacity', 1);
+      }
     })
     .on('mouseout', function(d) {
+      if(d) {
       d3.select('#m-line'+d.month).classed('active',false);
       d3.select('#mLabel')
         .transition()
         .duration(1500)
         .style('opacity', 0);
+      }
     })
     function makeBarYAxis(g){
       g.call(d3.axisLeft(barY));

@@ -126,6 +126,9 @@ nav ul li a:hover {
 .about h2 {
     color: #96c147;
     }
+#nodata{
+  font-size: 75px;
+}
     /* Stats Gallery */
 .gallery {
 	clear: both;
