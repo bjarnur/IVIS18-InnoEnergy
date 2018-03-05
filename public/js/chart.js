@@ -354,13 +354,13 @@ function updateMonthlyChart(){
     let barY = d3.scaleBand().range([hBar,0]).padding(0.1);
     let barX = d3.scaleLinear().range([0,wBar]);
     //The bar chart will be sorted, but the color of each month is the same
-    let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
+    //let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
 
-    barY.domain(sortedData.map(function(d){ if(d) return d.month;}))
+    barY.domain(chData.map(function(d){ if(d) return d.month;}))
     barX.domain([0,d3.max(chData,function(d){if(d) return d.sum;})])
 
     let bars = d3.select('svg g.barChart2').selectAll(".yr-bar2")
-    .data(sortedData)
+    .data(chData)
     .enter()
     .append("g")
     .attr("class","yr-bar2")
