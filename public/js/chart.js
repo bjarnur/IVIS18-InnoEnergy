@@ -81,13 +81,13 @@ function drawYearlyChart(chData){
 
   //Animation (use curtain method)
   chartSVG.append('rect')
-      .attr('x', -1 * (wLine+30))
+      .attr('x', -1 * (wLine+50))
       .attr('y', -1 * hLine)
       .attr('height', hLine)
       .attr('class', 'curtain')
       .attr('transform', 'rotate(180)')
       .style('fill', '#ffffff')
-      .attr('width', wLine-15)
+      .attr('width', wLine)
       .transition()
       .duration(5000)
       .attr('width',0);
@@ -328,13 +328,13 @@ function updateMonthlyChart(){
 
     //Animation
     chartSVG.append('rect')
-        .attr('x', -1 * (wLine+30))
+        .attr('x', -1 * (wLine+50))
         .attr('y', -1 * hLine)
         .attr('height', hLine)
         .attr('class', 'curtain')
         .attr('transform', 'rotate(180)')
         .style('fill', '#ffffff')
-        .attr('width', wLine-15)
+        .attr('width', wLine)
         .transition()
         .duration(5000)
         .attr('width',0);

@@ -36,7 +36,6 @@ function parseYearlyData(chData){
         val: chData[yr].values[month],
       };
     }
-    //console.log(yrData['vals']);
     ret.push(yrData);
   }
   return ret;
@@ -45,7 +44,6 @@ function parseYearlyData(chData){
 
 function parseMonthlyData(chData){
   var ret = [];
-  console.log(chData);
   for(let month in chData){
     var mData = {};
     mData['sum'] = chData[month].sum;
