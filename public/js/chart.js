@@ -128,6 +128,23 @@ function drawYearlyChart(chData){
         .style('opacity', 0);
     });
 
+  /* LEGENDS */
+  // text label for the x axis
+  lines.append("text")
+    .attr("transform",
+          "translate(" + (wLine/2) + " ," +
+                         (hLine + margin.top + 30) + ")")
+    .style("text-anchor", "middle")
+    .text("Month");
+
+  lines.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (hLine / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Peak monthly consumption (KWh)");
+
   lines.append("path")
         .attr("class", "line")
         .attr("d", function(d) { return line(d.vals); })
@@ -359,6 +376,23 @@ function updateMonthlyChart(){
           .attr("class", "line")
           .attr("d", function(d) { return line(d.vals); })
           .style("stroke", function(d) { return color(d.month); })
+
+    /* LEGENDS */
+    // text label for the x axis
+    lines.append("text")
+      .attr("transform",
+            "translate(" + (wLine/2) + " ," +
+                           (hLine + margin.top + 30) + ")")
+      .style("text-anchor", "middle")
+      .text("Day of month");
+
+    lines.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (hLine / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Peak daily consumption (KWh)");
 
     let barSVG = d3.select('#MonthlybarChartWrapper')
         .append("svg")

@@ -18,9 +18,9 @@ var months = {
 var curId = -1;
 
 //drawing related
-var	margin = {top: 20, right: 80, bottom: 30, left: 30};
-var canvasLineW = 930,canvasLineH = 500;
-var canvasBarW = 360, canvasBarH = 500;
+var	margin = {top: 0, right: 80, bottom: 40, left: 30};
+var canvasLineW = 930,canvasLineH = 550;
+var canvasBarW = 360, canvasBarH = 550;
 var wLine = canvasLineW- margin.left - margin.right,
     hLine = canvasLineH - margin.top - margin.bottom;
 var wBar = canvasBarW - margin.left - margin.right,
