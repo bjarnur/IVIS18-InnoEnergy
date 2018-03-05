@@ -80,10 +80,6 @@ npm test
 ```
 
 
-## Visualization with backend
+## Known Issue
 
-```sh
-npm start
-```
-Go to [localhost:5000/demo](http://localhost:5000/demo),type ID and you'll see the
-consumption over time.
+* When clicking too quickly, the svg won't be removed...(need at least 3 sec interval)

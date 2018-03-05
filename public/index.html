@@ -6,7 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="js/gmaps.js"></script>
 
 		<!--- Map API -->
 		<script type="text/javascript" src="js/markerclusterer.js"></script>
@@ -14,15 +13,17 @@
 
 		<!--- D3.js -->
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-		<script type="text/javascript" src="js/d3.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/marcos.js"></script>
+    <script type="text/javascript" src="js/chart.js"></script>
 
 		<title>IVIS18 - Group 1</title>
 		<link href="css/singlePageTemplate.css" rel="stylesheet" type="text/css">
 
-		<script type="text/javascript" src="js/scripts.js"></script>
 
-        <!-- Font: Titillium -->
-        <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <!-- Font: Titillium -->
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
 	</head>
 	<body>
 		<!-- Main Container -->
@@ -86,13 +87,26 @@
 						  <p class="text_chart"><span id="addinfo"></span></p>
 					  </div>
 				  </center>
-                  <div>
-                    <div class="lineChart"><svg width="1130" height="500"></svg></div>
-                    <div class="barChart">INSERT Bar-Chart</div>
-                </div>
+          <div>
+            <div id="lineChartWrapper"></div>
+            <div id="barChartWrapper">INSERT Bar-Chart</div>
+          </div>
 			  </div>
 		  </section>
 
+		  <section class="about" id="toggled2" style="display: none;">
+			  <div class="gallery">
+				  <center>
+					  <div class="chart_info">
+						  <h2 class="text_chart"><span id="selectedYr"></span></h2>
+					  </div>
+				  </center>
+          <div>
+            <div id="MonthlylineChartWrapper"></div>
+            <div id="MonthlybarChartWrapper">Hao Hao</div>
+          </div>
+			  </div>
+		  </section>
 		  <!-- More Info Section -->
 		  <footer>
 			  <section id="contact">

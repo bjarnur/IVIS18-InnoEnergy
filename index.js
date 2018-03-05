@@ -3,8 +3,10 @@ const db = require('./lib/db/db.js')
 
 const express = require('express')
 const path = require("path")
-var bodyParser = require('body-parser');
 const app = express()
+
+let util = require('./lib/db/util')
+let bodyParser = require('body-parser')
 
 app.use(bodyParser.json());
 
@@ -14,7 +16,7 @@ for now until we want to pass dynamic content */
 app.use(express.static(path.join(__dirname + '/public')))
 
 app.get('/example', async function(req, res) {
-  let result = await db.consumptionById('735999114000793384')
+  let result = await db.consumptionById('735999114006943486')
   res.send(result)
 })
 
@@ -29,7 +31,7 @@ app.get('/buildings', async function(req, res) {
 })
 
 app.get('/buildingsByAddress/:addr', async function(req, res) {
-  let result = await db.getBuildingsByAddress(req.params.addr)  
+  let result = await db.getBuildingsByAddress(req.params.addr)
   res.send(result)
 })
 
@@ -44,25 +46,53 @@ app.get('/consumptionById/:id',async function(req,res){
 })
 
 /**
-example usage:
-http://localhost:5000/consumptionOnIntervalById/735999114007366888/2012-01-01/2012-01-01 */
-app.get('/consumptionOnIntervalById/:id/:from/:to', async function(req, res) {
-  let result = await db.getConsumptionByDate(req.params.id, req.params.from, req.params.to)
-  res.send(result)
+* example usage:
+* http://localhost:5000/consumptionOnIntervalById/735999114007366888/month
+*
+*/
+app.get('/consumptionOnIntervalById/:id/:time', async function(req, res) {
+  let result = await db.getConsumptionByDate(req.params.id, req.params.time)
+  util.sendFormatted(res, result)
 })
 
+/**
+* example usage:
+* http://localhost:5000/consumptionOnIntervalById/735999114006943486/[year|month|day]/2008-01-01/2017-01-01
+*
+* If anything else but the parameters above are supplied for time the normal consumptionOnIntervalById will be returned
+*/
+app.get('/consumptionOnIntervalById/:id/:time/:from/:to', async function(req, res) {
+  console.time('consumptionOnIntervalById with ' + req.params.time)
+  let result = await db.getConsumptionByDate(req.params.id, req.params.time, req.params.from, req.params.to)
+  util.sendFormatted(res, result)
+  console.timeEnd('consumptionOnIntervalById with ' + req.params.time)
+})
+
+app.get('/maximumConsumptionOnIntervalById/:id/:from/:to/:time', async function(req, res) {
+  let time = req.params.time
+  let result = {}
+  switch(time) {
+    case 'month':
+      result = await db.getMonthlyMaxConsumption(req.params.id, req.params.from, req.params.to, req.params.time)
+      break
+    case 'day':
+      result = await db.getDailyMaxConsumption(req.params.id, req.params.from, req.params.to, req.params.time)
+      break
+    default:
+      break
+  }  
+  util.sendFormatted(res, result)
+})
+
+app.get('/fuseCapacity/:id',async function(req,res){
+  let result = constants.FUSES[req.params.id]
+  res.send(result)
+})
 
 //for DEBUG
 app.get('/ttest',async function(req,res){
   let result = await db.getConsumptionById('735999114006654405');
 })
-
-//app.post('/search',async function(req,res){
-  ////console.log(req.body.idx)
-  //let result = await db.consumptionById(req.body.idx)
-  ////TODO:later on we can send back building_info at this point
-  //res.send(result)
-//})
 
 app.get('/hello', function(req, res) {
   res.send("Hello captain")
