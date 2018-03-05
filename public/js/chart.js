@@ -93,13 +93,24 @@ function drawYearlyChart(chData){
       .transition()
       .duration(5000)
       .attr('width',0);
-
   //Set energy line
   //lines: collection of all yearly line
   let lines= d3.select('svg g.lineChart').selectAll(".yr-line")
     .data(chData)
     .enter().append("g")
     .attr("class", "yr-line")
+    .style("opacity",function(d){
+      if(d.yr == "Capacity"){
+        for(let i=0;i<d.vals.length;++i){
+          if (typeof d.vals[i] !== "undefined" && d.vals[i].val != 0){
+            return 1;
+          }
+        }
+        return 0;
+      }
+      else
+        return 1;
+    })
     .on('click',function(d){
       selectedYr = d.yr;
       updateYearlyChart();
@@ -166,7 +177,6 @@ function drawYearlyChart(chData){
  //.style('fill','#FFF')
   .attr('x',10)
   .attr('y',function(d){
-    console.log(d);
     return (barY(d.yr) + 10 +  barY.bandwidth()/2);
   })
   .text(function(d){
@@ -239,9 +249,7 @@ function updateMonthlyChart(){
 
   //Get the consumption data of selected yr
   $.getJSON("maximumConsumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
-    console.log(res)
     let chData = parseMonthlyData(res);
-    console.log(chData)
 
     //Same as above
     //FIXME: duplicated code, some bad smell...Orz
@@ -260,9 +268,11 @@ function updateMonthlyChart(){
 
     // set domain
     x.domain([1,31]);
-    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){
-      if(typeof d == 'undefined') return 0;
-      else return d.val + 2;
+    y.domain([0,d3.max(chData,function(c){
+      if(typeof c == 'undefined') return 0;
+      else return d3.max(c.vals,function(d){
+        if(typeof d == 'undefined') return 0;
+        else return d.val + 2;
     })})]);
     color.domain(chData.map(function(d){return d.month;}));
 
@@ -305,6 +315,7 @@ function updateMonthlyChart(){
         .y(function(d) { return y(d.val); });
 
 
+    console.log(chData);
     //add id for monthly line for highlighting
     let lines= d3.select('svg g.lineChart2').selectAll(".m-line")
       .data(chData)
@@ -380,7 +391,6 @@ function updateMonthlyChart(){
 
     //Highlight hovered month (use id to get related line)
     bars.on('mouseover', function(d) {
-      console.log(d3.select('#m-line'+d.month));
       d3.select('#m-line'+d.month).classed('active',true);
       d3.select('#mLabel')
         .text(months[d.month])

@@ -65,6 +65,12 @@ function parseMonthlyData(chData){
       ret[parseInt(month)-1] = mData;
     }
   }
-  console.log(ret)
+  //To handle some month lack of data
+  //for(let mid = 1;mid < 12;++mid ){
+    //if(typeof ret[parseInt(mid)-1] == 'undefined'){
+      //ret[parseInt(mid)-1] = {'month':mid,'vals':[]};
+    //}
+  //}
+  
   return ret;
 }
