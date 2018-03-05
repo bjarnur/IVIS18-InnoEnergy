@@ -350,7 +350,7 @@ function updateMonthlyChart(){
     let lines= d3.select('svg g.lineChart2').selectAll(".m-line")
       .data(chData)
       .enter().append("g").filter(function(d){
-        return d.month !== "Capacity";
+        if (d) return d.month !== "Capacity";
       })
       .attr("class", "m-line")
       .attr("id",function(d){
@@ -441,13 +441,13 @@ function updateMonthlyChart(){
 
     bars.append('text')
      .text(function(d){
-      return d.sum;
+      if (d) return d.sum;
      })
    // .style('font-size','12px')
    // .style("fill","#FFF")
     .attr('x',textMargin * 2)
     .attr('y',function(d){
-      return (barY(d.month)+ 5 + barY.bandwidth()/2);
+      if(d) return (barY(d.month)+ 5 + barY.bandwidth()/2);
     });
 
     //Highlight hovered month (use id to get related line)
