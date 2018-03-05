@@ -3,7 +3,7 @@
 /* The style from InnoEnergy:
     Font: 'Titillium Web', sans-serif
     Blue color: #004494
-    Green color: #96c147 
+    Green color: #96c147
     Grey: #444 */
 
     /* Body */
@@ -78,7 +78,7 @@ nav ul li a:visited {
     }
 nav ul li a:hover {
 	color: #96c147;
-    } 
+    }
 .hero_header {
 	color: #004494;
 	text-align: center;
@@ -151,7 +151,7 @@ nav ul li a:hover {
 	font-weight: lighter;
 	float: left;
 	color: #444;
-	padding: 0px; 
+	padding: 0px;
 	margin: 0px;
     }
 .gallery div .nopad {
@@ -176,12 +176,12 @@ g {
 #yrLabel {
     font-size: 100px;
     font-weight: 'bold';
-    fill: #ddd; 
+    fill: #ddd;
 }
 #mLabel {
     font-size: 100px;
     font-weight: 'bold';
-    fill: #ddd; 
+    fill: #ddd;
 }
 #barChartWrapper{
     width: 250px;
@@ -280,7 +280,7 @@ footer .footer_column p {
     color: #96c147;
 	text-align: center;
 	font-weight: 800;
-    } 
+    }
 #hero .floater {
 	width: 200px;
 	height: 490px;
@@ -347,4 +347,9 @@ footer .footer_column p {
 	overflow-x: hidden;
 	height: 100%;
 	font-size: 14px;
+}
+
+.barChartLegend {
+	margin-top: 1px;
+	margin-bottom: 1px;
 }
