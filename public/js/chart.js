@@ -132,7 +132,6 @@ function drawYearlyChart(chData){
   //FIXME: Can use other scale method
   let barX = d3.scaleLinear().range([0,wBar]);
 
-
   //Set range
   barY.domain(chData.map(function(d){return d.yr;}))
   barX.domain([0,d3.max(chData,function(d){return d.sum;})])
@@ -143,7 +142,7 @@ function drawYearlyChart(chData){
   .enter()
   .append("g")
   .attr("class","yr-bar");
-  
+
   bars.append("rect")
     .attr("y", function(d) { return barY(d.yr); })
     .attr("fill", function(d) {return color(d.yr);})
@@ -152,7 +151,7 @@ function drawYearlyChart(chData){
     .transition()
     .duration(1000)
     .attr("width", function(d) {return barX(d.sum); } )
-    
+
 
   //Add text (I don't know how to customize tick)
   //Note: need to add before addEventListner
