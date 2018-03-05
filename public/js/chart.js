@@ -142,11 +142,12 @@ function drawYearlyChart(chData){
 
   barSVG.append('g')
         .classed('barChart',true)
-        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform","translate(" + margin.left + "," + (margin.top-80) + ")");
 
+  let textMargin = 10
   let barY = d3.scaleBand().range([hBar,0]).padding(0.3);
   //FIXME: Can use other scale method
-  let barX = d3.scaleLinear().range([0,wBar]);
+  let barX = d3.scaleLinear().range([30,wBar - textMargin]);
 
   //Set range
   barY.domain(chData.map(function(d){return d.yr;}))
@@ -155,18 +156,21 @@ function drawYearlyChart(chData){
   //bars: collection of all aggregated bars
   let bars = d3.select('svg g.barChart').selectAll(".yr-bar")
   .data(chData)
-  .enter()
+  .enter().filter(function(d){ return d.yr !== "Capacity";})
   .append("g")
   .attr("class","yr-bar");
 
-  bars.append("rect")
+
+  bars
+    .append("rect")
+    .attr("x", 10)
     .attr("y", function(d) { return barY(d.yr); })
     .attr("fill", function(d) {return color(d.yr);})
     .attr("height", barY.bandwidth())
     .attr("width",0)
     .transition()
     .duration(1000)
-    .attr("width", function(d) {return barX(d.sum); } )
+    .attr("width", function(d) {console.log(d.yr); return d.yr === "Capacity" ? 0 : barX(d.sum); } )
 
 
   //Add text (I don't know how to customize tick)
@@ -174,13 +178,25 @@ function drawYearlyChart(chData){
   bars.append('text')
   //.style('font-size','25px')
  //.style('fill','#FFF')
-  .attr('x',10)
+  .attr('x',textMargin*2)
   .attr('y',function(d){
-    return (barY(d.yr) + 10 +  barY.bandwidth()/2);
+    return (barY(d.yr) + 5 +  barY.bandwidth()/2);
   })
   .text(function(d){
-   return d.yr + ": " + d.sum;
+   return d.sum;
   });
+
+  bars.append('text')
+  //.style('font-size','25px')
+ .style('fill','#000000')
+  .attr('x',-25)
+  .attr('y',function(d){
+    return (barY(d.yr) + 5 +  barY.bandwidth()/2);
+  })
+  .text(function(d){
+   return d.yr === "Capacity" ? "" : d.yr;
+  });
+
 
   //Set event
   bars.on('click',function(d){
@@ -249,7 +265,6 @@ function updateMonthlyChart(){
   //Get the consumption data of selected yr
   $.getJSON("maximumConsumptionOnIntervalById/"+curId+yrRange(parseInt(selectedYr))).then(function(res){
     let chData = parseMonthlyData(res);
-
     //Same as above
     //FIXME: duplicated code, some bad smell...Orz
     let chartSVG = d3.select('#MonthlylineChartWrapper')
@@ -293,6 +308,7 @@ function updateMonthlyChart(){
       .attr("class", "axis yAxis")
       .attr("transform", "translate(" + 10 +",0)")
       .call(d3.axisLeft(y))
+      console.log(y)
 
     //Animation
     chartSVG.append('rect')
@@ -318,7 +334,10 @@ function updateMonthlyChart(){
     //add id for monthly line for highlighting
     let lines= d3.select('svg g.lineChart2').selectAll(".m-line")
       .data(chData)
-      .enter().append("g")
+      .enter().append("g").filter(function(d){
+        console.log(d)
+        return d.month !== "Capacity";
+      })
       .attr("class", "m-line")
       .attr("id",function(d){
         return "m-line" + d.month;
@@ -350,9 +369,10 @@ function updateMonthlyChart(){
           .classed('barChart2',true)
           .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
+    let textMargin = 10
     //FIXME: Can use other scale method
     let barY = d3.scaleBand().range([hBar,0]).padding(0.1);
-    let barX = d3.scaleLinear().range([0,wBar]);
+    let barX = d3.scaleLinear().range([0,wBar - textMargin]);
     //The bar chart will be sorted, but the color of each month is the same
     let sortedData = chData.sort(function(a,b){return d3.ascending(a.sum,b.sum);});
 
@@ -366,6 +386,7 @@ function updateMonthlyChart(){
     .attr("class","yr-bar2")
 
     bars.append("rect")
+    .attr("x", 10)
     .attr("y", function(d) { return barY(d.month); })
     .attr("fill", function(d) {return color(d.month);})
     .attr("height", barY.bandwidth())
@@ -378,15 +399,25 @@ function updateMonthlyChart(){
     bars.select('text').remove();
     bars.append('text')
      .text(function(d){
-      return months[d.month] + ": " + d.sum;
+      return months[d.month].substring(0, 3);
+     })
+   // .style('font-size','12px')
+    .style("fill","#000000")
+    .attr('x',-20)
+    .attr('y',function(d){
+      return (barY(d.month)+ 5 + barY.bandwidth()/2);
+    });
+
+    bars.append('text')
+     .text(function(d){
+      return d.sum;
      })
    // .style('font-size','12px')
    // .style("fill","#FFF")
-    .attr('x',10)
+    .attr('x',textMargin * 2)
     .attr('y',function(d){
-      return (barY(d.month)+10 + barY.bandwidth()/2);
+      return (barY(d.month)+ 5 + barY.bandwidth()/2);
     });
-
 
     //Highlight hovered month (use id to get related line)
     bars.on('mouseover', function(d) {
