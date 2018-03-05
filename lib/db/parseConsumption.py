@@ -10,6 +10,18 @@ data_source='secret/el_07_07_2017.csv'
 table_name='consumption'
 database_location='secret/db.sqlite'
 
+start_time = time.time()
+con = lite.connect(database_location)
+sql1 = "CREATE TABLE consumption (timestamp TIMESTAMP, id TEXT, value REAL);"
+cur = con.cursor()
+cur.execute(sql1)
+sql2 = "CREATE INDEX id_idx ON consumption (id);"
+cur = con.cursor()
+cur.execute(sql2)
+con.commit()
+con.close()
+print("--- %s seconds ---" % (time.time() - start_time))
+
 # load data
 
 start_time = time.time()
