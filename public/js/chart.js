@@ -2,6 +2,7 @@
 function init(id){
   document.getElementById('toggled').style = 'display: none;';
   document.getElementById('toggled2').style = 'display: none;';
+  d3.select("#nodata").text('');
   d3.selectAll("svg").remove();
   bMonthlyChart = false;
   selectedYr = -1
@@ -17,16 +18,16 @@ function renderChart(id){
   //$.getJSON("/consumptionOnIntervalById/"+curId+"/month/2012-01-01/2018-01-01").then(function(result){
 
 
-    if(Object.keys(result).length != 0){
-      document.getElementById('toggled').style.display = '';
+    document.getElementById('toggled').style.display = '';
+    if(Object.keys(result).length > 1){
       drawYearlyChart(parseYearlyData(result));
     }
     else{
+      d3.select("#nodata").text('Sorry... No Data Here');
       console.log(curId + "doesn't have data");
     }
   });
 }
-
 /*Draw the upper chart*/
 function drawYearlyChart(chData){
 
@@ -48,7 +49,10 @@ function drawYearlyChart(chData){
 
   //Set domain
   x.domain([1,12]);
-  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
+  y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){
+    if(typeof d == 'undefined') return 0;
+    else return d.val + 2;
+  })})]);
   color.domain(chData.map(function(d){return d.yr;}));
 
   //Yr indicator
@@ -72,6 +76,7 @@ function drawYearlyChart(chData){
 
   //Energy line def
   let line = d3.line()
+      .defined(function(d) { return d; })
       .curve(d3.curveBasis)
       .x(function(d) { return x(d.time); })
       .y(function(d) { return y(d.val); });
@@ -255,7 +260,10 @@ function updateMonthlyChart(){
 
     // set domain
     x.domain([1,31]);
-    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){return d.val + 2})})]);
+    y.domain([0,d3.max(chData,function(c){return d3.max(c.vals,function(d){
+      if(typeof d == 'undefined') return 0;
+      else return d.val + 2;
+    })})]);
     color.domain(chData.map(function(d){return d.month;}));
 
     //Month indicator
@@ -291,6 +299,7 @@ function updateMonthlyChart(){
         .attr('width',0);
 
     let line = d3.line()
+        .defined(function(d) { return d; })
         .curve(d3.curveBasis)
         .x(function(d) { return x(d.time); })
         .y(function(d) { return y(d.val); });

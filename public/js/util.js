@@ -1,7 +1,5 @@
 function setInfo(building) {
   
-  console.log(building);
-  
   var nameelement = document.getElementById('markerinfo'); 
   nameelement.textContent = building.address.replace(/"/g, '').replace(';', ',');
   
@@ -25,19 +23,20 @@ function setInfo(building) {
 
 
 function parseYearlyData(chData){
+  //console.log(chData);
  var ret = [];
   for(let yr in chData){
     var yrData = {};
     yrData['sum'] = chData[yr].sum;
     yrData['yr'] = yr;
     yrData['vals'] = [];
-    //yrData['vals'] = chData[yr].values;
     for(let month in chData[yr].values) {
       yrData['vals'][parseInt(month)-1] = {
         time: month,
         val: chData[yr].values[month],
       };
     }
+    //console.log(yrData['vals']);
     ret.push(yrData);
   }
   return ret;
